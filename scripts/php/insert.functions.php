@@ -54,7 +54,7 @@ function InsertTextFile( $file, $table, $exclude = array(), $append = true )
 	if( !$append )
 	{
 		// Remove rows from table
-		DB_Query( sprintf( 'DELETE FROM %s ', $table ) );
+		DB_Query( sprintf( 'DELETE FROM %s', $table ) );
 	}
 	
 	// Process the data from the text file
@@ -149,23 +149,4 @@ function InsertRow( $row, $table, $headers )
 	DB_Query( vsprintf( "INSERT INTO %s ( {$keyS} ) VALUES ( {$valS} )", $fields ) );
 }
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
