@@ -7,6 +7,6 @@
 include 'insert.functions.php';
 
 // Insert the classes
-InsertClassTextFile( 'parsed_classes.txt' );
+InsertTextFile( 'test.txt', 'CLASS', array( 'ADDED' ) );
 
 ?>
