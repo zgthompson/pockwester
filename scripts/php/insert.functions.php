@@ -9,6 +9,7 @@ define( 'DB_HOST_NAME', 'cs370tutoringapp.db.11456014.hostedresource.com' );
 define( 'DB_USER_NAME', 'cs370tutoringapp');
 define( 'DB_PASSWORD', 'Tutoring!!66' );
 define( 'DB_DATABASE', 'cs370tutoringapp' );
+
 define( 'DB_CLASS_TABLE', 'CLASS' );
 
 $DB_LINK = null;
@@ -94,6 +95,7 @@ function ProcessTextFile( $data )
 // Postcondition: An array object 
 function ProcessRow( $data, $delimiter = ',' )
 {
+	// Remove quotes from the string
 	$data = str_replace('"', "", $data);
 	$data = str_replace("'", "", $data);
 	return explode( $delimiter, $data );
@@ -110,7 +112,7 @@ function InsertClassRow( $row )
 		return;
 	}
 	
-	// Form query  *** REFACTOR! ***
+	// Form query  *** REFACTOR because this tightly binds this function to the table data ***
 	$fields = array( DB_CLASS_TABLE, 'CLASS_ID', 'SUBJECT', 'CATALOG_NUMBER', 'SECTION_NUMBER', 'TITLE', 'UNITS', 'TYPE', 'DAYS', 'TIME', 'BUILDING', 'INSTRUCTOR' );
 	
 	// Get number of fields
