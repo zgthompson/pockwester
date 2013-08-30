@@ -4,17 +4,18 @@
 // 8/28/13
 
 // Constants  *** Should be moved to new file, true for all database constants and functions ***
-// Database
-define( 'DB_HOST_NAME', 'cs370tutoringapp.db.11456014.hostedresource.com' );
-define( 'DB_USER_NAME', 'cs370tutoringapp');
-define( 'DB_PASSWORD', 'Tutoring!!66' );
-define( 'DB_DATABASE', 'cs370tutoringapp' );
+// Database constancts are defined as environmental variables in the .htaccess file
+
+//DB_HOST_NAME', 'cs370tutoringapp.db.11456014.hostedresource.com' );
+//DB_USER_NAME', 'cs370tutoringapp');
+//DB_PASSWORD', 'Tutoring!!66' );
+//DB_DATABASE', 'cs370tutoringapp' );
 
 // Connects to MySQL database  
 function DB_Connect()
 {
-	$link = mysql_connect( DB_HOST_NAME, DB_USER_NAME, DB_PASSWORD, DB_DATABASE );
-	mysql_select_db ( DB_DATABASE );
+	$link = mysql_connect( $_SERVER['DB_HOST_NAME'], $_SERVER['DB_USER_NAME'], $_SERVER['DB_PASSWORD'] );
+	mysql_select_db( $_SERVER['DB_DATABASE'] );
 	return $link;
 }
 
@@ -54,7 +55,7 @@ function InsertTextFile( $file, $table, $exclude = array(), $append = true )
 	if( !$append )
 	{
 		// Remove rows from table
-		DB_Query( sprintf( 'DELETE FROM %s', $table ) );
+		DB_Query( sprintf( 'DELETE FROM %s ', $table ) );
 	}
 	
 	// Process the data from the text file
@@ -149,4 +150,23 @@ function InsertRow( $row, $table, $headers )
 	DB_Query( vsprintf( "INSERT INTO %s ( {$keyS} ) VALUES ( {$valS} )", $fields ) );
 }
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
