@@ -3,36 +3,8 @@
 // Arthur Wuterich
 // 8/28/13
 
-// Constants  *** Should be moved to new file, true for all database constants and functions ***
-// Database constancts are defined as environmental variables in the .htaccess file
+require '../database/database.functions.php';
 
-//DB_HOST_NAME', 'cs370tutoringapp.db.11456014.hostedresource.com' );
-//DB_USER_NAME', 'cs370tutoringapp');
-//DB_PASSWORD', 'Tutoring!!66' );
-//DB_DATABASE', 'cs370tutoringapp' );
-
-// Connects to MySQL database  
-function DB_Connect()
-{
-	$link = mysql_connect( $_SERVER['DB_HOST_NAME'], $_SERVER['DB_USER_NAME'], $_SERVER['DB_PASSWORD'] );
-	mysql_select_db( $_SERVER['DB_DATABASE'] );
-	return $link;
-}
-
-// Executes a query on the connected database
-// Precondition: A valid SQL query
-// Side effect: Executes the SQL query
-function DB_Query( $query )
-{
-	$result = mysql_query( $query );
-		
-	// Show error if available
-	if (!$result) {
-		echo mysql_error(), '<BR/>';
-	}	
-	
-	return $result;
-}
 
 // Will open a .txt file and insert each row of data into the an table
 // $exclude: set of header values that will be excluded from the insertion
@@ -82,7 +54,7 @@ function GetTableHeaders( $table, $exclude = array() )
 	$headers = DB_Query( "SHOW COLUMNS FROM {$table}" );
 	
 	// Create array with column headers
-	while( $row = mysql_fetch_array( $headers ) )
+	while( $row = DB_GetRow( $headers ) )
 	{
 		// If the row is to be excluded assign to empty
 		$header = in_array( $row[0], $exclude )?'':$row[0];
