@@ -15,6 +15,11 @@
 		public static var fadeTarget:String = '';
 		public static var stageObject:MovieClip = null;
 		public static var fadeObject:MovieClip = null;
+		
+		public function Fade()
+		{
+			this.visible = false;
+		}
 				
 		private static function fadeScreen(e:TimerEvent):void
 		{
@@ -38,6 +43,7 @@
 					fadeObject.alpha = 0.0;
 					fadeTimer.stop();
 					fadeTimer = null;
+					fadeObject.visible = false;
 				}
 			}
 		}
@@ -50,6 +56,7 @@
 			}
 			
 			fadeTimer = new Timer(60); // 1 second
+			fadeObject.visible = true;
 			fadeTimer.addEventListener(TimerEvent.TIMER, fadeScreen);
 			fadeTimer.start();
 			hasTrans = false;
