@@ -35,7 +35,7 @@ function DB_GetRow( &$result )
 	return mysql_fetch_row( $result );
 }
 
-// Returns a 3d array with all of the elements
+// Returns a 2d array with all of the elements
 // Precondition: A valid MySql query result object
 // Postcondition: A 2d array with all query information
 function DB_GetArray( &$result )
