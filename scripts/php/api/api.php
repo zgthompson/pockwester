@@ -6,18 +6,17 @@
 // System Constants
 define( 'LIB_PATH', 'lib/' );
 define( 'CMD_PATH', 'command/' );
-define( 'API_APIKEY', '5JrkmqFUxrf90cd' );
 define( 'ERROR_INVALID_POST', 'Post array or elements are impropertly formed' );
 define( 'ERROR_INVALID_KEY', 'API key is incorrect' );
 define( 'ERROR_INVALID_TASK', 'API task does not exist' );
 
-// System Variables
-$API_COMMANDS = array( 'get_colleges', 'get_classes' );
-
-
 // Load api libraries
 include_once LIB_PATH . 'database/database.functions.php';
-//include_once LIB_PATH . 'admin/insert.functions.php';
+include_once LIB_PATH . 'pwapi.functions.php';
+
+// System Variables
+// Returns an array of the commands available in the LIB_PATH/CMD_PATH/ directory
+$API_COMMANDS = GetCommandArray( scandir( LIB_PATH . CMD_PATH ) );
 
 // Application Variables
 DEFINE( 'APIKEY', isset($_POST['apikey'])?$_POST['apikey']:'' );
@@ -30,7 +29,7 @@ if( APIKEY == '' || APITASK == '' )
 	exit( ERROR_INVALID_POST );
 }
 // -Api key is incorrect
-if( APIKEY != API_APIKEY )
+if( APIKEY != $_SERVER['API_APIKEY'] )
 {
 	exit( ERROR_INVALID_KEY );
 }
@@ -43,6 +42,7 @@ if( !in_array( $_POST['apitask'], $API_COMMANDS ) )
 
 // Execute command script which is expected to output the required data
 include( LIB_PATH . CMD_PATH . APITASK . '.php' );
+exit();
 
 ?>
 
