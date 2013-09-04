@@ -1,9 +1,8 @@
 <?php
-// insert_classes.php: Defines functions to dynamically insert information into a database
+// insert_classes.php: 	Defines functions to dynamically insert information into a database
+//						Precondition: Requires database.functions.php to be defined
 // Arthur Wuterich
 // 8/28/13
-
-require '../database/database.functions.php';
 
 
 // Will open a .txt file and insert each row of data into the an table
