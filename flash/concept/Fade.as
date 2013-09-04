@@ -6,7 +6,11 @@
 	
 	public class Fade extends MovieClip
 	{
+<<<<<<< HEAD
 		private static const FADE_TIME:int = 1000;
+=======
+		private static const FADE_TIME:int = 300;
+>>>>>>> cad4d02b68e79f3a0b4e7a6c6c744c6b6b9f3626
 		private static const FADE_DELTA:Number = 60/(FADE_TIME/2.0);
 		
 		private static var hasTrans:Boolean = false;
