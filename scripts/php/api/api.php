@@ -19,12 +19,12 @@ include_once LIB_PATH . 'pwapi.functions.php';
 $API_COMMANDS = GetCommandArray( scandir( LIB_PATH . CMD_PATH ) );
 
 // Application Variables
-DEFINE( 'APIKEY', isset($_POST['apikey'])?$_POST['apikey']:'' );
-DEFINE( 'APITASK', isset($_POST['apitask'])?$_POST['apitask']:'' );
+DEFINE( 'APIKEY', $_POST['apikey'] );
+DEFINE( 'APITASK', $_POST['apitask'] );
 
 // Exit conditions that result from incomplete post data
 // -Either of the two required post variables are not set
-if( APIKEY == '' || APITASK == '' )
+if( !APIKEY || !APITASK )
 {
 	exit( ERROR_INVALID_POST );
 }
