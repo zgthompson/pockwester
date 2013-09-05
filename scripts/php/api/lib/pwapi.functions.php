@@ -18,7 +18,7 @@
 		$needleLength = strlen( $needle );
 		$haystackStartPos = strlen( $haystack ) - $needleLength;
 				
-		// Check each element of the needle string against the end of the haystack if there is a discrepancy return false
+		// Check each element of the needle string against the endng members of the haystack
 		for( $i = 0; $i < $needleLength; $i++ )
 		{
 			// If an element does not match then exit
@@ -32,7 +32,7 @@
 	}
 
 	// Returns a formatted array of commands
-	// Precondtion: Expects an array of filename strings from the api/lib/commands/ dir
+	// Precondtion: Expects an array of filename strings from the api/LIB_PATH/CMD_PATH/ dir
 	// Postcondition: A formated array of pwapi commands that can be executed
 	function GetCommandArray( $cmds )
 	{
@@ -49,10 +49,10 @@
 		{
 			$cmd = strtolower( $cmd );
 			
-			// Skip commands that do not contain with .php
+			// Skip commands that are not .php files
 			if( strend( $cmd, '.php' ) !== false )
 			{
-				// Format the .php off of commands that do end with .php			
+				// Format the .php off of commands and push into command array			
 				$result[] = str_replace( '.php', '', $cmd );
 			}
 		}

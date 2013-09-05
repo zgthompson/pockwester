@@ -14,8 +14,8 @@ define( 'ERROR_INVALID_TASK', 'API task does not exist' );
 define( 'ERROR_VARIABLE_NOT_FOUND', 'A required variable was not found in the command argument array' );
 
 // Load api libraries
-include_once LIB_PATH . 'database/database.functions.php';
-include_once LIB_PATH . 'pwapi.functions.php';
+require_once LIB_PATH . 'database/database.functions.php';
+require_once LIB_PATH . 'pwapi.functions.php';
 
 // System Variables
 // Returns an array of the commands available in the LIB_PATH/CMD_PATH/ directory
