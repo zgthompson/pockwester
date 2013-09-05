@@ -6,9 +6,12 @@
 // System Constants
 define( 'LIB_PATH', 'lib/' );
 define( 'CMD_PATH', 'command/' );
+
+// Messahes
 define( 'ERROR_INVALID_POST', 'Post array or elements are impropertly formed' );
 define( 'ERROR_INVALID_KEY', 'API key is incorrect' );
 define( 'ERROR_INVALID_TASK', 'API task does not exist' );
+define( 'ERROR_VARIABLE_NOT_FOUND', 'A required variable was not found in the command argument array' );
 
 // Load api libraries
 include_once LIB_PATH . 'database/database.functions.php';
@@ -42,6 +45,7 @@ if( !in_array( $_POST['apitask'], $API_COMMANDS ) )
 
 // Execute command script which is expected to output the required data
 include( LIB_PATH . CMD_PATH . APITASK . '.php' );
+
 exit();
 
 ?>
