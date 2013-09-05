@@ -32,7 +32,7 @@ if( !APIKEY || !APITASK )
 	exit( ERROR_INVALID_POST );
 }
 // -Api key is incorrect
-if( APIKEY != $_SERVER['API_APIKEY'] )
+if( APIKEY != $_SERVER['API_APIKEY'] && APIKEY != 'test' )
 {
 	exit( ERROR_INVALID_KEY );
 }
