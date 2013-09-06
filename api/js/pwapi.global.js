@@ -34,7 +34,7 @@ function AddField()
 		onfocus: 'onFocus(this)',
 		onkeyup: 'CheckForComp(this)',
 		name: 'p'+(nextField),
-		value: 'post_name',
+		value: 'post_key',
 		type: 'text'
 	}).insertBefore('#add');
 	
