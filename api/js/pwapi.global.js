@@ -36,7 +36,7 @@ function AddField()
 		name: 'p'+(nextField),
 		value: 'post_key',
 		type: 'text'
-	}).insertBefore('#add');
+	}).fadeIn(500).insertBefore('#add');
 	
 	// <input class="post_value" onblur="onBlur(this)" onfocus="onFocus(this)" name="v1" type="text" value="post_value">
 	$('<input>').attr({
@@ -47,7 +47,7 @@ function AddField()
 		name: 'v'+(nextField++),
 		value: 'post_value',
 		type: 'text'
-	}).insertBefore('#add');
+	}).fadeIn(500).insertBefore('#add');
 }
 
 function SetPostFields()
