@@ -25,6 +25,8 @@ $API_COMMANDS = GetCommandArray( scandir( LIB_PATH . CMD_PATH ) );
 DEFINE( 'APIKEY', $_POST['apikey'] );
 DEFINE( 'APITASK', $_POST['apitask'] );
 
+print_r( $_POST );
+
 // Exit conditions that result from incomplete post data
 // -Either of the two required post variables are not set
 if( !APIKEY || !APITASK )
