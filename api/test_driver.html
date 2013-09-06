@@ -1,18 +1,25 @@
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/pwapi.global.css">
+<script language="javascript" type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script language="javascript" type="text/javascript" src="js/pwapi.global.js"></script>
+
 </head>
-<body style="background-color:#AAAAAA;">
-<div style="margin: 50px auto 0px auto; text-align:center;" >
+<body>
+<div id="title" >
 <h1> Pockwester API Test Driver </h1>
 </div>
-<div style="padding:10px;background-color:#FFFFFF;margin:200px auto 0px auto;width:500px;height300px;border-radius:8px;border:2px solid #000000;">
-	<img src="img/ic_launcher-web.png" width="50px" height="50px">
+<div id="main_window">
+	<img src="img/ic_launcher-web.png" class="img_icon">
 	<br/>
-	<form method="post" action="api.php" >
-		<input style="font-size:15px" name="apikey" type="text" value="apikey">
-		<input style="font-size:15px" name="apitask" type="text" value="apitask">
+	<form method="post" id="main_form" action="api.php" >
+		<input class="default_input" onblur="onBlur(this)" onfocus="onFocus(this)" name="apikey" type="text" value="apikey">
+		<input class="default_input" onblur="onBlur(this)" onfocus="onFocus(this)" name="apitask" type="text" value="apitask">
+		<input class="post_name" onblur="onBlur(this)" onfocus="onFocus(this)" onkeyup="CheckForComp(this)" name="p1" type="text" value="post_name">
+		<input class="post_value" onblur="onBlur(this)" onfocus="onFocus(this)" onkeyup="CheckForComp(this)" name="v1" type="text" value="post_value">
+		<div id="add"></div>
 		<BR/>
-		<input style="font-size:15px" name="submit" type="submit" value="submit">
+		<input class="default_submit" name="submit" type="submit" value="submit" onclick="SetPostFields();" >
 	</form>
 </div>
 </body>
