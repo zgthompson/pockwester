@@ -1,0 +1,24 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/pwapi.global.css">
+<script language="javascript" type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script language="javascript" type="text/javascript" src="js/pwapi.global.js"></script>
+
+</head>
+<body>
+<div id="title" >
+<h1> Pockwester API Test Driver </h1>
+</div>
+<div id="main_window">
+	<img src="img/ic_launcher-web.png" class="img_icon">
+	<br/>
+	<form method="post" id="main_form" action="api.php" >
+		<input class="default_input" onblur="onBlur(this)" onfocus="onFocus(this)" name="apikey" type="text" value="apikey"><input class="default_input" onblur="onBlur(this)" onfocus="onFocus(this)" name="apitask" type="text" value="apitask">
+		<HR/>
+		<input class="post_name" onblur="onBlur(this)" onfocus="onFocus(this)" onkeyup="CheckForComp(this)" name="p1" type="text" value="post_key"><input class="post_value" onblur="onBlur(this)" onfocus="onFocus(this)" onkeyup="CheckForComp(this)" name="v1" type="text" value="post_value">
+		<BR id="add" />
+		<input class="default_submit" name="submit" type="submit" value="submit" onclick="SetPostFields();" >
+	</form>
+</div>
+</body>
+</html>
