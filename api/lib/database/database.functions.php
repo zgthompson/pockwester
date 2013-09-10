@@ -30,9 +30,17 @@ function DB_Query( $query )
 
 // Returns a row of data from a query result
 // Precondition: A valid MySql query result object
-function DB_GetRow( &$result )
+//		-$assoc: If true returns an associative array
+function DB_GetRow( &$result, $assoc = false )
 {
-	return mysql_fetch_row( $result );
+	if( !$assoc )
+	{
+		return mysql_fetch_row( $result );
+	}
+	else
+	{
+		return mysql_fetch_assoc( $result );
+	}
 }
 
 // Returns a 2d array with all of the elements
