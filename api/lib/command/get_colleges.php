@@ -12,6 +12,6 @@ DB_Connect();
 $data = DB_GetArray( DB_Query( 'SELECT * from COLLEGE' ) );
 
 // Output JSON object
-exit( json_encode( $data ) );
+exit( OutputFormatting( $data ) );
 
 ?>

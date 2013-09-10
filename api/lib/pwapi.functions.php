@@ -18,7 +18,7 @@
 		$needleLength = strlen( $needle );
 		$haystackStartPos = strlen( $haystack ) - $needleLength;
 				
-		// Check each element of the needle string against the endng members of the haystack
+		// Check each element of the needle string against the end of the haystack if there is a discrepancy return false
 		for( $i = 0; $i < $needleLength; $i++ )
 		{
 			// If an element does not match then exit
@@ -32,7 +32,7 @@
 	}
 
 	// Returns a formatted array of commands
-	// Precondtion: Expects an array of filename strings from the api/LIB_PATH/CMD_PATH/ dir
+	// Precondtion: Expects an array of filename strings from the api/lib/commands/ dir
 	// Postcondition: A formated array of pwapi commands that can be executed
 	function GetCommandArray( $cmds )
 	{
@@ -49,10 +49,10 @@
 		{
 			$cmd = strtolower( $cmd );
 			
-			// Skip commands that are not .php files
+			// Skip commands that do not contain with .php
 			if( strend( $cmd, '.php' ) !== false )
 			{
-				// Format the .php off of commands and push into command array			
+				// Format the .php off of commands that do end with .php			
 				$result[] = str_replace( '.php', '', $cmd );
 			}
 		}
@@ -60,9 +60,25 @@
 		return $result;
 	}
 	
+	// Returns an database query formatted to the api specifications
+	function FormattResults( $queryHandle )
+	{
+	}
+	
 	// Returns the associated file in the post array or ends execution if the variable is required and not present
 	function Get( $postVariable, $required = true )
 	{
 		return ($_POST[$postVariable]||!$required)?$_POST[$postVariable]:exit( ERROR_VARIABLE_NOT_FOUND . ": {$postVariable}" );
+	}
+	// Returns a database column header formatted
+	function FormatColumn( $value )
+	{
+		return strtolower( $value );
+	}
+	
+	// Returns a formatted object for API output
+	function OutputFormatting( $value )
+	{
+		return json_encode( $value );
 	}
 ?>
