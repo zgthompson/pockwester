@@ -11,6 +11,7 @@ DB_Connect();
 // Get classes from db
 $qHandle = DB_Query( 'SELECT * from CLASS' );
 
+// Formatting arrays for results
 $exclude = array( 'ADDED' );
 $combine = array( 'TIME' => 'DAYS', 'COURSE_NUMBER' => 'SUBJECT' );
 $rename = array( 'BUILDING' => 'LOCATION', 'SUBJECT' => 'COURSE_TYPE', 'CATALOG_NUMBER' => 'COURSE_NUMBER', 'CLASS_ID' => 'COURSE_ID' );
@@ -20,40 +21,15 @@ $resultArray = array( 'courses' => array() );
 // Build the assoc. array in memory
 while( $row = DB_GetRow( $qHandle, true ) )
 {
-	// Format the array with key => value pairings
-	$formattedArray = array();
-	
+
 	// Rename any fields that need to be converted
-	foreach( $rename as $key => $value )
-	{
-		if( isset( $row[$key] ) )
-		{
-			$row[$value] = $row[$key];
-			unset( $row[$key] );
-		}
-	}
+	RenameKeys( $row, $rename );
 	
 	// Combine required fields	
-	foreach( $combine as $key => $value )
-	{
-		if( isset( $row[$key] ) && isset( $row[$value] ) )
-		{
-			$row[$key] = $row[$key] . ' ' . $row[$value];
-		}
-	}
-	
-	// Build the formatted array
-	foreach( $row as $key => $val )
-	{
-		// Only include elements that are not excluded
-		if( !in_array( $key, $exclude ) )
-		{
-			$formattedArray[FormatColumn($key)] = $val;
-		}
-	}
-	
+	CombineKeys( $row, $combine );
+		
 	// Push into result array
-	$resultArray['courses'][] = $formattedArray;
+	$resultArray['courses'][] = FormatRow( $row, $exclude );
 }
 
 // Output JSON object
