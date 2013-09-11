@@ -5,35 +5,43 @@
 // 9-3-13
 
 // Map for commands that have help information
-$info = array
-(
-	'cmds' 			=>	'Displays the loaded commands for pwapi',
-	'help' 			=>	'Help information for the commands in the pwapi',
-	'get_classes' 	=> 	'Returns an JSON object with the classes',
-	'get_courses' 	=> 	'Returns an JSON object with the classes formatted for Android client',
-	'get_colleges' 	=> 	'Returns an JSON object with colleges',
-	'test_post' 	=> 	'Requires and returns the post variable \'cat\'',
-	'test_cmd' 		=> 	'Testing grounds for new commands and revisions'
-);
-
 $newline = '<BR/>';
-
 $result = '';
 
 // Add each command
 foreach( $API_COMMANDS as $cmd )
 {
-	$help = (isset($info[$cmd]))?$info[$cmd]:'';
+	$help = '';
+	
+	// Get all of the contents from the command file
+	$content = file_get_contents( LIB_PATH . CMD_PATH . $cmd .'.php' );
+	
+	// Get comments
+	$comments = token_get_all( $content );
+		
+	// Find the comment line with the command name in it
+	foreach( $comments as $line )
+	{
+		// If the comment contains the command name then use this line as the help information
+		if ( stripos( $line[1], $cmd) !== FALSE ) 
+		{
+			// Format help line
+			$help = str_replace( '//', '', $line[1] );
+			break;
+		}
+	}
+	
+	// If this is a legacy command signify it
 	if( isset($LEGACY_COMMANDS[$cmd]) )
 	{
-		$result .= "*{$cmd}: {$help}{$newline}";
+		$help = "{$help}*";
 	}
-	else
-	{
-		$result .= "{$cmd}: {$help}{$newline}";
-	}
+
+	
+	$result .= "{$help}{$newline}";
 }
 
+// Add footer information
 $result .= '( * = legacy )';
 
 exit( $result );

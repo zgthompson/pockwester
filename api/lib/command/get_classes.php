@@ -1,7 +1,5 @@
 <?php
-// get_classes.php:	Command for the pockwester api
-//					 -Returns the classes for provided campus
-//					 -Precondition: Constants in api.php are defined 
+// get_classes.php: Returns the classes from the PWAPI
 // Arthur Wuterich
 // 8-3-13
 //
