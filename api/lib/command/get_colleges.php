@@ -1,7 +1,5 @@
 <?php
-// get_classes.php:	Command for the pockwester api
-//					 -Returns the colleges in the database
-//					 -Precondition: Constants in api.php are defined 
+// get_colleges.php: Returns the colleges in the database
 // Arthur Wuterich
 // 8-3-13
 //
