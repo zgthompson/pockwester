@@ -12,8 +12,8 @@ DB_Connect();
 $qHandle = DB_Query( 'SELECT * from CLASS' );
 
 $exclude = array( 'ADDED' );
-$combine = array( 'DAYS' => 'TIME', 'COURSE_NUMBER' => 'SUBJECT' );
-$rename = array( 'BUILDING' => 'LOCATION', 'SUBJECT' => 'COURSE_TYPE', 'CATALOG_NUMBER' => 'COURSE_NUMBER' );
+$combine = array( 'TIME' => 'DAYS', 'COURSE_NUMBER' => 'SUBJECT' );
+$rename = array( 'BUILDING' => 'LOCATION', 'SUBJECT' => 'COURSE_TYPE', 'CATALOG_NUMBER' => 'COURSE_NUMBER', 'CLASS_ID' => 'COURSE_ID' );
 
 $resultArray = array( 'courses' => array() );
 
