@@ -11,7 +11,7 @@ DB_Connect();
 // Get classes from db
 $qHandle = DB_Query( 'SELECT * from CLASS' );
 
-$exclude = array( 'CLASS_ID', 'ADDED' );
+$exclude = array( 'ADDED' );
 $combine = array( 'DAYS' => 'TIME', 'COURSE_NUMBER' => 'SUBJECT' );
 $rename = array( 'BUILDING' => 'LOCATION', 'SUBJECT' => 'COURSE_TYPE', 'CATALOG_NUMBER' => 'COURSE_NUMBER' );
 
@@ -53,7 +53,7 @@ while( $row = DB_GetRow( $qHandle, true ) )
 	}
 	
 	// Push into result array
-	$resultArray['courses'][FormatColumn($row['CLASS_ID'])] = $formattedArray;
+	$resultArray['courses'][] = $formattedArray;
 }
 
 // Output JSON object
