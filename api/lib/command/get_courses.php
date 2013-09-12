@@ -9,7 +9,7 @@
 DB_Connect();
 
 // Get classes from db
-$qHandle = DB_Query( 'SELECT * from CLASS limit 1' );
+$qHandle = DB_Query( 'SELECT * from CLASS' );
 
 // Formatting arrays for results
 $exclude = array( 'ADDED' );
