@@ -13,20 +13,22 @@ $qHandle = DB_Query( 'SELECT * from CLASS limit 1' );
 
 // Formatting arrays for results
 $exclude = array( 'ADDED' );
-$combine = array( 'DAYS' => 'TIME', 'COURSE_NUMBER' => 'SUBJECT', 'COURSE_NUMBER' => 'SUBJECT' );
-$rename = array( 'BUILDING' => 'LOCATION', 'CATALOG_NUMBER' => 'COURSE_NUMBER', 'CLASS_ID' => 'COURSE_ID', 'DAYS' => 'TIME' );
+$combine = array( 'DAYS' => 'TIME', 'SUBJECT' => 'CATALOG_NUMBER' );
+$rename = array( 'BUILDING' => 'LOCATION', 'CATALOG_NUMBER' => 'COURSE_NUMBER',
+				 'CLASS_ID' => 'COURSE_ID', 'DAYS' => 'TIME', 'SUBJECT' => 'COURSE_NUMBER',
+				 'TYPE' => 'COURSE_TYPE' );
 
 $resultArray = array( 'courses' => array() );
 
 // Build the assoc. array in memory
 while( $row = DB_GetRow( $qHandle, true ) )
 {
-
-	// Rename any fields that need to be converted
-	RenameKeys( $row, $rename );
 	
 	// Combine required fields	
 	CombineKeys( $row, $combine );
+	
+	// Rename any fields that need to be converted
+	RenameKeys( $row, $rename );	
 		
 	// Push into result array
 	$resultArray['courses'][] = FormatRow( $row, $exclude );
