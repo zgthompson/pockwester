@@ -131,6 +131,7 @@
 			if( isset( $source[$key] ) && isset( $source[$value] ) )
 			{
 				$source[$key] = $source[$key] . $delimit . $source[$value];
+				unset( $source[$value] );
 			}
 		}	
 	}

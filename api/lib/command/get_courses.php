@@ -1,5 +1,5 @@
 <?php
-// get_courses.php:	Command for the pockwester api
+// get_courses.php:	Pulls the course information from database, formats for android client, and returns the results
 //					 -Returns the classes for provided campus
 //					 -Precondition: Constants in api.php are defined 
 // Arthur Wuterich
@@ -9,12 +9,12 @@
 DB_Connect();
 
 // Get classes from db
-$qHandle = DB_Query( 'SELECT * from CLASS' );
+$qHandle = DB_Query( 'SELECT * from CLASS limit 1' );
 
 // Formatting arrays for results
 $exclude = array( 'ADDED' );
-$combine = array( 'TIME' => 'DAYS', 'COURSE_NUMBER' => 'SUBJECT' );
-$rename = array( 'BUILDING' => 'LOCATION', 'SUBJECT' => 'COURSE_TYPE', 'CATALOG_NUMBER' => 'COURSE_NUMBER', 'CLASS_ID' => 'COURSE_ID' );
+$combine = array( 'DAYS' => 'TIME', 'COURSE_NUMBER' => 'SUBJECT', 'COURSE_NUMBER' => 'SUBJECT' );
+$rename = array( 'BUILDING' => 'LOCATION', 'CATALOG_NUMBER' => 'COURSE_NUMBER', 'CLASS_ID' => 'COURSE_ID', 'DAYS' => 'TIME' );
 
 $resultArray = array( 'courses' => array() );
 
