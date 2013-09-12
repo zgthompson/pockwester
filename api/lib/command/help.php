@@ -1,3 +1,4 @@
+<!--- TEST! -->
 <?php
 // help.php:	Displays help information
 //				 -Expects api.php to call this file
@@ -26,13 +27,13 @@ foreach( $API_COMMANDS as $cmd )
 		if ( stripos( $line[1], $cmd) !== FALSE ) 
 		{
 			// Format help line
-			$help = str_replace( '//', '', $line[1] );
+			$help = str_replace( array( '.php', '//', '/*', '*/', '* ', '*\t' ), '', $line[1] );
 			break;
 		}
 	}
 	
 	// If this is a legacy command signify it
-	if( isset($LEGACY_COMMANDS[$cmd]) )
+	if( isset( $LEGACY_COMMANDS[$cmd] ) )
 	{
 		$help = "{$help}*";
 	}
