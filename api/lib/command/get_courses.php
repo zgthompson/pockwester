@@ -15,8 +15,11 @@ $qHandle = DB_Query( 'SELECT * from CLASS' );
 $exclude = array( 'ADDED' );
 $combine = array( 'DAYS' => 'TIME', 'SUBJECT' => 'CATALOG_NUMBER' );
 $rename = array( 'BUILDING' => 'LOCATION', 'CATALOG_NUMBER' => 'COURSE_NUMBER',
-				 'CLASS_ID' => 'COURSE_ID', 'DAYS' => 'TIME', 'SUBJECT' => 'COURSE_NUMBER',
-				 'TYPE' => 'COURSE_TYPE' );
+		 'CLASS_ID' => 'COURSE_ID', 'DAYS' => 'TIME', 'SUBJECT' => 'COURSE_NUMBER',
+		 'TYPE' => 'COURSE_TYPE' );
+
+// Get the provided date if available 
+$last_update = get( 'last_update', false );
 
 $resultArray = array( 'courses' => array() );
 
