@@ -8,8 +8,20 @@
 
 DB_Connect();
 
-// Get classes from db
-$qHandle = DB_Query( 'SELECT * from CLASS' );
+// Get the provided date if available 
+$last_update = get( 'last_update', false );
+
+// If we have the last update time filter the query based on the time provided
+if( isset($last_update) )
+{
+	// Get classes from db
+	$qHandle = DB_Query( 'SELECT * from CLASS where {$last_update} >= ADDED' );
+}
+else
+{
+	// Get classes from db
+	$qHandle = DB_Query( 'SELECT * from CLASS' );
+}
 
 // Formatting arrays for results
 $exclude = array( 'ADDED' );
@@ -17,9 +29,6 @@ $combine = array( 'DAYS' => 'TIME', 'SUBJECT' => 'CATALOG_NUMBER' );
 $rename = array( 'BUILDING' => 'LOCATION', 'CATALOG_NUMBER' => 'COURSE_NUMBER',
 		 'CLASS_ID' => 'COURSE_ID', 'DAYS' => 'TIME', 'SUBJECT' => 'COURSE_NUMBER',
 		 'TYPE' => 'COURSE_TYPE' );
-
-// Get the provided date if available 
-$last_update = get( 'last_update', false );
 
 $resultArray = array( 'courses' => array() );
 
