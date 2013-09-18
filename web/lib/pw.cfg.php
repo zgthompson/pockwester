@@ -9,6 +9,10 @@ define( 'IMG_PATH', 'img/' );
 define( 'SRC_PATH', 'src/' );
 define( 'CSS_PATH', 'css/' );
 
+// API http location
+define( 'PWAPI_URL', 'http://arthurwut.com/pockwester/api/' );
+define( 'PWAPI_TIMEOUT', 5 );
+
 // Useful constants
 define( 'NOW', time() );
 
