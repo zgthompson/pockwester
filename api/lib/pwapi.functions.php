@@ -139,7 +139,10 @@
 	// Returns the associated file in the post array or ends execution if the variable is required and not present
 	function Get( $postVariable, $required = true )
 	{
-		return ($_POST[$postVariable]||!$required)?str_replace(';','',$_POST[$postVariable]):exit( ERROR_VARIABLE_NOT_FOUND . ": {$postVariable}" );
+
+		
+		return str_replace( ';', '', $_POST[$postVariable]||!$required)?$_POST[$postVariable]:exit( ERROR_VARIABLE_NOT_FOUND . ": {$postVariable}" );
+
 	}
 	// Returns a database column header formatted
 	function FormatColumn( $value )

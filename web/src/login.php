@@ -6,7 +6,7 @@
 	if( isset( $_POST['username'] ) && isset( $_POST['password'] ) )
 	{
 		$response = PWTask( 'login_user', $_POST );
-				
+		echo $response;			
 		if( $response == '1' )
 		{
 			$login = true;
