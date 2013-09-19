@@ -27,7 +27,7 @@ define( 'DOC_TYPE', '<!DOCTYPE html>' );
 define( 'GLOBAL_CSS', '<link rel="stylesheet" type="text/css" href="'.CSS_PATH.'pw.global.css'.'">' );
 define( 'JQUERY', '<script src="'.JAV_PATH.'jquery-1.10.2.js"></script>' );
 define( 'GLOBAL_JS', '<script src="'.JAV_PATH.'pw.global.js"></script>' );
-define( 'GLOBAL_TITLE', '<title>Forge:Test</title>' );
+define( 'GLOBAL_TITLE', '<title>Forge</title>' );
 
 define( 'GLOBAL_HEAD', '<head>' . GLOBAL_CSS . GLOBAL_TITLE . JQUERY . GLOBAL_JS . '</head>' );
 
