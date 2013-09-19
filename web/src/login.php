@@ -18,6 +18,9 @@
 	// If the user was successful in logging in redirect
 	if( $login ){
 ?>
+<script type="text/javascript">
+	BouncePage( 2 );
+</script>
 <div id="login_window" class="rounded_window center_on_page small_window drop_shadow">
 	<h1> Pockwester Scheduling Application </h1>
 	<h2> Logged in! </h2>
