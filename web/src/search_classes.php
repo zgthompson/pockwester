@@ -39,7 +39,7 @@ function AddField()
 <h1> Select Courses </h1>
 	<form action="index.php" method="POST" >
 		<?php echo $classes_dropdown; ?>
-		<button type="button" name="add" id="add" onclick="AddField();">+</button>
+		<button type="button" name="add" id="add" class="add" onclick="AddField();">+</button>
 		<BR />
 		<button type="submit" name="goto" value="home.php">Back Home</button>
 		<button type="submit" name="goto" value="calc_schecule.php">Calculate Schedule</button>

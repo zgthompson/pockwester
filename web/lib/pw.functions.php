@@ -14,6 +14,35 @@ function IsPageValid( $page )
 	return in_array( $page, $VALID_SOURCE_FILES );
 }
 
+// Returns true if the page is in the public files array
+// Precondition $page is a valid string and pw.cfg.php is included
+function IsPagePublic( $page )
+{
+	global $PUBLIC_SOURCE_FILES;
+	return in_array( $page, $PUBLIC_SOURCE_FILES );
+}
+
+// Returns true if the username, password, and email meets the standards for users
+function MeetsStandards( $username, $email, $password )
+{
+	if( !isset($username) || !isset($email) || !isset($password) )
+	{
+		return false;
+	}
+	
+	if( strlen( $password ) < 3 || strlen( $username ) < 3 )
+	{
+		return false;
+	}
+	
+	if( !strpos( $email, '@' ) || !strpos( $email, '.' ) )
+	{
+		return false;
+	}
+	
+	return true;
+}
+
 // Displays the content page provided
 // Precondtion: Assumes that $page is a valid content page and pw.cfg.php has been included
 // Postcondition: $page php will be executed and html displayed

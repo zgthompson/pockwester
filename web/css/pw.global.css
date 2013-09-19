@@ -12,7 +12,7 @@ body
 button
 {
 	padding:5px;
-	border-radius: 5px;
+	border-radius: 3px;
 	border: 2px groove #DDD;
 	font-weight: bold;
 	font-size: 14px;
@@ -38,6 +38,53 @@ button
 	/* W3C Markup, IE10 Release Preview */ 
 	background-image: linear-gradient(to bottom left, #FFFFFF 0%, #C7C7C7 100%);	
 		
+}
+
+select
+{
+	margin-top: 6px;
+	margin-bottom: 6px;
+}
+
+label
+{
+	display: inline-block;
+	width: 70px;
+	margin-left: 20px;
+}
+
+input
+{
+	width:200px;
+	padding: 0px;
+	margin: 5px;
+}
+
+input[type=textfield,type=password] 
+{
+	margin-left: 20px;
+}
+
+.add
+{
+	padding:3px;
+	border-radius: 3px;
+	border: 2px groove #DDD;
+	font-weight: bold;
+	font-size: 14px;
+	margin:0px;
+	background-color: #AFA;
+	background-image: none;
+}
+
+.add:active
+{
+	padding:3px;
+	border-radius: 3px;
+	border: 2px groove #DDD;
+	font-weight: bold;
+	font-size: 14px;
+	margin:0px;
 }
 
 button:hover
