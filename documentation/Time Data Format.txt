@@ -1,0 +1,27 @@
+Time Data Format
+Pockwester Project
+Arthur Wuterich
+
+About
+Documentation about how we will represent the weekly schedule of users in PWApi. This is a critical aspect of the project and the selected solution needs to be comprehensive. The first section of this document will list some proposed solutions
+Proposed Solutions
+Time logs
+After a user enters in their times the system will break apart their schedule into individual time entries such to minimize the amount of data stored. For example consider a user that is available on Mondays between 3pm – 6pm, Tuesdays 2pm-3pm, Tuesdays 5pm-6pm, and Fridays 8am-5pm. The schedule table will contain four entries for the user :
+	<USER_ID>, …, <START_AVAILABILITY>, <END_AVAILABILITY>
+	<”BILLY”>, …, <015>               , <017>
+	<”BILLY”>, …, <026>               , <027>
+	<”BILLY”>, …, <029>               , <030>
+	<”BILLY”>, …, <104>               , <113>
+
+The column START_AVAILABILITY and END_AVAILABILITY would work on a 0-167 scale where:
+	000 = MONDAY   , 00:00
+	012 = MONDAY   , 12:00
+	024 = TUESDAY  , 00:00
+	048 = WEDENSDAY, 00:00
+	072 = THURSDAY , 00:00
+	096 = FRIDAY   , 00:00
+	120 = SATURDAY , 00:00
+	144 = SUNDAY   , 00:00
+	167 = SUNDAY   , 23:00
+ n  = (d*24)+h , hh:00, where d is the integer numerical representation of the day { 0=Monday, 1=Tuesday, …, 6=Sunday } and h is the current military hour { 0, 1, …, 23 }
+One advantage of this solution is the ability to arbitral define the precision of start times and end times.  If n is defined as a real number we would be able to define any value of time we desire. 

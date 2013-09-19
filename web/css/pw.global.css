@@ -1,0 +1,163 @@
+/* Global CSS 
+
+*/
+
+body
+{
+	margin:0px 0px 0px 0px;
+	background-image:url('../image/ticks.png');
+	min-width:600px;
+}
+
+button
+{
+	padding:5px;
+	border-radius: 3px;
+	border: 2px groove #DDD;
+	font-weight: bold;
+	font-size: 14px;
+	margin:5px;
+	
+	/* Note: This gradient may render differently in browsers that don't support the unprefixed gradient syntax */
+
+	/* IE10 Consumer Preview */ 
+	background-image: -ms-linear-gradient(top right, #FFFFFF 0%, #C7C7C7 100%);
+
+	/* Mozilla Firefox */ 
+	background-image: -moz-linear-gradient(top right, #FFFFFF 0%, #C7C7C7 100%);
+
+	/* Opera */ 
+	background-image: -o-linear-gradient(top right, #FFFFFF 0%, #C7C7C7 100%);
+
+	/* Webkit (Safari/Chrome 10) */ 
+	background-image: -webkit-gradient(linear, right top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #C7C7C7));
+
+	/* Webkit (Chrome 11+) */ 
+	background-image: -webkit-linear-gradient(top right, #FFFFFF 0%, #C7C7C7 100%);
+
+	/* W3C Markup, IE10 Release Preview */ 
+	background-image: linear-gradient(to bottom left, #FFFFFF 0%, #C7C7C7 100%);	
+		
+}
+
+select
+{
+	margin-top: 6px;
+	margin-bottom: 6px;
+}
+
+label
+{
+	display: inline-block;
+	width: 70px;
+	margin-left: 20px;
+}
+
+input
+{
+	width:200px;
+	padding: 0px;
+	margin: 5px;
+}
+
+input[type=textfield,type=password] 
+{
+	margin-left: 20px;
+}
+
+.add
+{
+	padding:3px;
+	border-radius: 3px;
+	border: 2px groove #DDD;
+	font-weight: bold;
+	font-size: 14px;
+	margin:0px;
+	background-color: #AFA;
+	background-image: none;
+}
+
+.add:active
+{
+	padding:3px;
+	border-radius: 3px;
+	border: 2px groove #DDD;
+	font-weight: bold;
+	font-size: 14px;
+	margin:0px;
+}
+
+button:hover
+{
+}
+
+button:active
+{
+	padding:3px;
+	margin-left: 7px;
+	margin-top: 7px;
+}
+
+#course_form
+{
+}
+
+#login_window
+{
+}
+
+#schedule_accept_classes
+{
+}
+
+.rounded_window
+{
+	border-radius: 8px;
+	border: 5px ridge #BBB;
+	background-image:url('../image/ForgeAnvilBackground.png');
+	padding: 8px;
+}
+
+.center_on_page
+{
+	/* centers on page */
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	margin: auto;
+}
+
+.small_window
+{
+	width:500px;
+	height:250px;
+}
+
+.large_window
+{
+	width:90%;
+	height:90%;
+}
+
+.drop_shadow
+{
+	box-shadow: 10px 10px 5px #888888;
+}
+
+/* Custom tags */
+day_block
+{
+	display:block;
+}
+
+day
+{
+	font-weight: bold;
+}
+
+time_value
+{
+	margin-left: 15px;
+}
