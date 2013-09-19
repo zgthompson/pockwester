@@ -22,8 +22,8 @@ function IsPagePublic( $page )
 	return in_array( $page, $PUBLIC_SOURCE_FILES );
 }
 
-// Returns true if the username, password, and email meets the standards for users
-function MeetsStandards( $username, $email, $password )
+// Returns true if the username, password, and email meets the standard for user na`me, password, and email
+function MeetsUserStandard( $username, $email, $password )
 {
 	if( !isset($username) || !isset($email) || !isset($password) )
 	{

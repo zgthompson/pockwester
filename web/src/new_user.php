@@ -1,18 +1,25 @@
 <?php
-// home.php: Landing page for entering the pw web client
-// 9-17-13
+// new_user.php: Allows users to create new accounts
+// 9-19-13
 // Arthur Wuterich
 
-	// Check the data for garbage
-	if( MeetsStandards( $_POST['username'], $_POST['email'], $_POST['password'] ) )
+	$error = "";
+
+	if( $_POST['apitask'] == 'user_create' )
 	{
-		// The user was created successfully
-		if( PWTask( $_POST['apitask'], $_POST ) == '1' )
+		// Check the user submitted parameters meet the standards for the database 
+		if( $error = MeetsUserStandard( $_POST['username'], $_POST['email'], $_POST['password'] ) )
 		{
-			$_SESSION['CURRENT_PAGE'] = LOGIN_PAGE;
-			unset($_POST);
-			$create = true;
+			// Sends user_create command to the PWApi, if the return is 1 then the user was created suscessfully
+			if( $error = PWTask( 'user_create', $_POST ) == '1' )
+			{
+				$_SESSION['CURRENT_PAGE'] = LOGIN_PAGE;
+				unset($_POST);
+				$create = true;
+			}
+
 		}
+
 	}
 
 

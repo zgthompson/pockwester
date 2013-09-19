@@ -17,8 +17,7 @@ if( isset( $_POST['goto'] ) )
 	$_SESSION['CURRENT_PAGE'] = $_POST['goto'];
 }
 
-// Only allow the user to access the login page and the create account page
-// if they are not logged in
+// If the user is not set then only allow access to public pages
 if( !isset($_SESSION['USER']) )
 {
 	if( !IsPagePublic( $_SESSION['CURRENT_PAGE'] ) )
