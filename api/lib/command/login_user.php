@@ -10,12 +10,14 @@ $password = md5( Get( 'password' ) );
 DB_Connect();
 
 // Find if user is in the database already
-$users = DB_GetArray( DB_Query( "SELECT * from USER where NAME = '{$username}' AND PASSWORD='{$password}'" ) );
+$users = DB_GetArray( DB_Query( "SELECT UID from USER where NAME = '{$username}' AND PASSWORD='{$password}' LIMIT 1" ) );
 
 // If so error out
 if( count($users) <= 0 )
 {
-	exit( '-1' );
+	exit( 'Could not locate the user account.' );
 }
-exit( '1' );
+
+// Return the userid
+exit( $users[0][0] );
 ?>

@@ -256,6 +256,22 @@ function ConvertMilitary( $time )
 	return "{$time}AM";
 }
 
+// Returns an empty string time array
+function MakeTimeString( $char = ' ', $length = AVAL_LENGTH )
+{
+	return str_repeat( $char, $length );
+}
+
+// Will alter a timestring at the day and hour position to $value
+// &$timeString: Valid timestring to be processed
+// $day:   Day of the week [0-6]
+// $hour:  Hour of the day [0-23]
+// $value: The value to sed the element to
+function AlterTimeString( &$timeString, $day, $hour, $value )
+{
+	$pos = ($day%7) * 24 + ($hour%24);
+	$timeString[$pos] = $value;
+}
 
 
 

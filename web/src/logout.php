@@ -3,7 +3,8 @@
 // 9-17-13
 // Arthur Wuterich
 
-unset($_SESSION['USER'])
+unset($_SESSION['USER']);
+unset($_SESSION['USER_ID']);
 
 ?>
 

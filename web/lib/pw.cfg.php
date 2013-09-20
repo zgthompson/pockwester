@@ -3,6 +3,9 @@
 //	9-17-13
 //	Arthur Wuterich
 
+// System Variables
+define( 'AVAL_LENGTH', 168 );
+
 // Path constants
 define( 'LIB_PATH', 'lib/' );
 define( 'IMG_PATH', 'img/' );
@@ -40,7 +43,7 @@ define( 'LOGOUT_PAGE'	 , 'logout.php'	);
 $PUBLIC_SOURCE_FILES = array ( 'new_user.php', 'logout.php', LOGIN_PAGE, LOGOUT_PAGE, 'help_user.php' );
 
 // Define valid source files for index to pull
-$VALID_SOURCE_FILES = array( 'search_classes.php', 'calc_schecule.php', 'new_user.php',
+$VALID_SOURCE_FILES = array( 'search_classes.php', 'calc_schedule.php', 'new_user.php',
 							 'new_user.php', 'logout.php', DEFAULT_CONTENT, LOGIN_PAGE,
 							 LOGOUT_PAGE, 'help_user.php');
 

@@ -7,10 +7,11 @@
 	{
 		$response = PWTask( 'login_user', $_POST );
 					
-		if( $response == '1' )
+		if( intval($response) >= 0 )
 		{
 			$login = true;
 			$_SESSION['USER'] = $_POST['username'];
+			$_SESSION['USER_ID'] = intval($response);
 			unset($_POST);
 		}
 	}
