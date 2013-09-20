@@ -58,26 +58,50 @@ function DB_GetArray( &$result )
 	return $array;
 }
 
-// Returns a 1d array with all of the elements *** REFACTOR WITH RECURSION ***
+// Will take an nth dimension array and return a 1d array
+// Precondition: Valid array object
+// Postcondition: 1d array containing all of the elements of the org array
+function DB_FlattenArray( $array )
+{
+	// Return input if not an array
+	if( !is_array( $array ) )
+	{
+		return $array;
+	}
+	
+	$result = array();
+	foreach( $array as $value )
+	{
+		if( is_array( $value ) )
+		{
+			$result = array_merge( $result, DB_FlattenArray( $value ) );
+		}
+		else
+		{
+			$result[] = $value;
+		}
+	}
+	
+	return $result;
+}
+
+// Returns a 1d array with all of the elements 
 // Precondition: A valid MySql query result object
 // Postcondition: A 2d array with all query information
 function DB_GetSingleArray( &$result )
 {
 	$array = array();
 
+	// Cycle each element to push into result array
 	while( $row = DB_GetRow( $result ) )
 	{
+		// If the element is an array use recursion to get all of the elements
 		if( is_array( $row ) )
 		{
-			foreach( $row as $inner_row )
-			{
-				$array[] = $inner_row;
-			}
+			$row = DB_FlattenArray( $row );
 		}
-		else
-		{
-			$array[] = $row;
-		}
+		
+		$array = array_merge( $array, $row );
 	}
 	
 	return $array;

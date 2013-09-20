@@ -28,11 +28,7 @@ if( !isset($_SESSION['USER']) )
 
 // If the current page is valid route to that page
 // else goto home
-if( IsPageValid( $_SESSION['CURRENT_PAGE'] ) )
-{
-	GetPage( $_SESSION['CURRENT_PAGE'] );
-}
-else
+if( !GetPage( $_SESSION['CURRENT_PAGE'] ) )
 {
 	GetPage( DEFAULT_CONTENT );
 	$_SESSION['CURRENT_PAGE'] = DEFAULT_CONTENT;

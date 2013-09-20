@@ -20,10 +20,6 @@ define( 'PWAPI_TIMEOUT', 5 );
 // Useful constants
 define( 'NOW', time() );
 
-// Mapping for day to values
-$DAY_VALUE = array( 'M' => 0,'T' => 1,'W' => 2,'R' => 3,'F' => 4,'S' => 5,'U' => 6);
-$VALUE_DAY = array( 0 => 'Monday',1 => 'Tuesday',2 => 'Wednesday',3 => 'Thursday',4 => 'Friday',5 => 'Saturday',6 => 'Sunday');
-
 // Page defining constants
 // *** Testing this method of including header information ... might need to be refactored ***
 define( 'DOC_TYPE', '<!DOCTYPE html>' );
@@ -41,10 +37,5 @@ define( 'LOGOUT_PAGE'	 , 'logout.php'	);
 
 // Source files that are considered public and do not need a login to access
 $PUBLIC_SOURCE_FILES = array ( 'new_user.php', 'logout.php', LOGIN_PAGE, LOGOUT_PAGE, 'help_user.php' );
-
-// Define valid source files for index to pull
-$VALID_SOURCE_FILES = array( 'search_classes.php', 'calc_schedule.php', 'new_user.php',
-							 'new_user.php', 'logout.php', DEFAULT_CONTENT, LOGIN_PAGE,
-							 LOGOUT_PAGE, 'help_user.php');
 
 ?>

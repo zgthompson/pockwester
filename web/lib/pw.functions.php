@@ -43,19 +43,30 @@ function MeetsUserStandard( $username, $email, $password )
 	return true;
 }
 
-// Displays the content page provided
+// Displays the content page provided. Returns true if the operation was suscessful
 // Precondtion: Assumes that $page is a valid content page and pw.cfg.php has been included
 // Postcondition: $page php will be executed and html displayed
 function GetPage( $page )
 {
+	// Find out if the page exists
+	$path = SRC_PATH . $page;
+	
+	// If the file is not there exit
+	if( !is_readable( $path ) )
+	{
+		return false;
+	}
+	
 	// Header information
 	echo DOC_TYPE, '<html>', GLOBAL_HEAD, '<body>';
 	
 	// Body content
-	include SRC_PATH . $page;
+	include $path;
 	
 	// Closing tags
 	echo '</body>', '</html>';
+	
+	return true;
 }
 
 // Runs a PWAPI task
@@ -96,7 +107,9 @@ function PWTask( $apiTask, $post = array() )
 //  $offset: Integer offset if required
 function GetTimeValue( $time, $minutes=false, $offset=0.0 )
 {
-	global $DAY_VALUE;
+	// Mapping for day to values
+	$DAY_VALUE = array( 'M' => 0,'T' => 1,'W' => 2,'R' => 3,'F' => 4,'S' => 5,'U' => 6);
+	$VALUE_DAY = array( 0 => 'Monday',1 => 'Tuesday',2 => 'Wednesday',3 => 'Thursday',4 => 'Friday',5 => 'Saturday',6 => 'Sunday');
 	
 	$result = array();
 		
@@ -178,7 +191,7 @@ function GetTimeValue( $time, $minutes=false, $offset=0.0 )
 //  $day: Include day in string
 function ConvertTimeValue( $timeValue, $day = false )
 {
-	global $VALUE_DAY;
+	$VALUE_DAY = array( 0 => 'Monday',1 => 'Tuesday',2 => 'Wednesday',3 => 'Thursday',4 => 'Friday',5 => 'Saturday',6 => 'Sunday');
 	
 	$dayKey = floor(($timeValue%168) / 24.0 );
 	$day = $VALUE_DAY[$dayKey];
@@ -198,7 +211,7 @@ function ConvertTimeValue( $timeValue, $day = false )
 // Precondition: Requires a valid schedule array with TimeValue objects
 function FormatSchedule( $times )
 {
-	global $VALUE_DAY;
+	$VALUE_DAY = array( 0 => 'Monday',1 => 'Tuesday',2 => 'Wednesday',3 => 'Thursday',4 => 'Friday',5 => 'Saturday',6 => 'Sunday');
 	
 	// Collect information based on day
 	$schedule = array
@@ -238,6 +251,8 @@ function FormatSchedule( $times )
 	return $format_schedule;
 	
 }
+
+
 
 // Converts military time into standard time and returns a string representing the time
 // Precondition: A valid time value [0-23]

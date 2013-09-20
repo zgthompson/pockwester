@@ -12,6 +12,7 @@
 			$login = true;
 			$_SESSION['USER'] = $_POST['username'];
 			$_SESSION['USER_ID'] = intval($response);
+			$_SESSION['CURRENT_PAGE'] = DEFAULT_CONTENT;
 			unset($_POST);
 		}
 	}
@@ -20,7 +21,7 @@
 	if( $login ){
 ?>
 <script type="text/javascript">
-	//BouncePage( 2 );
+	BouncePage( 1 );
 </script>
 <div id="login_window" class="rounded_window center_on_page small_window drop_shadow">
 	<h1> Pockwester Scheduling Application </h1>
