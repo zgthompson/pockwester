@@ -17,7 +17,7 @@ $users = DB_GetArray( DB_Query( "SELECT * from USER where NAME = '{$username}'" 
 // If so error out
 if( count($users) > 0 )
 {
-	exit( 'User already exist' );
+	exit( 'User already exists' );
 }
 
 // Make the user

@@ -3,8 +3,9 @@
 // 9-17-13
 // Arthur Wuterich
 
-unset($_SESSION['USER']);
-unset($_SESSION['USER_ID']);
+//unset($_SESSION);
+unset($_POST);
+session_unset();
 $_SESSION['CURRENT_PAGE'] = LOGIN_PAGE;
 
 ?>

@@ -132,6 +132,7 @@ h1
 	color: #000;
 	font-size: 40px;
 	font-weight: bold;
+	margin-bottom: 10px;
 }
 
 .add
@@ -183,6 +184,30 @@ h1
 	*/
 	
 	background-color: rgba(0, 0, 0, 0.23);
+	border-top: 3px groove rgba(0, 0, 0, 0.23);
+	border-bottom: 3px groove rgba(0, 0, 0, 0.23);
+}
+
+.error_box
+{
+	color: #911;
+	width:400px;
+	background-color: #efd0d0;
+	border: 1px solid #da9797;	
+	text-align: center;
+	margin: auto auto;
+	border-radius: 3px;
+}
+
+.green_box
+{
+	color: #191;
+	width:400px;
+	background-color: #d0efd0;
+	border: 1px solid #97da97;	
+	text-align: center;
+	margin: auto auto;
+	border-radius: 3px;
 }
 
 .center_on_page

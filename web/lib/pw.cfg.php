@@ -5,6 +5,7 @@
 
 // System Variables
 define( 'AVAL_LENGTH', 168 );
+define( 'PW_VERSION', 'V0.2' );
 
 // Path constants
 define( 'LIB_PATH', 'lib/' );
