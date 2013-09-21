@@ -7,7 +7,7 @@
 	{
 		$response = PWTask( 'login_user', $_POST );
 					
-		if( intval($response) >= 0 )
+		if( intval($response) >= 1 )
 		{
 			$login = true;
 			$_SESSION['USER'] = $_POST['username'];
@@ -21,7 +21,7 @@
 	if( $login ){
 ?>
 <script type="text/javascript">
-	BouncePage( 1 );
+	BouncePage( <?php echo BOUNCE_QUICK; ?> );
 </script>
 <div id="login_window" class="rounded_window center_on_page small_window drop_shadow">
 	<h1> Pockwester Scheduling Application </h1>
@@ -34,7 +34,7 @@
 
 <div id="login_window" class="rounded_window center_on_page small_window drop_shadow">
 	<h1> Pockwester Scheduling Application </h1>
-	<form action="index.php" method="POST">
+	<form action="index.php" method="POST" id="login_form">
 		<label for="username">Username</label>
 		<input type="textfield" name="username" value="<?php echo $_POST['username'];?>"><BR/>
 		<label for="password">Password</label>

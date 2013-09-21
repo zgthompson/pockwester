@@ -66,7 +66,7 @@ if( $updatedClasses ){
 	$_SESSION['CURRENT_PAGE'] = DEFAULT_CONTENT;
 ?>
 <script type="text/javascript">
-	BouncePage( 2 );
+	BouncePage( <?php echo BOUNCE_NORMAL; ?> );
 </script>
 <div id="schedule_accept_classes" class="rounded_window center_on_page small_window drop_shadow" >
 <h1> You have joined the class groups and your avail has been altered </h1>

@@ -10,20 +10,22 @@ DB_Connect();
 
 if( isset($user) )
 {
-	// Get groups from db
+	// Get groups from db that belong to user
 	$groups = DB_GetArray( 
-	DB_Query( 
-	"SELECT DISTINCT(g.NAME) 
+	DB_Query( "
+	SELECT DISTINCT(g.NAME) 
 	FROM USER as u, USER_GROUP as ug, GROUPS as g 
-	WHERE u.UID = ug.USER_ID and ug.GROUP_ID = g.GID and u.UID = \"{$user}\"" ) );
+	WHERE u.UID = ug.USER_ID and ug.GROUP_ID = g.GID and u.UID = \"{$user}\"
+	ORDER BY g.NAME" ) );
 }
 else
 {
 	// Get groups from db
 	$groups = DB_GetArray( 
-	DB_Query( 
-	'SELECT DISTINCT(g.NAME) 
-	FROM GROUPS as g ' ) );
+	DB_Query( '
+	SELECT DISTINCT(g.NAME) 
+	FROM GROUPS as g
+	ORDER BY g.NAME' ) );
 }
 
 // Output JSON object

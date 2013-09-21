@@ -20,20 +20,13 @@ define( 'PWAPI_TIMEOUT', 5 );
 // Useful constants
 define( 'NOW', time() );
 
-// Page defining constants
-// *** Testing this method of including header information ... might need to be refactored ***
-define( 'DOC_TYPE', '<!DOCTYPE html>' );
-define( 'GLOBAL_CSS', '<link rel="stylesheet" type="text/css" href="'.CSS_PATH.'pw.global.css'.'">' );
-define( 'JQUERY', '<script src="'.JAV_PATH.'jquery-1.10.2.js"></script>' );
-define( 'GLOBAL_JS', '<script src="'.JAV_PATH.'pw.global.js"></script>' );
-define( 'GLOBAL_TITLE', '<title>Forge</title>' );
-
-define( 'GLOBAL_HEAD', '<head>' . GLOBAL_CSS . GLOBAL_TITLE . JQUERY . GLOBAL_JS . '</head>' );
-
-// Set the default landing page if there is not routing information
+// Template variables
 define( 'DEFAULT_CONTENT', 'home.php'	);
 define( 'LOGIN_PAGE'     , 'login.php'	);
 define( 'LOGOUT_PAGE'	 , 'logout.php'	);
+define( 'HEADER_FILE'	 , 'head.php' 	);
+define( 'BOUNCE_QUICK'	 , .5 			);
+define( 'BOUNCE_NORMAL'	 , 2 			);
 
 // Source files that are considered public and do not need a login to access
 $PUBLIC_SOURCE_FILES = array ( 'new_user.php', 'logout.php', LOGIN_PAGE, LOGOUT_PAGE, 'help_user.php' );

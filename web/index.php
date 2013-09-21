@@ -25,7 +25,19 @@ if( !isset($_SESSION['USER']) )
 		$_SESSION['CURRENT_PAGE'] = LOGIN_PAGE;	
 	}
 }
-
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<?php GetPage( HEADER_FILE ); ?>
+</head>
+<body>
+<pw_bar>
+	Pockwester V0.1
+	<a href="https://github.com/zgthompson/pockwester" target="_blank">Github Source</a>
+	<a href="http://pwa.arthurwut.com/test_driver.html" target="_blank">PWApi Test Driver</a>
+</pw_bar>
+<?php
 // If the current page is valid route to that page
 // else goto home
 if( !GetPage( $_SESSION['CURRENT_PAGE'] ) )
@@ -34,3 +46,5 @@ if( !GetPage( $_SESSION['CURRENT_PAGE'] ) )
 	$_SESSION['CURRENT_PAGE'] = DEFAULT_CONTENT;
 }
 ?>
+</body>
+</html>

@@ -170,4 +170,20 @@
 	{
 		return json_encode( $value );
 	}
+	
+	// Returns a number to day string array
+	function GetValueDayArray()
+	{
+		return array( 0 => 'Monday',1 => 'Tuesday',2 => 'Wednesday',3 => 'Thursday',4 => 'Friday',5 => 'Saturday',6 => 'Sunday');
+	}
+
+	// Returns a day to number string array
+	function GetDayValueArray()
+	{
+		return array( 'M' => 0,'T' => 1,'W' => 2,'R' => 3,'F' => 4,'S' => 5,'U' => 6);
+	}
+
+
+
+	
 ?>

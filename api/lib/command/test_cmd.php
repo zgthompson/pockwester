@@ -3,6 +3,5 @@
 	// Arthur Wuterich
 	// 9-11-13
 	
-	
 	exit( 'test_cmd' );
 ?>

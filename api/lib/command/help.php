@@ -1,4 +1,3 @@
-<!--- TEST! -->
 <?php
 // help.php:	Displays help information
 //				 -Expects api.php to call this file

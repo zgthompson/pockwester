@@ -38,7 +38,6 @@ if( $create ){
 ?>
 <div id="login_window" class="rounded_window center_on_page small_window drop_shadow">
 	<h1> Pockwester Scheduling Application </h1>
-	Create User
 	<form action="index.php" method="POST">
 		<label for="username">Username</label>
 		<input type="textfield" name="username" value="<?php echo $_POST['username']; ?>"><BR/>

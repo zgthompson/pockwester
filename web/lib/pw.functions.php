@@ -56,16 +56,10 @@ function GetPage( $page )
 	{
 		return false;
 	}
-	
-	// Header information
-	echo DOC_TYPE, '<html>', GLOBAL_HEAD, '<body>';
-	
+		
 	// Body content
 	include $path;
-	
-	// Closing tags
-	echo '</body>', '</html>';
-	
+
 	return true;
 }
 
@@ -286,6 +280,18 @@ function AlterTimeString( &$timeString, $day, $hour, $value )
 {
 	$pos = ($day%7) * 24 + ($hour%24);
 	$timeString[$pos] = $value;
+}
+
+// Returns a number to day string array
+function GetValueDayArray()
+{
+	return array( 0 => 'Monday',1 => 'Tuesday',2 => 'Wednesday',3 => 'Thursday',4 => 'Friday',5 => 'Saturday',6 => 'Sunday');
+}
+
+// Returns a day to number string array
+function GetDayValueArray()
+{
+	return array( 'M' => 0,'T' => 1,'W' => 2,'R' => 3,'F' => 4,'S' => 5,'U' => 6);
 }
 
 
