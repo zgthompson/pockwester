@@ -9,24 +9,27 @@ $last_update = Get( 'last_update', false );
 DB_Connect();
 
 $remove = array( 'UPDATED' );
-$combine = array( 'DAYS' => 'TIME', 'DEPARTMENT' => 'COURSE_NUMBER' );
-$rename = array( 'DAYS' => 'TIME', 'DEPARTMENT' => 'COURSE_NUMBER' );
+$combine = array( 'DAYS' => 'TIME' );
+$rename = array( 'DAYS' => 'TIME' );
+
+// Return assoc tables
+$assoc = true;
 
 // Filter based on provided unix timestamp
 if( isset($last_update) && is_numeric($last_update) )
 {
-	$sections = DB_GetArray( DB_Query( "SELECT * from SECTION where {$last_update} < unix_timestamp(UPDATED)" ), true );	
+	$sections = DB_GetArray( DB_Query( "SELECT * from SECTION where {$last_update} < unix_timestamp(UPDATED)" ), $assoc );	
 }
 else
 {
-	$sections = DB_GetArray( DB_Query( "SELECT * from SECTION" ), true );		
+	$sections = DB_GetArray( DB_Query( "SELECT * from SECTION" ), $assoc );		
 }
 
-RemoveKeys( $sections, $remove, true );
-CombineKeys( $sections, $combine, true );
-RenameKeys( $sections, $rename, true );
+RemoveKeys( $sections, $remove );
+CombineKeys( $sections, $combine );
+RenameKeys( $sections, $rename );
 
-FormatAssocKeys( $sections, true );
+FormatAssocKeys( $sections );
 
 exit( OutputFormatting( $sections ) );
 

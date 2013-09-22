@@ -195,7 +195,58 @@
 				unset( $source[$key] );
 			}
 		}	
-	}	
+	}
+	
+	// Makes a new key based on each element in the make array. This will create the field for each key of make taking each found member of the parent array as the data
+	// $make: Is expected to be a assoc array which represents <new_field> => <array,parent,fields,names>
+	// $delimit: What will be placed in between the two elements on concatenation
+	// $recursive: Will run this command on each array element	
+	// Precondition: Both $source and $combine are both arrays	
+	function MakeKeys( &$source, &$make, $recursive = true, $delimit = ' ' )
+	{
+		// Exit conditions
+		if( !is_array( $source ) || !is_array( $make ) )
+		{
+			return;
+		}
+		
+		// If recursive run this on each element that is an array in source
+		if( $recursive )
+		{
+			foreach( $source as &$value )
+			{
+				if( is_array( $value ) )
+				{
+					MakeKeys( $value, $make, $recursive, $delimit );
+				}
+			}
+		}
+		
+		// Create the new fields
+		foreach( $make as $key => &$value )
+		{
+			$new_field = '';
+			
+			// Search the parent array for each element
+			foreach( $value as $parent_key )
+			{
+					if( isset( $source[$parent_key] ) )
+					{
+						if( $new_field != '' ){ $new_field .= $delimit; }
+						
+						$new_field .= $source[$parent_key];
+					}
+			}
+			
+			//echo $new_field;
+			
+			// If the parent elements were found then add the new member
+			if( $new_field != '' )
+			{
+				$source[$key] = $new_field;
+			}
+		}	
+	}		
 	
 	// Returns an empty string time array
 	function MakeTimeString( $char = ' ', $length = AVAL_LENGTH )
@@ -248,7 +299,7 @@
 	// Precondition: A valid array object
 	// [$recursive]: Will perform operation on every assoc array in array
 	// [$format]: Function that will be called on each key of the array
-	function FormatAssocKeys( &$assoc_array, $recursive = false, $format = 'FormatColumn' )
+	function FormatAssocKeys( &$assoc_array, $recursive = true, $format = 'FormatColumn' )
 	{
 		
 		// Exit conditions

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="android">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../android" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../android/Forge/src/main/java" />
+      <root url="file://$PROJECT_DIR$/../android/Forge/build/source/r/debug" />
+      <root url="file://$PROJECT_DIR$/../android/Forge/build/source/buildConfig/debug" />
+    </SOURCES>
+  </library>
+</component>
