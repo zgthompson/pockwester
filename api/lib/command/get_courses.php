@@ -3,6 +3,7 @@
 //					 -Returns the classes for provided campus
 //					 -Precondition: Constants in api.cfg.php are defined
 //					 -$last_upate: Will filter results based on the provided unix timestamp
+//					 -$beta: Will return from the new table
 // Arthur Wuterich
 // 8-3-13
 //
@@ -11,6 +12,30 @@ DB_Connect();
 
 // Get the provided date if available 
 $last_update = get( 'last_update', false );
+$beta = get( 'beta', false );
+
+// New functionality
+if( isset($beta) )
+{
+	$remove = array( 'UPDATED' );
+	// If we have the last update time filter the query based on the time provided
+	if( isset($last_update) && is_numeric($last_update) )
+	{
+		// Get classes from db where the class updated field is greater than the provided field
+		$courses = DB_GetArray( DB_Query( "SELECT * from COURSE where {$last_update} < unix_timestamp(UPDATED)" ), true );
+	}
+	else
+	{
+		// Get classes from db
+		$courses = DB_GetArray( DB_Query( 'SELECT * from COURSE' ), true );
+	}
+	
+	RemoveKeys( $courses, $remove );
+	
+	FormatAssocKeys( $courses, true );
+	
+	exit( OutputFormatting( $courses ) );
+}
 
 // If we have the last update time filter the query based on the time provided
 if( isset($last_update) && is_numeric($last_update) )

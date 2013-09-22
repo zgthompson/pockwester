@@ -45,12 +45,13 @@ function DB_GetRow( &$result, $assoc = false )
 
 // Returns a 2d array with all of the elements
 // Precondition: A valid MySql query result object
+// [$assoc]: If true returns each row as assoc rows
 // Postcondition: A 2d array with all query information
-function DB_GetArray( &$result )
+function DB_GetArray( &$result, $assoc = false )
 {
 	$array = array();
 
-	while( $row = DB_GetRow( $result ) )
+	while( $row = DB_GetRow( $result, $assoc ) )
 	{
 		$array[] = $row;
 	}
@@ -88,12 +89,13 @@ function DB_FlattenArray( $array )
 // Returns a 1d array with all of the elements 
 // Precondition: A valid MySql query result object
 // Postcondition: A 2d array with all query information
-function DB_GetSingleArray( &$result )
+// [$assoc]: Will return the array as an associative array
+function DB_GetSingleArray( &$result, $assoc = false )
 {
 	$array = array();
 
 	// Cycle each element to push into result array
-	while( $row = DB_GetRow( $result ) )
+	while( $row = DB_GetRow( $result, $assoc ) )
 	{
 		// If the element is an array use recursion to get all of the elements
 		if( is_array( $row ) )

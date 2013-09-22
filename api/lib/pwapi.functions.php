@@ -89,11 +89,12 @@
 		
 		return $resultArray;
 	}
-	
+		
 	// Renames elements from the $source assoc array based on the $rename array
 	// $rename: Is expected to be a assoc array which represents <name to change> => <new name>
+	// $recursive: Will run this command on each array element
 	// Precondition: Both $source and $rename are both arrays
-	function RenameKeys( &$source, &$rename )
+	function RenameKeys( &$source, &$rename, $recursive = true )
 	{
 		// Exit conditions
 		if( !is_array( $source ) || !is_array( $rename ) )
@@ -101,8 +102,20 @@
 			return;
 		}
 		
+		// Execute this command on each member if recursive
+		if( $recursive )
+		{
+			foreach( $source as &$value )
+			{
+				if( is_array( $value ) )
+				{
+					RenameKeys( $value, $rename, $recursive );
+				}
+			}
+		}
+		
 		// Rename any fields that need to be converted
-		foreach( $rename as $key => $value )
+		foreach( $rename as $key => &$value )
 		{
 			if( isset( $source[$key] ) )
 			{
@@ -116,8 +129,9 @@
 	// Combines elements from the $source assoc array based on the $rename array
 	// $combine: Is expected to be a assoc array which represents <field to keep> => <field to combine>
 	// $delimit: What will be placed in between the two elements on concatenation
+	// $recursive: Will run this command on each array element	
 	// Precondition: Both $source and $combine are both arrays	
-	function CombineKeys( &$source, &$combine, $delimit = ' ' )
+	function CombineKeys( &$source, &$combine, $recursive = true, $delimit = ' ' )
 	{
 		// Exit conditions
 		if( !is_array( $source ) || !is_array( $combine ) )
@@ -125,9 +139,21 @@
 			return;
 		}
 		
-		// Combine required fields	
-		foreach( $combine as $key => $value )
+		// If recursive run this on each element that is an array in source
+		if( $recursive )
 		{
+			foreach( $source as &$value )
+			{
+				if( is_array( $value ) )
+				{
+					CombineKeys( $value, $combine, $recursive, $delimit );
+				}
+			}
+		}
+		
+		// Combine required fields	
+		foreach( $combine as $key => &$value )
+		{		
 			if( isset( $source[$key] ) && isset( $source[$value] ) )
 			{
 				$source[$key] = $source[$key] . $delimit . $source[$value];
@@ -135,6 +161,41 @@
 			}
 		}	
 	}
+	
+	// Combines elements from the $source assoc array based on the $rename array
+	// $combine: Is expected to be a assoc array which represents <field to keep> => <field to combine>
+	// $delimit: What will be placed in between the two elements on concatenation
+	// $recursive: Will run this command on each array element	
+	// Precondition: Both $source and $combine are both arrays	
+	function RemoveKeys( &$source, &$remove, $recursive = true )
+	{
+		// Exit conditions
+		if( !is_array( $source ) || !is_array( $remove ) )
+		{
+			return;
+		}
+		
+		// If recursive run this on each element that is an array in source
+		if( $recursive )
+		{
+			foreach( $source as &$value )
+			{
+				if( is_array( $value ) )
+				{
+					RemoveKeys( $value, $remove, $recursive );
+				}
+			}
+		}
+		
+		// Combine required fields	
+		foreach( $remove as $key )
+		{		
+			if( isset( $source[$key] ) )
+			{
+				unset( $source[$key] );
+			}
+		}	
+	}	
 	
 	// Returns an empty string time array
 	function MakeTimeString( $char = ' ', $length = AVAL_LENGTH )
@@ -182,6 +243,53 @@
 	{
 		return array( 'M' => 0,'T' => 1,'W' => 2,'R' => 3,'F' => 4,'S' => 5,'U' => 6);
 	}
+	
+	// Formats an assoc array's keys to lowercase
+	// Precondition: A valid array object
+	// [$recursive]: Will perform operation on every assoc array in array
+	// [$format]: Function that will be called on each key of the array
+	function FormatAssocKeys( &$assoc_array, $recursive = false, $format = 'FormatColumn' )
+	{
+		
+		// Exit conditions
+		if( !is_array( $assoc_array ) || count( $assoc_array ) <= 0 || ( !is_callable( $format ) && !function_exists( $format ) ) )
+		{
+			return false;
+		}
+		
+		// Perform operation on each key
+		foreach( $assoc_array as $key => &$value )
+		{
+			// If recursive then call on each array value
+			if( $recursive && is_array( $value ) )
+			{
+				FormatAssocKeys( $value, $recursive, $format );
+			}
+			
+			$formatted_key = $format($key);
+			
+			//echo "{$key},{$value}<BR/>";
+			// Only format the array if there is a difference in the key value
+			if( $formatted_key != $key )
+			{
+				$assoc_array[$formatted_key] = $value;
+				unset($assoc_array[$key]);
+			}
+		}
+		
+		return true;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 

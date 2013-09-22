@@ -21,6 +21,9 @@ define( 'ERROR_VARIABLE_NOT_FOUND', 'A required variable was not found in the co
 // Returns an array of the commands available in the LIB_PATH/CMD_PATH/ directory
 $API_COMMANDS = GetCommandArray( scandir( LIB_PATH . CMD_PATH ) );
 
+// Length of availability strings
+define( 'AVAL_LENGTH', 168 );
+
 // Defines legacy commands and which function will be called on redirect
 $LEGACY_COMMANDS = array( 'get_classes' => 'get_courses' )
 
