@@ -15,8 +15,9 @@ require_once LIB_PATH . 'pwapi.functions.php';
 require_once LIB_PATH . 'pwapi.cfg.php';
 
 // Application Variables
-DEFINE( 'APIKEY', $_POST['apikey'] );
-DEFINE( 'APITASK', $_POST['apitask'] );
+define( 'APIKEY', $_POST['apikey'] );
+define( 'APITASK', $_POST['apitask'] );
+define( 'DEBUG', true );
 
 // Exit conditions that result from incomplete post data
 // -Either of the two required post variables are not set
@@ -24,8 +25,8 @@ if( !APIKEY || !APITASK )
 {
 	exit( ERROR_INVALID_POST );
 }
-// -Api key is incorrect
-if( APIKEY != $_SERVER['API_APIKEY'] && APIKEY != 'test' )
+// -Api key is incorrect				
+if( APIKEY != $_SERVER['API_APIKEY'] ||( DEBUG && APIKEY != 'test' ) )
 {
 	exit( ERROR_INVALID_KEY );
 }
