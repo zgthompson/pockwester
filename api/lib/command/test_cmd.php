@@ -1,5 +1,5 @@
 <?php
-// test_cmd: Stub for running custom commands from PWApi *** THIS COMMAND DOES NOT HAVE DEFINED OUTPUT ***
+// test_cmd: Stub for running custom commands from PWApi.
 // Arthur Wuterich
 // 9-11-13
 
@@ -7,15 +7,15 @@
 DB_Connect();
 
 /* Code to take the sections from CLASS table and inset into SECTION table
-$classes = DB_GetArray( DB_Query( "SELECT CLASS_ID, SUBJECT, CATALOG_NUMBER, BUILDING, TIME, DAYS, INSTRUCTOR FROM CLASS" ) );
+$classes = DB_GetArray( DB_Query( "SELECT CLASS_ID, SECTION_NUMBER, SUBJECT, CATALOG_NUMBER, BUILDING, TIME, DAYS, INSTRUCTOR FROM CLASS" ) );
 
 
 foreach( $classes as $row )
 {
 	DB_Query( "INSERT INTO SECTION 
-				(SECTION_NUMBER,DEPARTMENT,COURSE_NUMBER,BUILDING,TIME,DAYS,INSTRUCTOR)
+				(SECTION_ID,SECTION_NUMBER,DEPARTMENT,COURSE_NUMBER,BUILDING,TIME,DAYS,INSTRUCTOR)
 				VALUES 
-				(\"{$row[0]}\",\"{$row[1]}\",\"{$row[2]}\",\"{$row[3]}\",\"{$row[4]}\",\"{$row[5]}\",\"{$row[6]}\")" );
+				(\"{$row[0]}\",\"{$row[1]}\",\"{$row[2]}\",\"{$row[3]}\",\"{$row[4]}\",\"{$row[5]}\",\"{$row[6]}\",\"{$row[7]}\")" );
 }
 	
 exit( OutputFormatting( $classes ) );

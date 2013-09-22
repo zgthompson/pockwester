@@ -8,7 +8,8 @@ $last_update = Get( 'last_update', false );
 
 DB_Connect();
 
-$remove = array( 'UPDATED' );
+$make = array ( 'COURSE_ID' => array( 'DEPARTMENT', 'COURSE_NUMBER' ) );
+$remove = array( 'UPDATED', 'COURSE_NUMBER', 'DEPARTMENT' );
 $combine = array( 'DAYS' => 'TIME' );
 $rename = array( 'DAYS' => 'TIME' );
 
@@ -25,8 +26,11 @@ else
 	$sections = DB_GetArray( DB_Query( "SELECT * from SECTION" ), $assoc );		
 }
 
-RemoveKeys( $sections, $remove );
+MakeKeys( $sections, $make );
 CombineKeys( $sections, $combine );
+
+RemoveKeys( $sections, $remove );
+
 RenameKeys( $sections, $rename );
 
 FormatAssocKeys( $sections );

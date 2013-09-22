@@ -17,7 +17,8 @@ $beta = get( 'beta', false );
 // New functionality
 if( isset($beta) )
 {
-	$remove = array( 'UPDATED' );
+	$make = array( 'COURSE_ID' => array( 'DEPARTMENT', 'COURSE_NUMBER' ) );
+	$remove = array( 'UPDATED', 'DEPARTMENT', 'COURSE_NUMBER' );
 	// If we have the last update time filter the query based on the time provided
 	if( isset($last_update) && is_numeric($last_update) )
 	{
@@ -30,6 +31,7 @@ if( isset($beta) )
 		$courses = DB_GetArray( DB_Query( 'SELECT * from COURSE' ), true );
 	}
 	
+	MakeKeys( $courses, $make );
 	RemoveKeys( $courses, $remove );
 	
 	FormatAssocKeys( $courses, true );
