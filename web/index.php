@@ -36,16 +36,18 @@ if( !isset($_SESSION['USER']) )
 <page_title>
 <?php echo GetTitle(); ?>
 </page_title>
-<div id="main_content">
-	<?php
-	// If the current page is valid route to that page
-	// else goto home
-	if( !GetPage( $_SESSION['CURRENT_PAGE'] ) )
-	{
-		GetPage( DEFAULT_CONTENT );
-		$_SESSION['CURRENT_PAGE'] = DEFAULT_CONTENT;
-	}
-	?>
+<div id="page">
+	<div id="main_content">
+		<?php
+		// If the current page is valid route to that page
+		// else goto home
+		if( !GetPage( $_SESSION['CURRENT_PAGE'] ) )
+		{
+			GetPage( DEFAULT_CONTENT );
+			$_SESSION['CURRENT_PAGE'] = DEFAULT_CONTENT;
+		}
+		?>
+	</div>
 </div>
 </body>
 </html>
