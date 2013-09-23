@@ -4,7 +4,7 @@
 // 9-19-13
 // Arthur Wuterich
 
-$username = Get( 'username' );
+$username = strtolower( Get( 'username' ) );
 $password = md5( Get( 'password' ) );
 
 DB_Connect();

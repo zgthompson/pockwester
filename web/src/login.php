@@ -16,7 +16,7 @@
 			if( intval($response) >= 1 )
 			{
 				$login = true;
-				$_SESSION['USER'] = $_POST['login_username'];
+				$_SESSION['USER'] = ucwords(strtolower($_POST['login_username']));
 				$_SESSION['USER_ID'] = intval($response);
 				$_SESSION['CURRENT_PAGE'] = DEFAULT_CONTENT;
 			}

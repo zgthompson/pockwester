@@ -25,7 +25,7 @@ function IsPagePublic( $page )
 // Returns true if the username, password, and email meets the standard for user na`me, password, and email
 function MeetsUserStandard( $username, $email, $password )
 {
-	if( preg_match( "/[\`\~\#\$\^\&\(\)\_\+\{\}\:\"\<\>\-\=\[\]\\\;\'\,\/\|]/", $username.$email.$password ) )
+	if( preg_match( "/[\ \`\~\#\$\^\&\(\)\_\+\{\}\:\"\<\>\-\=\[\]\\\;\'\,\/\|]/", $username.$email.$password ) )
 	{
 		return 'You can only user special symbols ! @ % * ? . ';
 	}
@@ -312,6 +312,23 @@ function Error($error)
 	}
 	
 	return "<div class=\"error_box\">{$error}</div>";
+}
+
+// Formats the current page title into a more human readable format
+function GetTitle()
+{
+	// If the current page has no title then exit
+	if( !isset($_SESSION['CURRENT_PAGE']))
+	{
+		return;
+	}
+
+	$title = strtolower( $_SESSION['CURRENT_PAGE'] );
+	$title = str_replace( '.php', '', $title );
+	$title = str_replace( '_', ' ', $title );
+	$title = ucwords( $title );
+	
+	return $title;
 }
 
 

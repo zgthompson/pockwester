@@ -32,19 +32,20 @@ if( !isset($_SESSION['USER']) )
 <?php GetPage( HEADER_FILE ); ?>
 </head>
 <body>
-<pw_bar>
-	Pockwester V0.1
-	<a href="https://github.com/zgthompson/pockwester" target="_blank">Github Source</a>
-	<a href="http://pwa.arthurwut.com/test_driver.html" target="_blank">PWApi Test Driver</a>
-</pw_bar>
-<?php
-// If the current page is valid route to that page
-// else goto home
-if( !GetPage( $_SESSION['CURRENT_PAGE'] ) )
-{
-	GetPage( DEFAULT_CONTENT );
-	$_SESSION['CURRENT_PAGE'] = DEFAULT_CONTENT;
-}
-?>
+<?php GetPage( PW_BAR_FILE ); ?>
+<page_title>
+<?php echo GetTitle(); ?>
+</page_title>
+<div id="main_content">
+	<?php
+	// If the current page is valid route to that page
+	// else goto home
+	if( !GetPage( $_SESSION['CURRENT_PAGE'] ) )
+	{
+		GetPage( DEFAULT_CONTENT );
+		$_SESSION['CURRENT_PAGE'] = DEFAULT_CONTENT;
+	}
+	?>
+</div>
 </body>
 </html>

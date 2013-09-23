@@ -4,10 +4,15 @@
 // 9-19-13
 // Arthur Wuterich
 
-$username = Get( 'username' );
+$username = strtolower( Get( 'username' ) );
 $password = md5( Get( 'password' ) );
 $email = 	Get( 'email' );
 
+// If any of the fields are empty then exit
+if( strlen($username)<=0 || strlen($password)<=0 || strlen($email)<=0 )
+{
+	exit( 'Error creating user' );
+}
 
 DB_Connect();
 

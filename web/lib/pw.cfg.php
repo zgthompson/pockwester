@@ -5,7 +5,7 @@
 
 // System Variables
 define( 'AVAL_LENGTH', 168 );
-define( 'PW_VERSION', 'V0.2' );
+define( 'PW_VERSION', 'V0.2.1' );
 
 // Path constants
 define( 'LIB_PATH', 'lib/' );
@@ -26,6 +26,7 @@ define( 'DEFAULT_CONTENT', 'home.php'	);
 define( 'LOGIN_PAGE'     , 'login.php'	);
 define( 'LOGOUT_PAGE'	 , 'logout.php'	);
 define( 'HEADER_FILE'	 , 'head.php' 	);
+define( 'PW_BAR_FILE'	 , 'pw_bar.php' );
 define( 'BOUNCE_QUICK'	 , .5 			);
 define( 'BOUNCE_NORMAL'	 , 2 			);
 

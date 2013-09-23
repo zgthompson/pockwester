@@ -29,7 +29,7 @@ if( $create ){
 	BouncePage( <?php echo BOUNCE_QUICK; ?> );
 </script>
 <div id="login_window" class="rounded_window center_on_page small_window drop_shadow">
-	<h1> Pockwester Scheduling Application </h1>
+	<h1> New User </h1>
 	<div class="green_box">User created!</div>
 	<form action="index.php" method="POST">
 		<button type="submit" name="goto" value="login.php">Login</button>
@@ -39,7 +39,7 @@ if( $create ){
 // Display user create form
 ?>
 <div id="login_window" class="rounded_window center_on_page small_window drop_shadow">
-	<h1> Pockwester Scheduling Application </h1>
+	<h1> New User </h1>
 	<form action="index.php" method="POST">
 		<?php echo Error( $error ); ?>
 		<label for="new_username">Username</label>
