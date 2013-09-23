@@ -35,13 +35,15 @@ function AddField()
 }
 </script>
 
-<div id="course_form" class="rounded_window center_on_page large_window drop_shadow" >
-<h1> Select Courses </h1>
-	<form action="index.php" method="POST" >
-		<?php echo $classes_dropdown; ?>
-		<button type="button" name="add" id="add" class="add" onclick="AddField();">+</button>
-		<BR />
-		<button type="submit" name="goto" value="home.php">Back Home</button>
-		<button type="submit" name="goto" value="calc_schedule.php">Calculate Schedule</button>
-	</form>
+<div id="course_form" class="window_background center_on_page large_window drop_shadow" >
+<div class="search_classes_left_align" >
+	<h1> Select Courses </h1>
+		<form  method="POST" >
+			<?php echo $classes_dropdown; ?>
+			<button type="button" name="add" id="add" class="add" onclick="AddField();">+</button>
+</div>			
+			<BR />
+			<button type="submit" name="goto" value="home.php">Back Home</button>
+			<button type="submit" name="goto" value="calc_schedule.php">Calculate Schedule</button>
+		</form>
 </div>

@@ -28,19 +28,19 @@ if( $create ){
 <script type="text/javascript">
 	BouncePage( <?php echo BOUNCE_QUICK; ?> );
 </script>
-<div id="login_window" class="rounded_window center_on_page small_window drop_shadow">
+<div id="login_window" class="window_background center_on_page small_window drop_shadow">
 	<h1> New User </h1>
 	<div class="green_box">User created!</div>
-	<form action="index.php" method="POST">
+	<form  method="POST">
 		<button type="submit" name="goto" value="login.php">Login</button>
 	</form>
 </div>
 <?php exit();} 
 // Display user create form
 ?>
-<div id="login_window" class="rounded_window center_on_page small_window drop_shadow">
+<div id="login_window" class="window_background center_on_page small_window drop_shadow">
 	<h1> New User </h1>
-	<form action="index.php" method="POST">
+	<form  method="POST">
 		<?php echo Error( $error ); ?>
 		<label for="new_username">Username</label>
 		<input type="textfield" name="new_username" value="<?php echo $_POST['new_username']; ?>"><BR/>

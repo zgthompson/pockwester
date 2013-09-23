@@ -38,18 +38,18 @@
 <script type="text/javascript">
 	BouncePage( <?php echo BOUNCE_QUICK; ?> );
 </script>
-<div id="login_window" class="rounded_window center_on_page small_window drop_shadow">
+<div id="login_window" class="window_background center_on_page small_window drop_shadow">
 	<h1> Pockwester Scheduling Application </h1>
 	<h2> Logged in! </h2>
-	<form action="index.php" method="POST">
+	<form  method="POST">
 		<button type="submit" name="goto" value="home.php">Continue</button>
 	</form>
 </div>
 <?php exit();} ?>
 
-<div id="login_window" class="rounded_window center_on_page small_window drop_shadow">
+<div id="login_window" class="window_background center_on_page small_window drop_shadow">
 	<h1> Pockwester Scheduling Application </h1>
-	<form action="index.php" method="POST" id="login_form">
+	<form  method="POST" id="login_form">
 		<?php echo Error( $error ); ?>
 		<label for="login_username">Username</label>
 		<input type="textfield" name="login_username" value="<?php echo $_POST['login_username'];?>"><BR/>

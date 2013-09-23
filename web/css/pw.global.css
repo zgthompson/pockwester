@@ -27,6 +27,17 @@ body
 	overflow:hidden;
 }
 
+/* Custom tags */
+day
+{
+	font-weight: bold;
+}
+
+time_value
+{
+	margin-left: 15px;
+}
+
 pw_bar
 {
 	position: absolute;
@@ -97,6 +108,38 @@ page_title
 	text-align: center;
 	font-size: 15px;
 	color: #FFF;
+}
+
+group_name, day_block
+{
+	padding-left: 20px;
+	padding: 10px;
+	display: inline-block;
+	border-radius: 3px;
+	margin: 5px 5px 10px 5px;
+	font-weight: bold;
+	border: 1px solid #000;
+	background: #cdeb8e; /* Old browsers */
+	background: -moz-linear-gradient(top, #cdeb8e 0%, #a5c956 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cdeb8e), color-stop(100%,#a5c956)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #cdeb8e 0%,#a5c956 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #cdeb8e 0%,#a5c956 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #cdeb8e 0%,#a5c956 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #cdeb8e 0%,#a5c956 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=0 ); /* IE6-9 */	
+}
+
+day_block
+{
+	color: #FFF;
+	background: #ff3019; /* Old browsers */
+	background: -moz-linear-gradient(top, #ff3019 0%, #cf0404 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3019), color-stop(100%,#cf0404)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #ff3019 0%,#cf0404 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */
 }
 
 #page
@@ -205,6 +248,26 @@ h1
 	margin-bottom: 10px;
 }
 
+h2
+{
+	margin: 25px 0px 0px 10px;
+}
+
+#course_form
+{
+}
+
+#login_window
+{
+}
+
+#login_form
+{
+}
+
+#schedule_accept_classes
+{
+}
 .add
 {
 	padding:3px;
@@ -226,24 +289,7 @@ h1
 	font-size: 14px;
 	margin:0px;
 }
-
-#course_form
-{
-}
-
-#login_window
-{
-}
-
-#login_form
-{
-}
-
-#schedule_accept_classes
-{
-}
-
-.rounded_window
+.window_background
 {
 	background-color: rgba(0, 0, 0, 0.23);
 	border-top: 3px groove rgba(0, 0, 0, 0.23);
@@ -272,6 +318,20 @@ h1
 	border-radius: 3px;
 }
 
+.search_classes_left_align
+{
+	width: 320px;
+	margin: 0px auto 0px auto;
+	text-align: left;
+}
+
+.calc_schedule_left_align
+{
+	width: 900px;
+	margin: 0px auto 0px auto;
+	text-align: left;
+}
+
 .center_on_page
 {
 	display:table-cell;
@@ -290,6 +350,7 @@ h1
 	padding: 40px;
 	width:50000px;
 	text-align: center;
+	margin-top: 100px;
 }
 
 .drop_shadow
@@ -299,22 +360,26 @@ h1
 	*/
 }
 
-/* Custom tags */
-day_block
+.group_block
 {
-	display:block;
-}
-
-day
-{
+	width: 65%;
+	border: 2px solid #000;
+	border-radius: 3px;
+	margin: 8px auto 8px auto;
+	padding: 10px 0px 10px 0px;
 	font-weight: bold;
+	font-size: 20px;
+	background: #f5f6f6; /* Old browsers */
+	background: -moz-linear-gradient(top, #f5f6f6 0%, #dbdce2 21%, #b8bac6 49%, #dddfe3 80%, #f5f6f6 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f6f6), color-stop(21%,#dbdce2), color-stop(49%,#b8bac6), color-stop(80%,#dddfe3), color-stop(100%,#f5f6f6)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#f5f6f6 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#f5f6f6 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#f5f6f6 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#f5f6f6 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f6f6', endColorstr='#f5f6f6',GradientType=0 ); /* IE6-9 */		
 }
 
-time_value
-{
-	margin-left: 15px;
-}
-
+/* For smaller screens make the pw_bar smaller font */
 @media screen and (max-width: 900px)
 {
 	pw_bar a, pw_bar button, pw_bar button:hover, pw_bar button:active

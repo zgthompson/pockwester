@@ -9,7 +9,7 @@
 	<a href="https://github.com/zgthompson/pockwester" target="_blank">Github Source</a>
 	<a href="http://pwa.arthurwut.com/test_driver.html" target="_blank">PWApi Test Driver</a>
 	<?php if( isset($_SESSION['USER']) ) { ?>
-	<form action="index.php" method="post">
+	<form  method="post">
 		<button name="goto" value="home.php">Home</button>
 		<button name="goto" value="manage_groups.php">Manage Groups</button>
 		<button name="goto" value="account.php">My Account</button>

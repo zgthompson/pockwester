@@ -248,7 +248,12 @@ function FormatSchedule( $times )
 	$format_schedule = '';
 	foreach( $schedule as $key => $day_block )
 	{
-		$format_schedule .= "<day_block><day>{$VALUE_DAY[$key]}</day>:<BR/><time_value>{$day_block}</time_value></day_block><BR/>";
+		if( $day_block == '' )
+		{
+			continue;
+		}
+		
+		$format_schedule .= "<day_block><day>{$VALUE_DAY[$key]}</day>:<BR/><time_value>{$day_block}</time_value></day_block>";
 	}
 	
 	return $format_schedule;
@@ -329,6 +334,19 @@ function GetTitle()
 	$title = ucwords( $title );
 	
 	return $title;
+}
+
+// Takes a groupname and returns a group block
+function CreateGroupBlock( $groupName )
+{
+	$html = 
+	"
+	<div class=\"group_block\">
+	{$groupName}
+	</div>
+	";	
+	
+	return $html;
 }
 
 
