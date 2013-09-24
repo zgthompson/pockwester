@@ -7,9 +7,9 @@ $post = array( 'user' => $_SESSION['USER_ID'] );
 $availString = PWTask( 'get_avail', $post );
 
 ?>
-<div id="login_window" class="window_background center_on_page small_window drop_shadow">
-	<h1> Summary of Availability </h1>
-	<?php echo $availString ?>
+<div id="login_window" class="window_background center_on_page small_window drop_shadow no_wrap">
+	<h1> Availability at a Glance </h1>
+	<?php echo FormatTimeString( $availString ) ?>
 	<form  method="POST">
 		<button type="submit" name="goto" value="home.php">Back</button>
 	</form>

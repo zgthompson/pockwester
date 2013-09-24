@@ -39,8 +39,7 @@ if( !isset($_SESSION['USER']) )
 <div id="page">
 	<div id="main_content">
 		<?php
-		// If the current page is valid route to that page
-		// else goto home
+		// If the current page cannot be retrived then return the default content page
 		if( !GetPage( $_SESSION['CURRENT_PAGE'] ) )
 		{
 			GetPage( DEFAULT_CONTENT );

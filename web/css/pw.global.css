@@ -142,6 +142,63 @@ day_block
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */
 }
 
+availability_active, availability_inactive
+{
+	height: 30px;
+	width: 10px;
+	margin-top: 20px;
+	display: inline-block;
+}
+
+availability_active:hover, availability_inactive:hover
+{
+	border: 2px solid #FFF;
+}
+
+
+availability_active
+{
+	background-color: #0F0;
+}
+
+availability_inactive
+{
+	background-color: #F00;
+}
+
+availability_title_wrapper
+{
+	position: relative;
+	height: 50px;
+	width: 10px;
+}
+
+availability_title
+{
+	position: relative;
+	bottom: 25px;
+	visibility: hidden;
+	opacity: 0;
+	
+	border: 1px solid #000;
+	padding: 2px;
+	border-radius: 4px;
+	background-color: #FFF;
+	
+	-webkit-transition: visibility opacity 0.2s;	
+	
+}
+
+availability_title_wrapper:hover availability_title
+{
+	visibility: visible;
+	opacity: 1;
+}
+
+block_break
+{
+}
+
 #page
 {
 	display:table;
@@ -377,6 +434,11 @@ h2
 	background: -ms-linear-gradient(top, #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#f5f6f6 100%); /* IE10+ */
 	background: linear-gradient(to bottom, #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#f5f6f6 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f6f6', endColorstr='#f5f6f6',GradientType=0 ); /* IE6-9 */		
+}
+
+.no_wrap
+{
+	white-space: nowrap;
 }
 
 /* For smaller screens make the pw_bar smaller font */

@@ -322,10 +322,10 @@ function Error($error)
 // Formats the current page title into a more human readable format
 function GetTitle()
 {
-	// If the current page has no title then exit
+	// If the current page is not set then exit
 	if( !isset($_SESSION['CURRENT_PAGE']))
 	{
-		return;
+		return '';
 	}
 
 	$title = strtolower( $_SESSION['CURRENT_PAGE'] );
@@ -349,6 +349,58 @@ function CreateGroupBlock( $groupName )
 	return $html;
 }
 
+// Takes in a timestring and formats a block of html that will represent it
+function FormatTimeString( $timeString )
+{
+	$html = '';
+	$timeStringLength = strlen( $timeString );
+	
+	// Iterate over the entire string
+	for( $i = 0; $i < $timeStringLength-1; $i++ )
+	{
+	
+		$dayhour = GetDayHourString( $i+1 );
+		$block = "<availability_title_wrapper><availability_title>{$dayhour}</availability_title></availability_title_wrapper>";
+	
+		if( ($i+1)%24 == 0 )
+		{
+			//$block = "<block_break></block_break>{$block}";
+		}
+	
+		// Depending on what each char is add a different piece of HTML
+		switch( $timeString[$i] )
+		{		
+			case '_':
+				$html .= "<availability_inactive>{$block}</availability_inactive>";
+			break;
+			case '-':
+				$html .= "<availability_active>{$block}</availability_active>";
+			break;			
+		}
+		
+	}
+	
+	return $html;
+}
+
+// Will return a "<Day> <Time>" for each valid position in a week
+// Precondition: An integer that represents the hour of the week
+function GetDayHourString( $hour )
+{
+	// Exit if the value is not numeric
+	if( !is_numeric($hour) )
+	{
+		return '';
+	}
+	
+	// Build the string components
+	$VALUE_DAY = array( 0 => 'Monday',1 => 'Tuesday',2 => 'Wednesday',3 => 'Thursday',4 => 'Friday',5 => 'Saturday',6 => 'Sunday');
+	$day = $VALUE_DAY[ floor($hour/24) ];
+	$hour = ConvertMilitary( $hour % 24 );
+	
+	return "{$day} {$hour}";
+	
+}
 
 
 
