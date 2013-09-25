@@ -15,13 +15,14 @@ html,body
 
 button
 {
+        color: white;
 	cursor:pointer;
 }
 
 body
 {
 	margin:0px 0px 0px 0px;
-	background-image:url('../image/ticks.png');
+	background-color:white;
 	min-width:600px;
 	font-family: "Arial", Sans-serif;
 	overflow:hidden;
@@ -145,7 +146,7 @@ day_block
 availability_active, availability_inactive
 {
 	height: 30px;
-	width: 10px;
+	width: 4px;
 	margin-top: 20px;
 	display: inline-block;
 }
