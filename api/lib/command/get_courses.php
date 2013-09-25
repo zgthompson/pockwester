@@ -36,7 +36,7 @@ if( isset($beta) )
 	
 	FormatAssocKeys( $courses, true );
 	
-	exit( OutputFormatting( $courses ) );
+	exit( OutputFormatting( array( 'courses' => $courses ) ) );
 }
 
 // If we have the last update time filter the query based on the time provided

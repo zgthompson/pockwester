@@ -35,7 +35,7 @@ RenameKeys( $sections, $rename );
 
 FormatAssocKeys( $sections );
 
-exit( OutputFormatting( $sections ) );
+exit( OutputFormatting( array( 'sections' => $sections ) ) );
 
 
 

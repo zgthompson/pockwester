@@ -35,5 +35,20 @@ foreach( $classes as $row )
 }
 	
 exit( OutputFormatting( $classes ) );
+
+*/
+
+/*
+// Code to take the sections from CLASS table and inset into COURSE table
+$types = DB_GetArray( DB_Query( "SELECT CLASS_ID, TYPE FROM CLASS" ) );
+
+foreach( $types as $type )
+{
+
+	DB_Query( "UPDATE SECTION SET TYPE = \"{$type[1]}\" WHERE SECTION_ID = \"{$type[0]}\"" );
+}
+	
+exit( OutputFormatting( $types ) );
+
 */
 ?>	
