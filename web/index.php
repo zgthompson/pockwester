@@ -33,9 +33,6 @@ if( !isset($_SESSION['USER']) )
 </head>
 <body>
 <?php GetPage( PW_BAR_FILE ); ?>
-<page_title>
-<?php echo GetTitle(); ?>
-</page_title>
 <div id="page">
 	<div id="main_content">
 		<?php

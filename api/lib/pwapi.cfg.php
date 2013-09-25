@@ -25,6 +25,12 @@ $API_COMMANDS = GetCommandArray( scandir( LIB_PATH . CMD_PATH ) );
 define( 'AVAL_LENGTH', 168 );
 
 // Defines legacy commands and which function will be called on redirect
-$LEGACY_COMMANDS = array( 'get_classes' => 'get_courses' )
+$LEGACY_COMMANDS = array( 'get_classes' => 'get_courses' );
+
+// User flags
+// Binary flags: 8765 4321
+//	1: Looking for group
+define( 'USER_DEFAULT', 0 );
+define( 'USER_LOOKING_FOR_GROUP', 1 );
 
 ?>

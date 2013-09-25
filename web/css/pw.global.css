@@ -15,7 +15,6 @@ html,body
 
 button
 {
-        color: white;
 	cursor:pointer;
 }
 
@@ -28,18 +27,8 @@ body
 	overflow:hidden;
 }
 
-/* Custom tags */
-day
-{
-	font-weight: bold;
-}
 
-time_value
-{
-	margin-left: 15px;
-}
-
-pw_bar
+#pw_bar
 {
 	position: absolute;
 	left: 0px;
@@ -61,7 +50,7 @@ pw_bar
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 ); /* IE6-9 */
 }
 
-pw_bar a, pw_bar button, pw_bar button:hover, pw_bar button:active
+#pw_bar a, #pw_bar button, #pw_bar button:hover, #pw_bar button:active
 {
 	color: #000;
 	margin: 0px 3px 0px 3px;
@@ -82,7 +71,7 @@ pw_bar a, pw_bar button, pw_bar button:hover, pw_bar button:active
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f6f6', endColorstr='#f5f6f6',GradientType=0 ); /* IE6-9 */	
 }
 
-pw_bar form
+#pw_bar form
 {
 	position: absolute;
 	z-index: 3;
@@ -97,7 +86,7 @@ pw_bar form
 	*/
 }
 
-page_title
+#page_title
 {
 	position: absolute;
 	top: 3px;
@@ -111,7 +100,7 @@ page_title
 	color: #FFF;
 }
 
-group_name, day_block
+.group_name, .day_block
 {
 	padding-left: 20px;
 	padding: 10px;
@@ -130,7 +119,7 @@ group_name, day_block
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=0 ); /* IE6-9 */	
 }
 
-day_block
+.day_block
 {
 	color: #FFF;
 	background: #ff3019; /* Old browsers */
@@ -143,61 +132,14 @@ day_block
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */
 }
 
-availability_active, availability_inactive
+.day
 {
-	height: 30px;
-	width: 4px;
-	margin-top: 20px;
-	display: inline-block;
+	font-weight: bold;
 }
 
-availability_active:hover, availability_inactive:hover
+.time_value
 {
-	border: 2px solid #FFF;
-}
-
-
-availability_active
-{
-	background-color: #0F0;
-}
-
-availability_inactive
-{
-	background-color: #F00;
-}
-
-availability_title_wrapper
-{
-	position: relative;
-	height: 50px;
-	width: 10px;
-}
-
-availability_title
-{
-	position: relative;
-	bottom: 25px;
-	visibility: hidden;
-	opacity: 0;
-	
-	border: 1px solid #000;
-	padding: 2px;
-	border-radius: 4px;
-	background-color: #FFF;
-	
-	-webkit-transition: visibility opacity 0.2s;	
-	
-}
-
-availability_title_wrapper:hover availability_title
-{
-	visibility: visible;
-	opacity: 1;
-}
-
-block_break
-{
+	margin-left: 15px;
 }
 
 #page
@@ -418,7 +360,7 @@ h2
 	*/
 }
 
-.group_block
+.group_block, .member_block
 {
 	width: 65%;
 	border: 2px solid #000;
@@ -442,24 +384,89 @@ h2
 	white-space: nowrap;
 }
 
-/* For smaller screens make the pw_bar smaller font */
-@media screen and (max-width: 900px)
+/* AVAILABILITY! */
+.availability_active, .availability_inactive
 {
-	pw_bar a, pw_bar button, pw_bar button:hover, pw_bar button:active
+	height: 30px;
+	width: 5px;
+	margin-top: 20px;
+	margin-bottom:5px;
+	display: inline-block;
+	border-right: 1px solid rgba( 0, 0, 0, .2);
+}
+
+.availability_active:hover, .availability_inactive:hover
+{
+	height: 30px;
+	margin-top:18px;
+	margin-bottom:3px;
+	border: 2px solid #FFF;
+}
+
+
+.availability_active
+{
+	background-color: #0F0;
+}
+
+.availability_inactive
+{
+	background-color: #F00;
+}
+
+.availability_title_wrapper
+{
+	padding-bottom: 12px;
+}
+
+.availability_title
+{
+	position: relative;
+	bottom: 25px;
+	visibility: hidden;
+	opacity: 0;
+	
+	border: 1px solid #000;
+	padding: 2px;
+	border-radius: 4px;
+	background-color: #FFF;
+	
+	-webkit-transition: visibility opacity 0.2s;	
+}
+
+.availability_title_wrapper:hover .availability_title
+{
+	visibility: visible;
+	opacity: 1;
+}
+
+.block_break
+{
+}
+
+/* For smaller screens make the pw_bar smaller font */
+@media screen and (max-width: 970px)
+{
+	#pw_bar a, #pw_bar button, #pw_bar button:hover, #pw_bar button:active
 	{
 		margin: 3px 0px 0px 0px;
 		font-size: 10px;
 	}
 	
-	page_title
+	#page_title
 	{
 		top: 6px;
 		font-size: 10px;
 	}
 	
-	pw_bar
+	#pw_bar
 	{
 		padding: 2px 0px 5px 2px;
 		font-size:10px;
+	}
+	
+	.availability_active, .availability_inactive
+	{
+		width: 3px;
 	}	
 }

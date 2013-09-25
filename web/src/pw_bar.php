@@ -4,10 +4,13 @@
 // Arthur Wuterich
 
 ?>
-<pw_bar>
+<div id="pw_bar">
 	Pockwester <?php echo PW_VERSION; ?>
 	<a href="https://github.com/zgthompson/pockwester" target="_blank">Github Source</a>
 	<a href="http://pwa.arthurwut.com/test_driver.html" target="_blank">PWApi Test Driver</a>
+	<div id="page_title">
+		<?php echo GetTitle(); ?>
+	</div>
 	<?php if( isset($_SESSION['USER']) ) { ?>
 	<form  method="post">
 		<button name="goto" value="home.php">Home</button>
@@ -16,4 +19,4 @@
 		<button name="goto" value="logout.php">Logoff <?php echo $_SESSION['USER']; ?></button>
 	</form>
 	<?php } ?>
-</pw_bar>
+</div>

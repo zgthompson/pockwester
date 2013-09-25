@@ -25,7 +25,7 @@ $group_id = DB_GetSingleArray(DB_Query( "SELECT GID from GROUPS WHERE NAME=\"{$g
 $group_id = $group_id[0];
 
 // Add the user to the created group
-DB_Query( "INSERT INTO USER_GROUP (USER_ID, GROUP_ID) VALUES (\"{$user_id}\", \"{$group_id}\")" );
+DB_Query( "INSERT INTO USER_GROUP (USER_ID, GROUP_ID, FLAGS) VALUES (\"{$user_id}\", \"{$group_id}\", ".USER_DEFAULT.")" );
 
 // Output JSON object
 exit( "1" );

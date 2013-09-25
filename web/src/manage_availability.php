@@ -3,6 +3,40 @@
 // 9-17-13
 // Arthur Wuterich
 
+// Takes in a timestring and formats a block of html that will represent it
+function FormatTimeString( $timeString )
+{
+	$html = '';
+	$timeStringLength = strlen( $timeString );
+	
+	// Iterate over the entire string
+	for( $i = 0; $i < $timeStringLength-1; $i++ )
+	{
+	
+		$dayhour = GetDayHourString( $i+1 );
+		$block = "<span class=\"availability_title_wrapper\"><span class=\"availability_title\">{$dayhour}</span></span>";
+	
+		if( ($i+1)%24 == 0 )
+		{
+			//$block = "<block_break></block_break>{$block}";
+		}
+	
+		// Depending on what each char is add a different piece of HTML
+		switch( $timeString[$i] )
+		{		
+			case '_':
+				$html .= "<span class=\"availability_inactive\">{$block}</span>";
+			break;
+			case '-':
+				$html .= "<span class=\"availability_active\">{$block}</span>";
+			break;			
+		}
+		
+	}
+	
+	return $html;
+}
+
 $post = array( 'user' => $_SESSION['USER_ID'] );
 $availString = PWTask( 'get_avail', $post );
 

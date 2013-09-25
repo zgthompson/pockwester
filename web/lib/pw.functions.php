@@ -210,58 +210,6 @@ function ConvertTimeValue( $timeValue, $day = false )
 	
 }
 
-// Returns a html schedule outline
-// Precondition: Requires a valid schedule array with TimeValue objects
-function FormatSchedule( $times )
-{
-	$VALUE_DAY = array( 0 => 'Monday',1 => 'Tuesday',2 => 'Wednesday',3 => 'Thursday',4 => 'Friday',5 => 'Saturday',6 => 'Sunday');
-	
-	// Collect information based on day
-	$schedule = array
-	(
-		0 => '',
-		1 => '',
-		2 => '',
-		3 => '',
-		4 => '',
-		5 => '',
-		6 => ''
-	);
-	
-	// For each time block, add to the day that time block belongs to
-	foreach( $times as $time_block )
-	{
-		$key = floor($time_block[0]/24.0)%168;
-		$begin = ConvertMilitary(ConvertTimeValue($time_block[0]));
-		$end = ConvertMilitary(ConvertTimeValue($time_block[1]));
-		
-		// Add commas if needed
-		if( $schedule[$key] != '' )
-		{
-			$schedule[$key] .= ', ';
-		}
-		
-		$schedule[$key] .= "{$begin}-{$end}";
-	}
-		
-	// Format the schedule
-	$format_schedule = '';
-	foreach( $schedule as $key => $day_block )
-	{
-		if( $day_block == '' )
-		{
-			continue;
-		}
-		
-		$format_schedule .= "<day_block><day>{$VALUE_DAY[$key]}</day>:<BR/><time_value>{$day_block}</time_value></day_block>";
-	}
-	
-	return $format_schedule;
-	
-}
-
-
-
 // Converts military time into standard time and returns a string representing the time
 // Precondition: A valid time value [0-23]
 function ConvertMilitary( $time )
@@ -334,53 +282,6 @@ function GetTitle()
 	$title = ucwords( $title );
 	
 	return $title;
-}
-
-// Takes a groupname and returns a group block
-function CreateGroupBlock( $groupName )
-{
-	$html = 
-	"
-	<div class=\"group_block\">
-	{$groupName}
-	</div>
-	";	
-	
-	return $html;
-}
-
-// Takes in a timestring and formats a block of html that will represent it
-function FormatTimeString( $timeString )
-{
-	$html = '';
-	$timeStringLength = strlen( $timeString );
-	
-	// Iterate over the entire string
-	for( $i = 0; $i < $timeStringLength-1; $i++ )
-	{
-	
-		$dayhour = GetDayHourString( $i+1 );
-		$block = "<availability_title_wrapper><availability_title>{$dayhour}</availability_title></availability_title_wrapper>";
-	
-		if( ($i+1)%24 == 0 )
-		{
-			//$block = "<block_break></block_break>{$block}";
-		}
-	
-		// Depending on what each char is add a different piece of HTML
-		switch( $timeString[$i] )
-		{		
-			case '_':
-				$html .= "<availability_inactive>{$block}</availability_inactive>";
-			break;
-			case '-':
-				$html .= "<availability_active>{$block}</availability_active>";
-			break;			
-		}
-		
-	}
-	
-	return $html;
 }
 
 // Will return a "<Day> <Time>" for each valid position in a week

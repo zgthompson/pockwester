@@ -21,14 +21,19 @@ if( count( $groupId ) <= 0 )
 
 $groupId = $groupId[0];
 
-//Get all of the user_ids in the group we are forming a subgroup from
-$groupPeople = DB_GetSingleArray( DB_Query( "SELECT UID FROM USER, USER_GROUP WHERE UID = USER_ID AND GROUP_ID = {$groupId}" ) );
+// Get all of the user_ids in the group we are forming a subgroup from 
+// where the user flags signify they are looking for a group
+$groupPeople = DB_GetSingleArray( DB_Query( "SELECT UID FROM USER, USER_GROUP WHERE UID = USER_ID AND GROUP_ID = {$groupId} AND FLAGS&".USER_LOOKING_FOR_GROUP."=".USER_LOOKING_FOR_GROUP  ) );
 $peopleInGroup = count( $groupPeople );
 
 // If there are no people in the group then exit
 if( $peopleInGroup <= 0 )
 {
 	exit( 'Group was empty' );
+}
+elseif( $peopleInGroup <= 2 )
+{
+	exit( 'There were not enough people to form a group' );
 }
 
 // Generate the compound where clause
@@ -37,7 +42,7 @@ foreach( $groupPeople as $userId )
 {
 	if( $where != '' )
 	{
-		$where .= ' AND';
+		$where .= ' OR';
 	}
 	
 	$where .= " USER_ID={$userId}";
@@ -55,14 +60,14 @@ foreach( $groupAvailability as $availability_time );
 	$availabilityMap[$availability_time]++;
 }
 
-// Now all we have to do if find any value in the map that is
+// Now all we have to do is find any value in the map that is
 // equal to the amount of users in the group and we have a compatible time
 $meetingTime = '';
 foreach( $availabilityMap as $key => $value )
 {
 	if( $value >= $peopleInGroup )
 	{
-		//Match!
+		// Match!
 		$meetingTime = $key;
 		break;
 	}
@@ -97,7 +102,7 @@ DB_Query( "INSERT INTO GROUP_AVAILABILITY (GROUP_ID) VALUES ({$newGroupID})" );
 // Add each user to the new group
 foreach( $groupPeople as $userId )
 {
-	DB_Query( "INSERT INTO USER_GROUP (USER_ID,GROUP_ID) VALUES ({$userId},{$newGroupID})" );
+	DB_Query( "INSERT INTO USER_GROUP (USER_ID,GROUP_ID,FLAGS) VALUES ({$userId},{$newGroupID},".USER_DEFAULT.")" );
 }
 
 exit( $newGroupName );

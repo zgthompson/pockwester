@@ -32,6 +32,56 @@ if( $_POST['this'] == 'calc_schedule.php' && isset( $_POST['timestring']) )
 	$_SESSION['CURRENT_PAGE'] = DEFAULT_CONTENT;
 }
 
+// Returns a html schedule outline
+// Precondition: Requires a valid schedule array with TimeValue objects
+function FormatSchedule( $times )
+{
+	$VALUE_DAY = array( 0 => 'Monday',1 => 'Tuesday',2 => 'Wednesday',3 => 'Thursday',4 => 'Friday',5 => 'Saturday',6 => 'Sunday');
+	
+	// Collect information based on day
+	$schedule = array
+	(
+		0 => '',
+		1 => '',
+		2 => '',
+		3 => '',
+		4 => '',
+		5 => '',
+		6 => ''
+	);
+	
+	// For each time block, add to the day that time block belongs to
+	foreach( $times as $time_block )
+	{
+		$key = floor($time_block[0]/24.0)%168;
+		$begin = ConvertMilitary(ConvertTimeValue($time_block[0]));
+		$end = ConvertMilitary(ConvertTimeValue($time_block[1]));
+		
+		// Add commas if needed
+		if( $schedule[$key] != '' )
+		{
+			$schedule[$key] .= ', ';
+		}
+		
+		$schedule[$key] .= "{$begin}-{$end}";
+	}
+		
+	// Format the schedule
+	$format_schedule = '';
+	foreach( $schedule as $key => $day_block )
+	{
+		if( $day_block == '' )
+		{
+			continue;
+		}
+		
+		$format_schedule .= "<div class=\"day_block\"><span class=\"day\">{$VALUE_DAY[$key]}</span>:<BR/><span class=\"time_value\">{$day_block}</span></div>";
+	}
+	
+	return $format_schedule;
+	
+}
+
 while( isset($_POST["class{$post_val}"]) )
 {
 	// Get all of the class information from the previous page
@@ -88,7 +138,7 @@ if( $updatedClasses ){
 <div class="calc_schedule_left_align">
 <h1> Confirm Schedule Restrictions and Courses </h1>
 <h2> These are the group(s) you will join: </h2>
-<?php foreach( $group_names as $groupName ){ echo "<group_name>{$groupName}<BR/></group_name>";} ?>
+<?php foreach( $group_names as $groupName ){ echo "<div class=\"group_name\">{$groupName}</div>";} ?>
 <BR/>	
 <h2> Based on the class times you will be unavailable at these times: </h2>
 	<form  method="POST" >
