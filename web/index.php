@@ -11,9 +11,9 @@ require_once( 'lib/pw.functions.php' );
 session_start();
 
 // Theme code
-if( !isset($_SESSION['THEME']) || !is_readable( CSS_PATH . $_SESSION['THEME'] ) )
+if( isset($_SESSION['THEME']) && !is_readable( CSS_PATH . $_SESSION['THEME'] ) )
 {
-	$_SESSION['THEME'] = DEFAULT_THEME;
+	unset($_SESSION['THEME']);
 }
 
 

@@ -9,8 +9,16 @@ $save_settings = false;
 // Theme changes
 if( $_POST['this'] === 'account_save_settings' )
 {
-	$_SESSION['THEME'] = $_POST['account_theme_change'];
-	$save_settings = true;
+	// If the desired theme is empty unset the theme and work with the default
+	if( $_POST['account_theme_change'] === '' )
+	{
+		unset( $_SESSION['THEME'] );
+	}
+	else
+	{
+		$_SESSION['THEME'] = $_POST['account_theme_change'];
+	}
+		$save_settings = true;
 
 }
 
@@ -30,7 +38,7 @@ if( $save_settings ){
 	<form method="POST">
 		<h2>Set Theme</h2>
 		<select name="account_theme_change" >
-			<option value="pw.global.css">Standard</option>
+			<option value="">Standard</option>
 			<option value="pw.mel.css">Mel</option>
 		</select>
 		<BR/>
