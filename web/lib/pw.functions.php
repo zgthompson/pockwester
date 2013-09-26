@@ -256,15 +256,16 @@ function GetDayValueArray()
 	return array( 'M' => 0,'T' => 1,'W' => 2,'R' => 3,'F' => 4,'S' => 5,'U' => 6);
 }
 
-// Returns a div for error boxes
-function Error($error)
+// Retirns a div with a message surrounded by a div
+// if the message exists
+function Message( $msg, $class = 'green_box' )
 {
-	if( !isset($error) || strlen($error) <= 0 )
+	if( !isset($msg) || strlen($msg) <= 0 )
 	{
 		return '';
 	}
 	
-	return "<div class=\"error_box\">{$error}</div>";
+	return "<div class=\"{$class}\">{$msg}</div>";	
 }
 
 // Formats the current page title into a more human readable format

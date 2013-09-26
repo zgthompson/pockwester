@@ -50,7 +50,7 @@
 <div id="login_window" class="window_background center_on_page small_window drop_shadow">
 	<h1> Pockwester Scheduling Application </h1>
 	<form  method="POST" id="login_form">
-		<?php echo Error( $error ); ?>
+		<?php echo Message( $error, 'error_box' ); ?>
 		<label for="login_username">Username</label>
 		<input type="textfield" name="login_username" value="<?php echo $_POST['login_username'];?>"><BR/>
 		<label for="login_password">Password</label>

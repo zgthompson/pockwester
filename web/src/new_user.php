@@ -41,7 +41,7 @@ if( $create ){
 <div id="login_window" class="window_background center_on_page small_window drop_shadow">
 	<h1> New User </h1>
 	<form  method="POST">
-		<?php echo Error( $error ); ?>
+		<?php echo Message( $error, 'error_box' ); ?>
 		<label for="new_username">Username</label>
 		<input type="textfield" name="new_username" value="<?php echo $_POST['new_username']; ?>"><BR/>
 		<label for="new_email">Email</label>

@@ -10,6 +10,12 @@ require_once( 'lib/pw.functions.php' );
 // Landing page code
 session_start();
 
+// Theme code
+if( !isset($_SESSION['THEME']) || !is_readable( CSS_PATH . $_SESSION['THEME'] ) )
+{
+	$_SESSION['THEME'] = DEFAULT_THEME;
+}
+
 
 // If the post variable 'goto' is set then try to route to that page
 if( isset( $_POST['goto'] ) )

@@ -30,6 +30,9 @@ define( 'PW_BAR_FILE'	 , 'pw_bar.php' );
 define( 'BOUNCE_QUICK'	 , .5 			);
 define( 'BOUNCE_NORMAL'	 , 2 			);
 
+// Themes
+define( 'DEFAULT_THEME', 'pw.global.css' );
+
 // Source files that are considered public and do not need a login to access
 $PUBLIC_SOURCE_FILES = array ( 'new_user.php', 'logout.php', LOGIN_PAGE, LOGOUT_PAGE, 'help_user.php' );
 

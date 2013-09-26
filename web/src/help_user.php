@@ -55,7 +55,7 @@ if( $sent_mail ) {
 <div id="login_window" class="window_background center_on_page small_window drop_shadow">
 	<h1> Pockwester Scheduling Application </h1>
 	<h2> Whats the email for the account? </h2>
-	<?php echo Error( $error ); ?>	
+	<?php echo Message( $error, 'error_box' ); ?>	
 	<form  method="POST">
 		<input type="textfield" name="help_email"><BR/>
 		<button type="submit" name="goto" value="login.php">Back</button>
