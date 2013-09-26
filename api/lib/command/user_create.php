@@ -8,10 +8,10 @@ $username = strtolower( Get( 'username' ) );
 $password = md5( Get( 'password' ) );
 $email = 	Get( 'email' );
 
-// If any of the fields are empty then exit
+// If any of the fields are empty then EndCommand
 if( strlen($username)<=0 || strlen($password)<=0 || strlen($email)<=0 )
 {
-	exit( 'Error creating user' );
+	return( 'Error creating user' );
 }
 
 DB_Connect();
@@ -22,11 +22,11 @@ $users = DB_GetArray( DB_Query( "SELECT * from USER where NAME = '{$username}'" 
 // If so error out
 if( count($users) > 0 )
 {
-	exit( 'User already exists' );
+	return( 'User already exists' );
 }
 
 // Make the user
 DB_Query( "INSERT INTO USER (NAME,PASSWORD,EMAIL) VALUES ('{$username}','{$password}','{$email}')" );
-exit( '1' );
+return( '1' );
 
 ?>

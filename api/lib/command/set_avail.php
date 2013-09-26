@@ -61,6 +61,6 @@ if( count($deleteTime) > 0 )
 	DB_Query( $sql );
 }
 
-exit( "1" );
+return( "1" );
 
 ?>

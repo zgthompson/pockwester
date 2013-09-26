@@ -18,7 +18,7 @@ foreach( $classes as $row )
 				(\"{$row[0]}\",\"{$row[1]}\",\"{$row[2]}\",\"{$row[3]}\",\"{$row[4]}\",\"{$row[5]}\",\"{$row[6]}\",\"{$row[7]}\")" );
 }
 	
-exit( OutputFormatting( $classes ) );
+return( OutputFormatting( $classes ) );
 */
 
 /* Code to take the sections from CLASS table and inset into COURSE table
@@ -34,7 +34,7 @@ foreach( $classes as $row )
 				(\"{$row[0]}\",\"{$row[1]}\",\"{$row[2]}\",\"{$row[3]}\",\"{$row[4]}\")" );
 }
 	
-exit( OutputFormatting( $classes ) );
+return( OutputFormatting( $classes ) );
 
 */
 
@@ -48,7 +48,7 @@ foreach( $types as $type )
 	DB_Query( "UPDATE SECTION SET TYPE = \"{$type[1]}\" WHERE SECTION_ID = \"{$type[0]}\"" );
 }
 	
-exit( OutputFormatting( $types ) );
+return( OutputFormatting( $types ) );
 
 */
 ?>	

@@ -14,7 +14,7 @@
 			$post = array( 	'username' => $_POST['new_username'],
 							'password' => $_POST['new_password'],
 							'email' => $_POST['new_email'] 		 );
-			if( ( $error = PWTask( 'user_create', $post ) ) == '1' )
+			if( intval( $error = PWTask( 'user_create', $post ) ) == 1 )
 			{	
 				$_SESSION['CURRENT_PAGE'] = LOGIN_PAGE;
 				$create = true;

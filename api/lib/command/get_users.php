@@ -13,7 +13,7 @@ $groupId = DB_GetSingleArray( DB_Query( "SELECT GID FROM GROUPS WHERE NAME=\"{$g
 
 if( count( $groupId ) <= 0 )
 {
-	exit( 'Could not find group' );
+	return( 'Could not find group' );
 }
 
 $groupId = $groupId[0];
@@ -21,7 +21,7 @@ $groupId = $groupId[0];
 // Get all user numbers that are part of the group
 $users = DB_GetSingleArray( DB_Query( "SELECT USER_ID FROM USER_GROUP WHERE GROUP_ID={$groupId}" ) );
 
-// If there are no users exit empty array
+// If there are no users EndCommand empty array
 if( count($users) <= 0 )
 {
 	return '[]';
@@ -45,7 +45,7 @@ foreach( $users as $user )
 $names = DB_GetSingleArray( DB_Query( "SELECT NAME FROM USER WHERE {$where} ORDER BY NAME" ) );
 
 
-exit( OutputFormatting( $names ) );
+return( OutputFormatting( $names ) );
 
 
 

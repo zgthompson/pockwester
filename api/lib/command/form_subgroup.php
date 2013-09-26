@@ -13,10 +13,11 @@ DB_Connect();
 // Get the group_id for the group we are going to form
 $groupId = DB_GetSingleArray( DB_Query( "SELECT GID FROM GROUPS WHERE NAME=\"{$group_name}\" LIMIT 1" ) );
 
-// If there is no group of the provided name exit
+// If there is no group of the provided name EndCommand
 if( count( $groupId ) <= 0 )
 {
-	exit( 'Group was not found' );
+	return( 'Group was not found' );
+	return;
 }
 
 $groupId = $groupId[0];
@@ -26,14 +27,14 @@ $groupId = $groupId[0];
 $groupPeople = DB_GetSingleArray( DB_Query( "SELECT UID FROM USER, USER_GROUP WHERE UID = USER_ID AND GROUP_ID = {$groupId} AND FLAGS&".USER_LOOKING_FOR_GROUP."=".USER_LOOKING_FOR_GROUP  ) );
 $peopleInGroup = count( $groupPeople );
 
-// If there are no people in the group then exit
+// If there are no people in the group then EndCommand
 if( $peopleInGroup <= 0 )
 {
-	exit( 'Group was empty' );
+	return( 'Group was empty' );
 }
 elseif( $peopleInGroup <= 2 )
 {
-	exit( 'There were not enough people to form a group' );
+	return( 'There were not enough people to form a group' );
 }
 
 // Generate the compound where clause
@@ -76,7 +77,7 @@ foreach( $availabilityMap as $key => $value )
 // If there is a no meeting time then the students availability is too restrictive
 if( $meetingTime == '' )
 {
-	exit( 'Meeting times are too restrictive to generate a complete group' );
+	return( 'Meeting times are too restrictive to generate a complete group' );
 }
 
 // Generate the new group name *** REFACTOR SILLY CODE! ***
@@ -88,10 +89,10 @@ DB_Query( "INSERT INTO GROUPS (NAME) VALUES (\"{$newGroupName}\")" );
 // Get the newly generated groups id
 $newGroupID = DB_GetSingleArray( DB_Query( "SELECT GID FROM GROUPS WHERE NAME=\"{$newGroupName}\" LIMIT 1" ) );
 
-// If the new group_id is not found then exit
+// If the new group_id is not found then EndCommand
 if( count( $newGroupID ) <= 0 )
 {
-	exit( 'Could not generate dynamic group' );
+	return( 'Could not generate dynamic group' );
 }
 
 $newGroupID = $newGroupID[0];
@@ -105,7 +106,7 @@ foreach( $groupPeople as $userId )
 	DB_Query( "INSERT INTO USER_GROUP (USER_ID,GROUP_ID,FLAGS) VALUES ({$userId},{$newGroupID},".USER_DEFAULT.")" );
 }
 
-exit( $newGroupName );
+return( $newGroupName );
 
 
 

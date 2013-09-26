@@ -10,6 +10,6 @@ DB_Connect();
 $classes = DB_GetArray( DB_Query( 'SELECT * from CLASS' ) );
 
 // Output JSON object
-exit( json_encode( $classes ) );
+return( json_encode( $classes ) );
 
 ?>

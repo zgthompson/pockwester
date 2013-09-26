@@ -12,5 +12,6 @@ foreach( $API_COMMANDS as $cmd )
 	$result .= "{$cmd} ";
 }
 
-exit( $result );
+return( $result );
+return;
 ?>

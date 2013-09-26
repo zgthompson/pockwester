@@ -20,10 +20,10 @@ DB_Connect();
 // Get the group_id for the group we are going to form
 $groupId = DB_GetSingleArray( DB_Query( "SELECT GID FROM GROUPS WHERE NAME=\"{$group_name}\" LIMIT 1" ) );
 
-// If there is no group of the provided name exit
+// If there is no group of the provided name EndCommand
 if( count( $groupId ) <= 0 )
 {
-	exit( 'Group was not found' );
+	return( 'Group was not found' );
 }
 
 $groupId = $groupId[0];
@@ -33,7 +33,7 @@ $userAvalDetails = DB_GetArray( DB_Query( "SELECT * FROM USER_GROUP WHERE USER_I
 
 if( count( $userAvalDetails ) <= 0 )
 {
-	exit( 'User is not part of specified group' );
+	return( 'User is not part of specified group' );
 }
 
 // Update the time entry
@@ -55,7 +55,7 @@ elseif( $remove != '' )
 // Set the flags
 DB_Query( "UPDATE USER_GROUP SET FLAGS={$bit_flag} WHERE USER_ID={$user_id} AND GROUP_ID={$groupId}" );
 
-exit( '1' );
+return( '1' );
 
 
 

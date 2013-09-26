@@ -15,9 +15,9 @@ $users = DB_GetArray( DB_Query( "SELECT UID from USER where NAME = '{$username}'
 // If so error out
 if( count($users) <= 0 )
 {
-	exit( 'Could not locate the user account / password.' );
+	return( 'Could not locate the user account / password.' );
 }
 
 // Return the userid
-exit( $users[0][0] );
+return( $users[0][0] );
 ?>

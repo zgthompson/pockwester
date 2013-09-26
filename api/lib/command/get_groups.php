@@ -29,6 +29,6 @@ else
 }
 
 // Output JSON object
-exit( json_encode( $groups ) );
+return( json_encode( $groups ) );
 
 ?>

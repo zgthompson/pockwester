@@ -3,7 +3,6 @@
 // Arthur Wuterich
 // 9-3-13
 
-
 	// Returns true if the haystack ends with the needle
 	// Precondition: $haystack and $needle are both strings and $needle is less than or equal to the size of $haystack
 	function strend( $haystack, $needle )

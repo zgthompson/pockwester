@@ -11,7 +11,7 @@ $user_name = Get( 'user_name', false );
 // If non of the information above is provided then error out
 if( $user_email == '' && $user_id == '' && $user_name == '' )
 {
-	exit( '-1' );
+	return( '-1' );
 }
 
 DB_Connect();
@@ -40,10 +40,10 @@ $user_data = DB_GetSingleArray( DB_Query( "SELECT NAME, EMAIL FROM USER WHERE {$
 
 if( count( $user_data ) <= 0 )
 {
-	exit( '-1' );
+	return( '-1' );
 }
 
-exit( OutputFormatting(  $user_data ) );
+return( OutputFormatting(  $user_data ) );
 	
 	
 ?>

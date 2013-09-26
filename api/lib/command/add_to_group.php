@@ -28,6 +28,7 @@ $group_id = $group_id[0];
 DB_Query( "INSERT INTO USER_GROUP (USER_ID, GROUP_ID, FLAGS) VALUES (\"{$user_id}\", \"{$group_id}\", ".USER_DEFAULT.")" );
 
 // Output JSON object
-exit( "1" );
+return( "1" );
+return;
 
 ?>

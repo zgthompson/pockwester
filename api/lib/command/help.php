@@ -44,5 +44,5 @@ foreach( $API_COMMANDS as $cmd )
 // Add footer information
 $result .= '( * = legacy )';
 
-exit( $result );
+return( $result );
 ?>

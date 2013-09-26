@@ -36,7 +36,7 @@ if( isset($beta) )
 	
 	FormatAssocKeys( $courses, true );
 	
-	exit( OutputFormatting( array( 'courses' => $courses ) ) );
+	return( OutputFormatting( array( 'courses' => $courses ) ) );
 }
 
 // If we have the last update time filter the query based on the time provided
@@ -75,6 +75,6 @@ while( $row = DB_GetRow( $qHandle, true ) )
 }
 
 // Output JSON object
-exit( OutputFormatting( $resultArray ) );
+return( OutputFormatting( $resultArray ) );
 
 ?>

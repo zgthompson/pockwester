@@ -10,6 +10,6 @@ DB_Connect();
 $data = DB_GetArray( DB_Query( 'SELECT * from COLLEGE' ) );
 
 // Output JSON object
-exit( OutputFormatting( $data ) );
+return( OutputFormatting( $data ) );
 
 ?>

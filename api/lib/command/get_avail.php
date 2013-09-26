@@ -16,7 +16,7 @@ $availResult = DB_GetSingleArray( DB_Query( "SELECT RAW_TIME FROM USER_AVAILABIL
 // If db flag is set then return the results from the database
 if( isset( $db ) )
 {
-	exit( OutputFormatting( $availResult ) );
+	return( OutputFormatting( $availResult ) );
 }
 
 // Make default timeString that has no avail
@@ -28,6 +28,6 @@ foreach( $availResult as $time )
 	AlterTimeString( $timeString, floor($time/24), $time%24, '-' );
 }
 
-exit( $timeString );
+return( $timeString );
 
 ?>

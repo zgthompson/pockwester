@@ -4,5 +4,5 @@
 // Arthur Wuterich
 // 9-3-13
 
-echo Get( 'cat' );
+return( Get( 'cat' );
 ?>
