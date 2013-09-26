@@ -330,6 +330,46 @@
 		return true;
 	}
 	
+	// Will execute internal PWApi command. This will alter the current post array to simulate calling the function as an individual entity
+	// Precondition: A valid PWTask string
+	// [$post]: New array of data for the command to use for processing
+	function PWTask( $command, $post = array() )
+	{
+		// Save the old post array if needed
+		$oldPost = $_POST;
+		if( count( $post ) > 0 )
+		{
+			$_POST = $post;
+		}
+		
+		// Execute the command if the command exists
+		if( is_readable( LIB_PATH . CMD_PATH . $command . '.php' ) )
+		{
+			$result = include( LIB_PATH . CMD_PATH . $command . '.php' );
+		}
+		else
+		{
+			$result = '';
+		}
+		
+		// Reset the post array
+		$_POST = $oldPost;
+		
+		// Return the result
+		return $result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

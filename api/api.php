@@ -47,7 +47,7 @@ if( !LEGACY && isset( $LEGACY_COMMANDS[APITASK] ) && in_array( $LEGACY_COMMANDS[
 }
 
 // Execute command
-echo include( LIB_PATH . CMD_PATH . $Apitask . '.php' );
+exit( include( LIB_PATH . CMD_PATH . $Apitask . '.php' ) );
 
 ?>
 
