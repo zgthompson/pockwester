@@ -25,6 +25,7 @@ body
 	min-width:600px;
 	font-family: "Arial", Sans-serif;
 	overflow:hidden;
+	background-image: url( '../image/ticks.png' );
 }
 
 
@@ -398,6 +399,7 @@ h2
 .availability_active:hover, .availability_inactive:hover
 {
 	height: 50px;
+	width: 37px;
 	margin-top:18px;
 	margin-bottom:3px;
 	border: 2px solid #FFF;
