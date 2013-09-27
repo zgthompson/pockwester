@@ -22,6 +22,8 @@ if( $_POST['this'] === 'account_save_settings' )
 
 }
 
+$themes = GetThemeArray( scandir( THM_PATH ) );
+
 if( $save_settings ){
 ?>
 <script type="text/javascript">
@@ -38,8 +40,9 @@ if( $save_settings ){
 	<form method="POST">
 		<h2>Set Theme</h2>
 		<select name="account_theme_change" >
+			<?php echo GetOption( $_SESSION['THEME'], GetThemeName() ); ?>
 			<option value="">Standard</option>
-			<option value="pw.mel.css">Mel</option>
+			<?php foreach( $themes as $theme ){ echo GetOption( $theme, GetThemeName( $theme ) );} ?>
 		</select>
 		<BR/>
 		<button type="submit" name="this" value="account_save_settings">Save Settings</button>

@@ -304,9 +304,94 @@ function GetDayHourString( $hour )
 	
 }
 
+// Returns the theme name
+function GetThemeName( $data = '' )
+{
+	// If the data is not set then pull the current theme
+	if( $data == '' )
+	{
+		$data = $_SESSION['THEME'];
+	}
+	
+	// Get the 2nd to last element in the array to drop the .css part
+	$comp = explode( '.', $data );
+	$name = $comp[count($comp)-2];
+	
+	// Return the uppercase value
+	return ucwords($name);
+}
 
+// Returns an select option
+function GetOption( $value, $text = '' )
+{
+	if( $value == '' )
+	{
+		return '';
+	}
+	
+	if( $text == '' )
+	{
+		$text = $value;
+	}
+	
+	return "<option value={$value}>{$text}</option>";
+}
 
+// Returns a formatted array of themes
+// Precondtion: Expects an array of filename strings from the api/lib/commands/ dir
+// Postcondition: A formated array of pwapi commands that can be executed
+function GetThemeArray( $cmds )
+{
+	// Exit conditions
+	if( !is_array( $cmds ) || count( $cmds ) <= 0 )
+	{
+		return array('');
+	}
+	
+	$result = array();
+	
+	// Loop over each command in the cmds array
+	foreach( $cmds as $cmd )
+	{
+		$cmd = strtolower( $cmd );
+		
+		// Skip commands that do not contain with .php
+		if( strend( $cmd, '.css' ) !== false )
+		{
+			// Format the .php off of commands that do end with .php			
+			$result[] = str_replace( '.php', '', $cmd );
+		}
+	}
+	
+	return $result;
+}
 
+// Returns true if the haystack ends with the needle
+// Precondition: $haystack and $needle are both strings and $needle is less than or equal to the size of $haystack
+function strend( $haystack, $needle )
+{
+	// Exit conditions
+	if( !is_string( $haystack ) || !is_string( $needle ) || strlen( $haystack ) <= strlen( $needle ) )
+	{
+		return false;
+	}
+	
+	// Get the start position of the comparison
+	$needleLength = strlen( $needle );
+	$haystackStartPos = strlen( $haystack ) - $needleLength;
+			
+	// Check each element of the needle string against the end of the haystack if there is a discrepancy return false
+	for( $i = 0; $i < $needleLength; $i++ )
+	{
+		// If an element does not match then exit
+		if( $haystack[$haystackStartPos+$i] !== $needle[$i] )
+		{
+			return false;
+		}
+	}
+	
+	return true;
+}
 
 
 

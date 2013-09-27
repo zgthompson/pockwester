@@ -13,6 +13,7 @@ define( 'IMG_PATH', 'img/' );
 define( 'SRC_PATH', 'src/' );
 define( 'CSS_PATH', 'css/' );
 define( 'JAV_PATH', 'js/'  );
+define( 'THM_PATH', 'theme/'  );
 
 // API http location
 define( 'PWAPI_URL', 'http://arthurwut.com/pockwester/api/' );
