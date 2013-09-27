@@ -9,13 +9,13 @@
 // 9/25/2013
 // Arthur Wuterich
 
+DB_Connect();
+
 $group_name = Get( 'group_name' );
 $user_id = Get( 'user_id' );
 $bit_flag = intval(Get( 'bit_flag' ));
 $combine = Get( 'combine', false );
 $remove = Get( 'remove', false );
-
-DB_Connect();
 
 // Get the group_id for the group we are going to form
 $groupId = DB_GetSingleArray( DB_Query( "SELECT GID FROM GROUPS WHERE NAME=\"{$group_name}\" LIMIT 1" ) );

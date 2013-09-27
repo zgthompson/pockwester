@@ -5,10 +5,9 @@
 // 9/24/2013
 // Arthur Wuterich
 
+DB_Connect();
 
 $group_name = Get( 'group_name' );
-
-DB_Connect();
 
 // Get the group_id for the group we are going to form
 $groupId = DB_GetSingleArray( DB_Query( "SELECT GID FROM GROUPS WHERE NAME=\"{$group_name}\" LIMIT 1" ) );

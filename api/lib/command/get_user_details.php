@@ -3,6 +3,7 @@
 // 9-21-13
 // Arthur Wuterich
 
+DB_Connect();
 
 $user_email = Get( 'user_email', false );	
 $user_id = Get( 'user_id', false );
@@ -13,8 +14,6 @@ if( $user_email == '' && $user_id == '' && $user_name == '' )
 {
 	return( '-1' );
 }
-
-DB_Connect();
 
 // Construct where clause
 $where = '';

@@ -4,6 +4,8 @@
 // 9-19-13
 // Arthur Wuterich
 
+DB_Connect();
+
 $username = strtolower( Get( 'username' ) );
 $password = md5( Get( 'password' ) );
 $email = 	Get( 'email' );
@@ -13,8 +15,6 @@ if( strlen($username)<=0 || strlen($password)<=0 || strlen($email)<=0 )
 {
 	return( 'Error creating user' );
 }
-
-DB_Connect();
 
 // Find if user is in the database already
 $users = DB_GetArray( DB_Query( "SELECT * from USER where NAME = '{$username}'" ) );
@@ -27,6 +27,14 @@ if( count($users) > 0 )
 
 // Make the user
 DB_Query( "INSERT INTO USER (NAME,PASSWORD,EMAIL) VALUES ('{$username}','{$password}','{$email}')" );
+
+
+// Get the number of the newly created user
+$user_id = DB_GetSingleArray( DB_Query( "SELECT UID FROM USER WHERE NAME=\"{$username}\" LIMIT 1" ) );
+$user_id = $user_id[0];
+
+// Insert a row into the user configuration database
+DB_QUERY( "INSERT INTO USER_CONFIG (USER_ID) VALUES ({$user_id})" );
 return( '1' );
 
 ?>

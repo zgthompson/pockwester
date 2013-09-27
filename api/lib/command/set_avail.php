@@ -4,10 +4,10 @@
 // 9-18-13
 //
 
+DB_Connect();
+
 $timeString = Get( 'time_string' );
 $user = Get( 'user' );
-
-DB_Connect();
 
 $timeStringSize = strlen($timeString);
 $VALUE_TO_DAY = GetValueDayArray();

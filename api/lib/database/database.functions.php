@@ -109,4 +109,12 @@ function DB_GetSingleArray( &$result, $assoc = false )
 	return $array;
 }
 
+// Returns the associated file in the post array or ends execution if the variable is required and not present
+// Precondition: Assumes a DB link
+function Get( $postVariable, $required = true )
+{
+	return str_replace( ';', '', $_POST[$postVariable]||!$required)?mysql_real_escape_string($_POST[$postVariable]):exit( ERROR_VARIABLE_NOT_FOUND . ": {$postVariable}" );
+
+}
+
 ?>

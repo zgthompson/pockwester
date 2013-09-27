@@ -5,16 +5,16 @@
 // 9-19-13
 //
 
+DB_Connect();
+
 $user = Get( 'user' );
 $db = Get( 'db', false );
-
-DB_Connect();
 
 // Get all of the times that the user is available
 $availResult = DB_GetSingleArray( DB_Query( "SELECT RAW_TIME FROM USER_AVAILABILITY WHERE USER_ID={$user}" ) );
 
 // If db flag is set then return the results from the database
-if( isset( $db ) )
+if( $db != '' )
 {
 	return( OutputFormatting( $availResult ) );
 }

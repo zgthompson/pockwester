@@ -16,9 +16,15 @@
 			if( intval($response) >= 1 )
 			{
 				$login = true;
+				// Get config data for user
+				$post = array( 'user_id' => $response );
+				$config = json_decode( PWTask( 'get_user_config', $post ) );
+				$config = $config[0];
+								
 				$_SESSION['USER'] = ucwords(strtolower($_POST['login_username']));
 				$_SESSION['USER_ID'] = intval($response);
 				$_SESSION['CURRENT_PAGE'] = DEFAULT_CONTENT;
+				$_SESSION['THEME'] = $config->THEME;
 			}
 			else
 			{

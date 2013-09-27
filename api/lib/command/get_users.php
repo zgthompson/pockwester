@@ -4,9 +4,9 @@
 // 9/25/2013
 // Arthur Wuterich
 
-$group = Get( 'group' );
-
 DB_Connect();
+
+$group = Get( 'group' );
 
 // Get the group id number
 $groupId = DB_GetSingleArray( DB_Query( "SELECT GID FROM GROUPS WHERE NAME=\"{$group}\"" ) );

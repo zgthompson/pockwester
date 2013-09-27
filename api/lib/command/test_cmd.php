@@ -51,4 +51,47 @@ foreach( $types as $type )
 return( OutputFormatting( $types ) );
 
 */
+
+/* Added keys to new user_Details table
+for( $i = 0; $i < 28; $i++ )
+{
+	DB_Query( "INSERT INTO USER_CONFIG (USER_ID) VALUES ({$i})" );	
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>	

@@ -14,12 +14,18 @@ if( $_POST['this'] === 'account_save_settings' )
 	{
 		unset( $_SESSION['THEME'] );
 	}
-	else
+	else if( $_POST['account_theme_change'] !== $_SESSION['THEME'] )
 	{
 		$_SESSION['THEME'] = $_POST['account_theme_change'];
+		
+		// Save the theme information in the database
+		$post = array( 	'user_id' 	=> $_SESSION['USER_ID'],
+						'field'		=> 'THEME',
+						'value'		=> $_SESSION['THEME'] );
+		PWTask( 'set_user_config', $post );
 	}
-		$save_settings = true;
-
+	
+	$save_settings = true;
 }
 
 $themes = GetThemeArray( scandir( THM_PATH ) );
@@ -42,7 +48,7 @@ if( $save_settings ){
 		<select name="account_theme_change" >
 			<?php echo GetOption( $_SESSION['THEME'], GetThemeName() ); ?>
 			<option value="">Standard</option>
-			<?php foreach( $themes as $theme ){ echo GetOption( $theme, GetThemeName( $theme ) );} ?>
+			<?php foreach( $themes as $theme ){ if($_SESSION['THEME'] === $theme){continue;}echo GetOption( $theme, GetThemeName( $theme ) );} ?>
 		</select>
 		<BR/>
 		<button type="submit" name="this" value="account_save_settings">Save Settings</button>

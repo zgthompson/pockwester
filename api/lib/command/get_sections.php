@@ -4,9 +4,9 @@
 // 9-21-13
 // Arthur Wuterich
 
-$last_update = Get( 'last_update', false );
-
 DB_Connect();
+
+$last_update = Get( 'last_update', false );
 
 $make = array ( 'COURSE_ID' => array( 'DEPARTMENT', 'COURSE_NUMBER' ) );
 $remove = array( 'UPDATED', 'COURSE_NUMBER', 'DEPARTMENT' );

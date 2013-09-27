@@ -4,10 +4,10 @@
 // 9-19-13
 // Arthur Wuterich
 
+DB_Connect();
+
 $username = strtolower( Get( 'username' ) );
 $password = md5( Get( 'password' ) );
-
-DB_Connect();
 
 // Find if user is in the database already
 $users = DB_GetArray( DB_Query( "SELECT UID from USER where NAME = '{$username}' AND PASSWORD='{$password}' LIMIT 1" ) );

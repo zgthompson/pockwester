@@ -4,10 +4,10 @@
 // 9-18-13
 //
 
+DB_Connect();
+
 $user_id = Get( 'user' );
 $group_name = Get( 'group_name' );
-
-DB_Connect();
 
 // Get groups from db
 $groups = DB_GetSingleArray( DB_Query( 'SELECT NAME from GROUPS' ) );

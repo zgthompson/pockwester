@@ -4,9 +4,9 @@
 // 9-19-2013
 // Arthur Wuterich
 
-$user = Get( 'user', false );
-
 DB_Connect();
+
+$user = Get( 'user', false );
 
 if( isset($user) )
 {

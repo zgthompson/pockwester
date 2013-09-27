@@ -25,9 +25,9 @@ function IsPagePublic( $page )
 // Returns true if the username, password, and email meets the standard for user na`me, password, and email
 function MeetsUserStandard( $username, $email, $password )
 {
-	if( preg_match( "/[\ \`\~\#\$\^\&\(\)\_\+\{\}\:\"\<\>\-\=\[\]\\\;\'\,\/\|]/", $username.$email.$password ) )
+	if( preg_match( "/[\ \`\~\#\$\^\&\(\)\+\{\}\:\"\<\>\-\=\[\]\\\;\'\,\/\|]/", $username.$email.$password ) )
 	{
-		return 'You can only user special symbols ! @ % * ? . ';
+		return 'You can only use special symbols ! @ % * ? . _ ';
 	}
 	
 	if( strlen($username) <= 0 || strlen($email) <= 0 || strlen($password) <= 0 )
