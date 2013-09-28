@@ -32,23 +32,12 @@ body
 	background-color: rgb(255, 174, 174);
 	min-width:600px;
 	font-family: "Arial", Sans-serif;
-	overflow:hidden;
 	background-image: url( "image/slat_background.png" );
 }
 
 
 #pw_bar
 {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	padding: 2px 0px 5px 2px;
-	font-size:11px;
-	width: 100%;
-	height:20px;
-	margin: 0px;
-	color: #fff;
-	z-index: 0;
 	background: #f85032; /* Old browsers */
 	background: -moz-linear-gradient(top, #f85032 0%, #f16f5c 50%, #f6290c 51%, #f02f17 71%, #e73827 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f85032), color-stop(50%,#f16f5c), color-stop(51%,#f6290c), color-stop(71%,#f02f17), color-stop(100%,#e73827)); /* Chrome,Safari4+ */
@@ -62,14 +51,6 @@ body
 #pw_bar a, #pw_bar button, #pw_bar button:hover, #pw_bar button:active
 {
 	color: #FFF;
-	margin: 0px 3px 0px 3px;
-	padding: 2px 5px 2px 5px;
-	font-size: 15px;
-	font-weight: bold;
-	display: inline-block;
-	border-radius:3px;
-	border: 0px;
-	text-decoration:none;
 	background: #4c4c4c; /* Old browsers */
 	background: -moz-linear-gradient(top, #4c4c4c 0%, #595959 12%, #666666 25%, #474747 39%, #2c2c2c 50%, #000000 51%, #111111 60%, #2b2b2b 76%, #1c1c1c 91%, #131313 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4c4c4c), color-stop(12%,#595959), color-stop(25%,#666666), color-stop(39%,#474747), color-stop(50%,#2c2c2c), color-stop(51%,#000000), color-stop(60%,#111111), color-stop(76%,#2b2b2b), color-stop(91%,#1c1c1c), color-stop(100%,#131313)); /* Chrome,Safari4+ */
@@ -97,15 +78,6 @@ body
 
 #page_title
 {
-	position: absolute;
-	top: 3px;
-	width:100%;
-	text-align:center;
-	pointer-events: none;
-	z-index: 2;
-	display:block;
-	text-align: center;
-	font-size: 15px;
 	color: #FFF;
 }
 
@@ -397,87 +369,33 @@ h2
 /* AVAILABILITY! */
 .availability_active, .availability_inactive
 {
-	height: 50px;
-	width: 40px;
-	margin-top: 20px;
-	margin-bottom:5px;
-	display: inline-block;
-	border-right: 1px solid rgba( 0, 0, 0, .2);
 }
 
 .availability_active:hover, .availability_inactive:hover
 {
-	height: 50px;
-	width: 37px;
-	margin-top:18px;
-	margin-bottom:3px;
-	border: 2px solid #FFF;
 }
 
 
 .availability_active
 {
-	background-color: #0F0;
 }
 
 .availability_inactive
 {
-	background-color: #F00;
 }
 
 .availability_title_wrapper
 {
-	padding-bottom: 32px;
 }
 
 .availability_title
-{
-	position: relative;
-	bottom: 25px;
-	visibility: hidden;
-	opacity: 0;
-	
-	border: 1px solid #000;
-	padding: 2px;
-	border-radius: 4px;
-	background-color: #FFF;
-	
-	-webkit-transition: visibility opacity 0.2s;	
+{	
 }
 
 .availability_title_wrapper:hover .availability_title
 {
-	visibility: visible;
-	opacity: 1;
 }
 
 .block_break
 {
-}
-
-/* For smaller screens make the pw_bar smaller font */
-@media screen and (max-width: 970px)
-{
-	#pw_bar a, #pw_bar button, #pw_bar button:hover, #pw_bar button:active
-	{
-		margin: 3px 0px 0px 0px;
-		font-size: 10px;
-	}
-	
-	#page_title
-	{
-		top: 6px;
-		font-size: 10px;
-	}
-	
-	#pw_bar
-	{
-		padding: 2px 0px 5px 2px;
-		font-size:10px;
-	}
-	
-	.availability_active, .availability_inactive
-	{
-		width: 25px;
-	}	
 }

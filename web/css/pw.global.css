@@ -24,7 +24,8 @@ body
 	background-color:white;
 	min-width:600px;
 	font-family: "Arial", Sans-serif;
-	overflow:hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
 	background-image: url( '../image/ticks.png' );
 }
 
@@ -34,7 +35,7 @@ body
 	position: absolute;
 	left: 0px;
 	top: 0px;
-	padding: 2px 0px 5px 2px;
+	padding: 2px 0px 5px 0px;
 	font-size:11px;
 	width: 100%;
 	height:20px;
@@ -388,7 +389,7 @@ h2
 /* AVAILABILITY! */
 .availability_active, .availability_inactive
 {
-	height: 50px;
+	height: 20px;
 	width: 40px;
 	margin-top: 20px;
 	margin-bottom:5px;
@@ -398,7 +399,7 @@ h2
 
 .availability_active:hover, .availability_inactive:hover
 {
-	height: 50px;
+	height: 20px;
 	width: 37px;
 	margin-top:18px;
 	margin-bottom:3px;
@@ -446,6 +447,26 @@ h2
 {
 }
 
+.large_table
+{
+	width:80%;
+	display:table;
+	border-collapse:collapse;
+	border: 6px groove rgba( 0, 0, 0, .25 );
+	margin: 0px auto 0px auto;
+	background-color: rgba( 0, 0, 0, .25 );
+}
+.large_table_row
+{
+	display:table-row;
+}
+
+.large_table_cell
+{
+	border: 3px solid rgba( 0, 0, 0, .25 );
+	display:table-cell;
+}
+
 /* For smaller screens make the pw_bar smaller font */
 @media screen and (max-width: 970px)
 {
@@ -463,12 +484,16 @@ h2
 	
 	#pw_bar
 	{
-		padding: 2px 0px 5px 2px;
 		font-size:10px;
 	}
 	
 	.availability_active, .availability_inactive
 	{
 		width: 25px;
+	}
+	
+	.availability_active:hover, .availability_inactive:hover
+	{
+		width: 22px;
 	}	
 }
