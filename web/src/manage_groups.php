@@ -39,8 +39,8 @@ if( is_array( $groups ) )
 
 <div class="window_background center_on_page large_window drop_shadow">
 	<h1> <?php echo $_SESSION['USER'] ?>'s Groups </h1>
-	<form method="POST">
 		<?php echo $outputHtml; ?>
+	<form method="POST">		
 		<button type="submit" name="goto" value="home.php">Back</button>
 	</form>
 </div>
