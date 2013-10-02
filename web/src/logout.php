@@ -12,7 +12,7 @@ $_SESSION['CURRENT_PAGE'] = LOGIN_PAGE;
 <script type="text/javascript">
 	BouncePage( <?php echo BOUNCE_QUICK; ?> );
 </script>
-<div id="login_window" class="window_background center_on_page small_window drop_shadow">
+<div id="login_window" class="window_background center_on_page small_window drop_shadow logout">
 	<h1> Pockwester Scheduling Application </h1>
 	<h2> Logged out Successfully </h2>
 	<form  method="POST">

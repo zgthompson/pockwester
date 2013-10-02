@@ -134,7 +134,7 @@ if( $updatedClasses ){
 	</form>
 </div>
 <?php exit(0); }?>
-<div id="schedule_accept_classes" class="window_background center_on_page large_window drop_shadow" >
+<div id="schedule_accept_classes" class="window_background center_on_page large_window drop_shadow calc_schedule" >
 <div class="calc_schedule_left_align">
 <h1> Confirm Schedule Restrictions and Courses </h1>
 <h2> These are the group(s) you will join: </h2>

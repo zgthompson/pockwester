@@ -52,7 +52,7 @@ if( $sent_mail ) {
 	</form>
 </div>
 <?php exit(); } ?>
-<div id="login_window" class="window_background center_on_page small_window drop_shadow">
+<div id="login_window" class="window_background center_on_page small_window drop_shadow help_user">
 	<h1> Pockwester Scheduling Application </h1>
 	<h2> Whats the email for the account? </h2>
 	<?php echo Message( $error, 'error_box' ); ?>	

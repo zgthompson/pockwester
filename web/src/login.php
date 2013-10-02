@@ -53,7 +53,7 @@
 </div>
 <?php exit();} ?>
 
-<div id="login_window" class="window_background center_on_page small_window drop_shadow">
+<div id="login_window" class="window_background center_on_page small_window drop_shadow login">
 	<h1> Pockwester Scheduling Application </h1>
 	<form  method="POST" id="login_form">
 		<?php echo Message( $error, 'error_box' ); ?>

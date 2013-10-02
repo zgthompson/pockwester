@@ -27,7 +27,7 @@ foreach( $users as $user )
 
 ?>
 
-<div class="window_background center_on_page large_window drop_shadow">
+<div class="window_background center_on_page large_window drop_shadow group">
 	<h1> <?php echo $group ?> Details </h1>
 	
 	<div class="large_table">

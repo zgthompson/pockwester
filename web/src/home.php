@@ -4,7 +4,7 @@
 // Arthur Wuterich
 
 ?>
-<div id="login_window" class="window_background center_on_page small_window drop_shadow">
+<div id="login_window" class="window_background center_on_page small_window drop_shadow home">
 	<h1> Home </h1>
 	<form  method="POST">
 		<button type="submit" name="goto" value="manage_groups.php">Manage Groups</button>

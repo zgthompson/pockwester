@@ -35,7 +35,7 @@ function AddField()
 }
 </script>
 
-<div id="course_form" class="window_background center_on_page large_window drop_shadow" >
+<div id="course_form" class="window_background center_on_page large_window drop_shadow search_classes" >
 <div class="search_classes_left_align" >
 	<h1> Select Courses </h1>
 		<form  method="POST" >

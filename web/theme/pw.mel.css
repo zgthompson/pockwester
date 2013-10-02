@@ -27,9 +27,9 @@ body
 	min-width:600px;
 	font-family: "Arial", Sans-serif;
 	overflow:hidden;
-	background-image: none;
+	background-image: url('image/ps_neutral.png');
 	background-color: white;
-	color: white;
+	color: pink;
 }
 
 
@@ -79,27 +79,14 @@ body
 	margin: 5px 5px 10px 5px;
 	font-weight: bold;
 	border: 1px solid #000;
-	background: #cdeb8e; /* Old browsers */
-	background: -moz-linear-gradient(top, #cdeb8e 0%, #a5c956 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cdeb8e), color-stop(100%,#a5c956)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #cdeb8e 0%,#a5c956 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #cdeb8e 0%,#a5c956 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #cdeb8e 0%,#a5c956 100%); /* IE10+ */
-	background: linear-gradient(to bottom, #cdeb8e 0%,#a5c956 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=0 ); /* IE6-9 */	
+	background: none;
+	background-color: #66CCFF;
 }
 
 .day_block
 {
 	color: #FFF;
-	background: #ff3019; /* Old browsers */
-	background: -moz-linear-gradient(top, #ff3019 0%, #cf0404 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3019), color-stop(100%,#cf0404)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* IE10+ */
-	background: linear-gradient(to bottom, #ff3019 0%,#cf0404 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */
+	background-color: #0099FF;
 }
 
 .day
@@ -131,30 +118,22 @@ body
 
 #main_content button
 {
-	border-radius: 3px;
-	border: 5px groove #DDD;
+	border-radius: none;
+	border: none;
 	font-weight: bold;
 	font-size: 18px;
 	padding: 1px 5px 1px 5px;	
 	margin:5px 5px 5px 5px;
 	
-	background: #00CC99;
+	background:  #cccccc;
 	color: white;
-
-/*	background: #f5f6f6; 
-	background: -moz-linear-gradient(top, #f5f6f6 0%, #dbdce2 21%, #b8bac6 49%, #dddfe3 80%, #f5f6f6 100%); 
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f6f6), color-stop(21%,#dbdce2), color-stop(49%,#b8bac6), color-stop(80%,#dddfe3), color-stop(100%,#f5f6f6));
-	background: -webkit-linear-gradient(top, #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#f5f6f6 100%); 
-	background: -o-linear-gradient(top, #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#f5f6f6 100%); 
-	background: -ms-linear-gradient(top, #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#f5f6f6 100%); 
-	background: linear-gradient(to bottom, #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#f5f6f6 100%); 
-*/
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f6f6', endColorstr='#f5f6f6',GradientType=0 ); /* IE6-9 */
 		
 }
 
 #main_content button:hover
 {
+background-color: #cccccc;
 }
 
 #main_content button:active
@@ -233,6 +212,9 @@ h2
 
 #login_window
 {
+/*background-color: white;
+color: #cccccc;*/
+
 }
 
 #login_form
@@ -265,7 +247,7 @@ h2
 }
 .window_background
 {
-	background-color: #66FFCC;
+	background-color: #dddddd;
 
 }
 
@@ -358,33 +340,65 @@ h2
 }
 
 /* AVAILABILITY! */
+
+
+.manage_availability
+{
+background-color: white;
+color: #cccccc;
+font-weight: 100;
+
+}
+
+.manage_availability h1
+{
+color: #cccccc;
+font-weight: 100;
+}
+
 .availability_active, .availability_inactive
 {
+
+background-color: white;
+
 }
 
 .availability_active:hover, .availability_inactive:hover
 {
+
+background-color: white;
+
 }
 
 
 .availability_active
 {
+
+background-color: #66CCFF;
+
 }
 
 .availability_inactive
 {
+
+background-color: #0099FF;
+
 }
 
 .availability_title_wrapper
 {
+
+
 }
 
 .availability_title
 {
+background-color: white;
 }
 
 .availability_title_wrapper:hover .availability_title
 {
+
 }
 
 .block_break

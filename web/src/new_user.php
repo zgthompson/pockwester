@@ -38,7 +38,7 @@ if( $create ){
 <?php exit();} 
 // Display user create form
 ?>
-<div id="login_window" class="window_background center_on_page small_window drop_shadow">
+<div id="login_window" class="window_background center_on_page small_window drop_shadow new_user">
 	<h1> New User </h1>
 	<form  method="POST">
 		<?php echo Message( $error, 'error_box' ); ?>

@@ -37,7 +37,7 @@ if( is_array( $groups ) )
 
 ?>
 
-<div class="window_background center_on_page large_window drop_shadow">
+<div class="window_background center_on_page large_window drop_shadow manage_groups">
 	<h1> <?php echo $_SESSION['USER'] ?>'s Groups </h1>
 		<?php echo $outputHtml; ?>
 	<form method="POST">		
