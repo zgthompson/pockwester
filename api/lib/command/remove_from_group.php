@@ -1,15 +1,25 @@
 <?php
-//	add_to_group.php: Will add the user to the specified group. If the group does not exist then will create the group.
-//	$user_id: User ID to add to group
-//	$group_name: The group name to add the user too
+//	remove_from_group.php: Will attempt to remove a user from a group
+//	$user: User name to remove from group
+//	$group_name: The group name to remove the user from
 //	Arthur Wuterich
-//	9-18-13
+//	10-02-13
 //
 
 DB_Connect();
 
-$user_id = Get( 'user' );
+$user = Get( 'user' );
 $group_name = Get( 'group_name' );
+
+// Attempt to remove user from the group
+DB_Query( "
+DELETE FROM USER_GROUP 
+WHERE USER_ID = ( SELECT UID FROM USER WHERE NAME = \"{$user}\") AND
+GROUP_ID = ( SELECT GID FROM GROUPS WHERE NAME = \"{$group_name}\") LIMIT 1" );
+
+return '1';
+
+/*
 
 // Get groups from db
 $groups = DB_GetSingleArray( DB_Query( 'SELECT NAME from GROUPS' ) );
@@ -32,5 +42,7 @@ DB_Query( "INSERT INTO USER_GROUP (USER_ID, GROUP_ID, FLAGS) VALUES (\"{$user_id
 // Output JSON object
 return( "1" );
 return;
+
+*/
 
 ?>

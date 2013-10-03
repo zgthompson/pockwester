@@ -12,19 +12,75 @@ function GroupMemberBlock( $name )
 	return "<div class=\"member_block\">{$name}</div>";
 }
 
+// Returns a meeting block string
+function MeetingBlock( $value )
+{
+	return "<div class=\"group_meeting_row\">{$value}</div>";
+}
+
+// Returns a details block string
+function DetailsBlock( $detail )
+{
+	return "<div class=\"group_detail_row\">{$detail}</div>";
+}
+
+// Switch on internal functions
+if( isset( $_POST['this'] ) )
+{
+	switch( $_POST['this'] )
+	{
+		case 'leave_group':
+			$post = array( 'user' => $_SESSION['USER'], 'group_name' => $_POST['group_name'] );
+			PWTask( 'remove_from_group', $post );
+		break;
+	}
+}
+
 $userHtml = '';
 
 // This function will assume that the post variable $group_name is set to the group to view
 $group = $_POST['group_name'];
 
-$post = array( 'group' => $group );
+$post = array( 'group' => $group, 'group_name' => $group );
 $users = json_decode( PWTask( 'get_users', $post ) );
 
-foreach( $users as $user )
+if( count($users) <= 0 )
 {
-	$userHtml .= GroupMemberBlock( $user );
+	$userHtml .= GroupMemberBlock( "No Users in Group" );
+}
+else
+{
+	foreach( $users as $user )
+	{
+		$userHtml .= GroupMemberBlock( $user );
+	}
 }
 
+// Get the details about the group
+$groupDetails = json_decode( PWTask( 'get_group_details', $post ) );
+
+
+
+// Details
+$detailsHtml = '';
+$detailsHtml .= DetailsBlock( "Number of Members: {$groupDetails->NUMBER_OF_MEMBERS}" );
+
+// Actions
+$actionsHtml = '';
+
+// Meetings
+$meetingsHtml = '';
+if( !isset($groupDetails->MEETING_TIMES)  || !is_array($groupDetails->MEETING_TIMES) || count( $groupDetails->MEETING_TIMES ) <= 0 )
+{
+	$meetingsHtml .= MeetingBlock( "This group has no meeting time" );
+}
+else
+{
+	foreach( $groupDetails->MEETING_TIMES as $time )
+	{
+		$meetingsHtml .= MeetingBlock( GetDayHourString( $time ) );
+	}
+}
 ?>
 
 <div class="window_background center_on_page large_window drop_shadow group">
@@ -38,14 +94,21 @@ foreach( $users as $user )
 			</div>
 			<div class="large_table_cell">
 				<h2> More Details </h2>
+				<?php echo $detailsHtml; ?>
 			</div>			
 		</div>
 		<div class="large_table_row">
 			<div class="large_table_cell">
 				<h2> Actions </h2>
+				<form method="POST">
+					<button name="this" value="leave_group" class="group_action_row">Leave Group</button>
+					<button name="this" value="set_lfg" class="group_action_row">Start Looking For Group</button>
+					<input type="hidden" name="group_name" value="<?php echo $_POST['group_name']; ?>" >
+				</form>
 			</div>
 			<div class="large_table_cell">
-				<h2> Meetings </h2>
+				<h2> Meeting Times </h2>
+				<?php echo $meetingsHtml; ?>
 			</div>					
 		</div>
 	</div>

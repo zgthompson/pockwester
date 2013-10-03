@@ -1,5 +1,6 @@
 <?php
 // get_avail.php: Returns the avail of a student in a timeString
+//	 $user: The user_id of the user to pull availability of
 //  [$db]: If set will return the time directly from the database
 // Arthur Wuterich
 // 9-19-13

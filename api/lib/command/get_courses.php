@@ -1,9 +1,9 @@
 <?php
 // get_courses.php:	Pulls the course information from database, formats for android client, and returns the results
-//					 -Returns the classes for provided campus
-//					 -Precondition: Constants in api.cfg.php are defined
-//					 -$last_upate: Will filter results based on the provided unix timestamp
-//					 -$beta: Will return from the new table
+//	-Returns the classes for provided campus
+//	-Precondition: Constants in api.cfg.php are defined
+//	-$last_upate: Will filter results based on the provided unix timestamp
+//	-$beta: Will return from the new table
 // Arthur Wuterich
 // 8-3-13
 //

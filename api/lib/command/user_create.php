@@ -1,6 +1,9 @@
 <?php
 //	user_create.php: Creates a user is not already present in the system
 //	Precondition: Requires that username, password, and email be defined
+//	$username: The username to attempt to register
+//	$password: The password for the new user
+//	$email: The email of the new user
 // 9-19-13
 // Arthur Wuterich
 

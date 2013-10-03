@@ -1,6 +1,8 @@
 <?php
 //	login_user.php: Will return a positive value if the user/password combo is valid
 //	Precondition: Requires that username and password field be defined
+//	$username: The username to reference password against
+//	$password: Password value to check
 // 9-19-13
 // Arthur Wuterich
 

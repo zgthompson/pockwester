@@ -1,7 +1,10 @@
 <?php
-// get_user_details.php: Will return the information about a user
-// 9-21-13
-// Arthur Wuterich
+//	get_user_details.php: Will return the information about a user
+//	[$user_email]: Email to reference against
+//	[$user_id]: ID number to reference against
+//	[$user_name]: Name to reference against
+//	9-21-13
+//	Arthur Wuterich
 
 DB_Connect();
 

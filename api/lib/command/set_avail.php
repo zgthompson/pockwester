@@ -1,8 +1,10 @@
 <?php
-// set_avail.php: Sets the availibility entries for the user
-// Arthur Wuterich
-// 9-18-13
-//
+//	set_avail.php: Sets the availibility entries for the user
+//	$time_string: A timeString of the users availability
+//	 EX: ----___---_--_
+//	$user: The user who the timeString represents
+//	Arthur Wuterich
+//	9-18-13
 
 DB_Connect();
 
