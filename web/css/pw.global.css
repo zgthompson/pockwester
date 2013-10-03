@@ -524,6 +524,11 @@ h2
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f6f6', endColorstr='#f5f6f6',GradientType=0 ); /* IE6-9 */
 }
 
+.group_lfg
+{
+	border: 3px groove #00FF00;
+}
+
 /* For smaller screens make the pw_bar smaller font */
 @media screen and (max-width: 970px)
 {

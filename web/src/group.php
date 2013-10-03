@@ -7,8 +7,12 @@
 
 // Retuns a member name in a member block
 // Precondition: Valid string name
-function GroupMemberBlock( $name )
+function GroupMemberBlock( $name, $lfg = false )
 {
+	if( $lfg )
+	{
+		return "<div class=\"member_block group_lfg\">{$name}</div>";
+	}
 	return "<div class=\"member_block\">{$name}</div>";
 }
 
@@ -33,6 +37,11 @@ if( isset( $_POST['this'] ) )
 			$post = array( 'user' => $_SESSION['USER'], 'group_name' => $_POST['group_name'] );
 			PWTask( 'remove_from_group', $post );
 		break;
+		
+		case 'set_lfg_flag':
+			$post = array( 'group_name' => $_POST['group_name'], 'user_id' => $_SESSION['USER_ID'], 'bit_flag' => FLAG_LFG );
+			echo PWTask( 'set_user_group_flag', $post );
+		break;
 	}
 }
 
@@ -44,6 +53,9 @@ $group = $_POST['group_name'];
 $post = array( 'group' => $group, 'group_name' => $group );
 $users = json_decode( PWTask( 'get_users', $post ) );
 
+$post['flag'] = FLAG_LFG;
+$LFGUsers = json_decode( PWTask( 'get_users', $post ) );
+
 if( count($users) <= 0 )
 {
 	$userHtml .= GroupMemberBlock( "No Users in Group" );
@@ -52,7 +64,7 @@ else
 {
 	foreach( $users as $user )
 	{
-		$userHtml .= GroupMemberBlock( $user );
+		$userHtml .= GroupMemberBlock( $user, in_array( $user, $LFGUsers ) );
 	}
 }
 
@@ -102,7 +114,7 @@ else
 				<h2> Actions </h2>
 				<form method="POST">
 					<button name="this" value="leave_group" class="group_action_row">Leave Group</button>
-					<button name="this" value="set_lfg" class="group_action_row">Start Looking For Group</button>
+					<button name="this" value="set_lfg_flag" class="group_action_row">Start Looking For Group</button>
 					<input type="hidden" name="group_name" value="<?php echo $_POST['group_name']; ?>" >
 				</form>
 			</div>

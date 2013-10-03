@@ -7,6 +7,10 @@
 define( 'AVAL_LENGTH', 168 );
 define( 'PW_VERSION', 'V0.2.1' );
 
+// Flags
+define( 'FLAG_NONE', 0 );
+define( 'FLAG_LFG', 1 );
+
 // Path constants
 define( 'LIB_PATH', 'lib/' );
 define( 'IMG_PATH', 'img/' );

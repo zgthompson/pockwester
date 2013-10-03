@@ -55,9 +55,9 @@ $groupAvailability = DB_GetSingleArray( DB_Query( "SELECT RAW_TIME FROM USER_AVA
 $availabilityMap = array();
 
 // Take each availability time and count based on the time
-foreach( $groupAvailability as $availability_time );
+for( $i = 0; $i < count( $groupAvailability ); $i++ )
 {
-	$availabilityMap[$availability_time]++;
+	$availabilityMap[$groupAvailability[$i]]++;
 }
 
 // Now all we have to do is find any value in the map that is
@@ -68,7 +68,7 @@ foreach( $availabilityMap as $key => $value )
 	if( $value >= $peopleInGroup )
 	{
 		// Match!
-		$meetingTime = $key;
+		$meetingTime = strval($key);
 		break;
 	}
 }

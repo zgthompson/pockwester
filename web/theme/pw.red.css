@@ -460,3 +460,8 @@ h2
 .block_break
 {
 }
+
+.group_lfg
+{
+	border: 3px groove #00FF00;
+}
