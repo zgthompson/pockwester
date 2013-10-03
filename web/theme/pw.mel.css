@@ -27,7 +27,7 @@ body
 	min-width:600px;
 	font-family: "Arial", Sans-serif;
 	overflow:hidden;
-	background-image: url('image/ps_neutral.png');
+	background-image: none;/*url('image/shl.png');*/
 	background-color: white;
 	color: white;
 }
@@ -133,7 +133,7 @@ body
 
 #main_content button:hover
 {
-background-color: #cccccc;
+background-color: #999999;
 }
 
 #main_content button:active
@@ -247,7 +247,7 @@ color: #cccccc;*/
 }
 .window_background
 {
-	background-color: #dddddd;
+	background-color: #cccccc;
 
 }
 
@@ -345,14 +345,14 @@ color: #cccccc;*/
 .manage_availability
 {
 background-color: white;
-color: #cccccc;
+color: #666666;
 font-weight: 100;
 
 }
 
 .manage_availability h1
 {
-color: #cccccc;
+color: #666666;
 font-weight: 100;
 }
 

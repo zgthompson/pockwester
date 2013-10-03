@@ -526,7 +526,7 @@ h2
 
 .group_lfg
 {
-	border: 3px groove #00FF00;
+	border: 3px groove #00FF00 !important;
 }
 
 /* For smaller screens make the pw_bar smaller font */
