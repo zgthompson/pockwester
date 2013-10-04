@@ -4,6 +4,7 @@
 //	-Precondition: Constants in api.cfg.php are defined
 //	-$last_upate: Will filter results based on the provided unix timestamp
 //	-$beta: Will return from the new table
+//	[$like]: Will only return courses that have a name that is similar to $like
 // Arthur Wuterich
 // 8-3-13
 //
@@ -11,25 +12,32 @@
 DB_Connect();
 
 // Get the provided date if available 
-$last_update = get( 'last_update', false );
-$beta = get( 'beta', false );
+$last_update = Get( 'last_update', false );
+$like = Get( 'like', false );
+$beta = Get( 'beta', false );
 
 // New functionality
 if( isset($beta) )
 {
 	$make = array( 'COURSE_ID' => array( 'DEPARTMENT', 'COURSE_NUMBER' ) );
 	$remove = array( 'UPDATED', 'DEPARTMENT', 'COURSE_NUMBER' );
-	// If we have the last update time filter the query based on the time provided
-	if( isset($last_update) && is_numeric($last_update) )
+	
+	$where = '';
+	
+	// Build the where clause
+	
+	if( isset( $last_update ) && $last_update != '' )
 	{
-		// Get classes from db where the class updated field is greater than the provided field
-		$courses = DB_GetArray( DB_Query( "SELECT * from COURSE where {$last_update} < unix_timestamp(UPDATED)" ), true );
+		WhereAdd( $where, "{$last_update} < unix_timestamp(UPDATED)" );
 	}
-	else
+	
+	if( isset( $like ) && $like != '' )
 	{
-		// Get classes from db
-		$courses = DB_GetArray( DB_Query( 'SELECT * from COURSE' ), true );
-	}
+		WhereAdd( $where, "(TITLE LIKE \"%{$like}%\" OR COURSE_NUMBER LIKE \"%{$like}%\")" );
+	}	
+	
+	// Get classes from db
+	$courses = DB_GetArray( DB_Query( "SELECT * from COURSE {$where}" ), true );
 	
 	MakeKeys( $courses, $make );
 	RemoveKeys( $courses, $remove );

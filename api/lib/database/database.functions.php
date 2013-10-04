@@ -113,8 +113,16 @@ function DB_GetSingleArray( &$result, $assoc = false )
 // Precondition: Assumes a DB link
 function Get( $postVariable, $required = true )
 {
-	return str_replace( ';', '', $_POST[$postVariable]||!$required)?mysql_real_escape_string($_POST[$postVariable]):exit( ERROR_VARIABLE_NOT_FOUND . ": {$postVariable}" );
-
+	if( isset($_POST[$postVariable])
+	{
+		return str_replace( ';', '', $_POST[$postVariable]||!$required)?mysql_real_escape_string($_POST[$postVariable]):exit( ERROR_VARIABLE_NOT_FOUND . ": {$postVariable}" );
+	} 
+	else if( $required )
+	{
+		exit( ERROR_VARIABLE_NOT_FOUND . ": {$postVariable}" );
+	}
+	
+	return null;
 }
 
 ?>

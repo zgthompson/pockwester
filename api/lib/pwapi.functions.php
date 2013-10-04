@@ -353,6 +353,29 @@
 		return $result;
 	}
 	
+	// Returns an addition to a where clause
+	// Precondition: An empty string to start building the where clause or an
+	//				 in process where string
+	//  $new: The new boolean condition
+	//  [$delimit]: The string to put in between the boolean conditions
+	function WhereAdd( &$where, $new, $delimit = 'AND' )
+	{
+		// If the addition is empty then exit without any changes
+		if( isset($new) && strlen($new) <= 0 )
+		{
+			return;
+		}
+	
+		// If the string is not empty append a delimiter
+		if( strlen( $where ) > 0 )
+		{
+			$where .= " {$delimit} ";
+		}
+		
+		// Add the new condition
+		$where .= "WHERE {$new}";
+	}
+	
 	
 	
 	
