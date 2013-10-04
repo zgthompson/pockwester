@@ -26,12 +26,12 @@ if( isset($beta) )
 	
 	// Build the where clause
 	
-	if( isset( $last_update ) && $last_update != '' )
+	if( isset( $last_update ) )
 	{
 		WhereAdd( $where, "{$last_update} < unix_timestamp(UPDATED)" );
 	}
 	
-	if( isset( $like ) && $like != '' )
+	if( isset( $like ) )
 	{
 		WhereAdd( $where, "(TITLE LIKE \"%{$like}%\" OR COURSE_NUMBER LIKE \"%{$like}%\")" );
 	}	
