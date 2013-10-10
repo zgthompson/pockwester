@@ -15,7 +15,7 @@ function FormatTimeString( $timeString )
 	{
 	
 		$dayhour = GetDayHourString( $i );
-		$block = "<span class=\"availability_title_wrapper\"><span class=\"availability_title\">{$dayhour}</span></span>";
+		$block = "<span class=\"availability_title_wrapper\" time_id=\"{$i}\"><span class=\"availability_title\">{$dayhour}</span></span>";
 		
 		if( ($i)%24 == 0 && $i != 0 )
 		{
@@ -27,10 +27,10 @@ function FormatTimeString( $timeString )
 		switch( $timeString[$i] )
 		{		
 			case '_':
-				$html .= "<span class=\"availability_inactive\">{$block}</span>";
+				$html .= "<span class=\"availability_inactive\" time_id=\"{$i}\">{$block}</span>";
 			break;
 			case '-':
-				$html .= "<span class=\"availability_active\">{$block}</span>";
+				$html .= "<span class=\"availability_active\" time_id=\"{$i}\">{$block}</span>";
 			break;			
 		}
 		
@@ -39,15 +39,50 @@ function FormatTimeString( $timeString )
 	return $html;
 }
 
-$post = array( 'user' => $_SESSION['USER_ID'] );
-$availString = PWTask( 'get_avail', $post );
+if( isset($_POST['this']) && $_POST['this'] == 'manage_availability_alter' )
+{
+	$availString = $_POST['timestring'];
+	$post = array( 'user' => $_SESSION['USER_ID'], 'time_string' => $_POST['timestring'] );
+	PWTask( 'set_avail', $post );
+}
+else
+{
+	$post = array( 'user' => $_SESSION['USER_ID'] );
+	$availString = PWTask( 'get_avail', $post );
+}
 
 ?>
+<script type="text/javascript">
+$( document ).ready(function() {
 
+	$( ".availability_title_wrapper" ).click(function() {
+		time_value = parseInt($(this).attr('time_id'));
+		newChar = '-';
+		
+		obj = $(".availability_inactive[time_id="+time_value+"]");
+		
+		if( obj.size() <= 0 )
+		{
+			obj = $(".availability_active[time_id="+time_value+"]")
+			newChar = '_';
+		}
+		
+		obj.toggleClass( 'availability_inactive').toggleClass( 'availability_active');
+		
+		time_string = $("#timestring").val();
+		time_string = time_string.toString();
+		time_string = time_string.substring(0, time_value) + newChar + time_string.substring(time_value+1);
+		$("#timestring").val( time_string );
+		
+	});
+});
+</script>
 <div id="login_window" class="window_background center_on_page large_window drop_shadow no_wrap manage_availability">
 	<h1> Availability at a Glance </h1>
 	<?php echo FormatTimeString( $availString ) ?>
 	<form  method="POST">
+		<input type="hidden" id="timestring" name="timestring" value="<?php echo$availString; ?>" >
+		<button type="submit" name="this" value="manage_availability_alter">Alter</button>
 		<button type="submit" name="goto" value="home.php">Back</button>
 	</form>
 </div>
