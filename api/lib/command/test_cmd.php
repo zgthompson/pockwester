@@ -6,6 +6,12 @@
 
 DB_Connect();
 
+DB_Query( "DELETE FROM USER_GROUP" );
+
+print_r( DB_GetArray( DB_Query( "SELECT * FROM USER_GROUP WHERE GROUP_ID = 1" ) ));
+return;
+
+
 /* Code to take the sections from CLASS table and inset into SECTION table
 $classes = DB_GetArray( DB_Query( "SELECT CLASS_ID, SECTION_NUMBER, SUBJECT, CATALOG_NUMBER, BUILDING, TIME, DAYS, INSTRUCTOR FROM CLASS" ) );
 

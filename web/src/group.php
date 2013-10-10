@@ -45,12 +45,17 @@ if( isset( $_POST['this'] ) )
 		
 		case 'set_lfg_flag':
 			$post = array( 'group_name' => $_POST['group_name'], 'user_id' => $_SESSION['USER_ID'], 'bit_flag' => FLAG_LFG );
-			echo PWTask( 'set_user_group_flag', $post );
+			PWTask( 'set_user_group_flag', $post );
+
+			// Attempt to form a subgroup
+			$post = array(' group_name' => $_POST['group_name']);
+			$newGroup = PWTask( 'form_subgroup', $post );	
+
 		break;
 
 		case 'unset_lfg_flag':
 			$post = array( 'group_name' => $_POST['group_name'], 'user_id' => $_SESSION['USER_ID'], 'bit_flag' => FLAG_LFG, 'remove' => 1 );
-			echo PWTask( 'set_user_group_flag', $post );
+			PWTask( 'set_user_group_flag', $post );
 		break;
 	}
 }
@@ -129,7 +134,7 @@ else
 
 <div class="window_background center_on_page large_window drop_shadow group">
 	<h1> <?php echo $group ?> Details </h1>
-	
+	<h2> <?php if( isset($newGroup)){echo $newGroup;}  ?> </h2>	
 	<div class="large_table">
 		<div class="large_table_row">
 			<div class="large_table_cell">

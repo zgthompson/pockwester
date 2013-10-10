@@ -14,7 +14,7 @@
 	<?php if( isset($_SESSION['USER']) ) { ?>
 	<form  method="post">
 		<button name="goto" value="home.php">Home</button>
-		<button name="goto" value="manage_groups.php">Manage Groups</button>
+		<button name="goto" value="manage_groups.php">Classes and Groups</button>
 		<button name="goto" value="account.php">My Account</button>
 		<button name="goto" value="logout.php">Logoff <?php echo $_SESSION['USER']; ?></button>
 	</form>

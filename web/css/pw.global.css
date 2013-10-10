@@ -248,6 +248,7 @@ h1
 	font-size: 40px;
 	font-weight: bold;
 	margin-bottom: 10px;
+	margin-top: 50px;
 }
 
 h2
@@ -395,15 +396,36 @@ h2
 	margin-bottom:5px;
 	display: inline-block;
 	border-right: 1px solid rgba( 0, 0, 0, .2);
+	
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+
+	/* Rules below not implemented in browsers yet */
+	-o-user-select: none;
+	user-select: none;	
+	
 }
 
 .availability_active:hover, .availability_inactive:hover
-{
+{/*
 	height: 20px;
 	width: 37px;
 	margin-top:18px;
 	margin-bottom:3px;
 	border: 2px solid #FFF;
+
+*/
+}
+.manage_availability
+{
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+
+	/* Rules below not implemented in browsers yet */
+	-o-user-select: none;
+	user-select: none;	
 }
 
 
@@ -434,7 +456,15 @@ h2
 	border-radius: 4px;
 	background-color: #FFF;
 	
-	-webkit-transition: visibility opacity 0.2s;	
+	-webkit-transition: visibility opacity 0.2s;
+
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+
+	/* Rules below not implemented in browsers yet */
+	-o-user-select: none;
+	user-select: none;		
 }
 
 .availability_title_wrapper:hover .availability_title
@@ -529,6 +559,20 @@ h2
 	border: 3px groove #00FF00 !important;
 }
 
+.search_classes_input
+{
+	width:45%;
+	padding: 10px 0px 10px 0px;
+	text-align: center;
+}
+
+.search_classes_button
+{
+	width: 10%;
+	padding: 10px 0px 10px 0px;
+	background-color: #FFF;
+}
+
 /* For smaller screens make the pw_bar smaller font */
 @media screen and (max-width: 970px)
 {
@@ -556,6 +600,8 @@ h2
 	
 	.availability_active:hover, .availability_inactive:hover
 	{
+		/*
 		width: 22px;
+		*/
 	}	
 }

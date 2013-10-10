@@ -12,10 +12,10 @@ $user = Get( 'user' );
 $group_name = Get( 'group_name' );
 
 // Attempt to remove user from the group
-DB_Query( "
+print_r( DB_Query( "
 DELETE FROM USER_GROUP 
 WHERE USER_ID = ( SELECT UID FROM USER WHERE NAME = \"{$user}\") AND
-GROUP_ID = ( SELECT GID FROM GROUPS WHERE NAME = \"{$group_name}\") LIMIT 1" );
+GROUP_ID = ( SELECT GID FROM GROUPS WHERE NAME = \"{$group_name}\")" ));
 
 return '1';
 
