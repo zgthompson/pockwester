@@ -420,7 +420,8 @@ background-color: black;
 
 .availability_title
 {
-background-color: white;
+	background-color: white;
+	bottom: 41px;
 }
 
 .availability_title_wrapper:hover .availability_title
