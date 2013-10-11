@@ -372,8 +372,14 @@
 			$where .= " {$delimit} ";
 		}
 		
+		// If ther where clause is empty start the where statement
+		if( strlen( $where ) <= 0 )
+		{
+			$where .= " WHERE";
+		}
+		
 		// Add the new condition
-		$where .= "WHERE {$new}";
+		$where .= " {$new}";
 	}
 	
 	
