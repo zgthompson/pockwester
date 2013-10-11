@@ -9,4 +9,5 @@
 <?php } ?>
 <script src="<?php echo JAV_PATH ?>jquery-1.10.2.js"></script>
 <script src="<?php echo JAV_PATH ?>pw.global.js"></script>
+<script src="<?php echo JAV_PATH ?>jquery-ui-1.10.3.custom.min.js"></script>
 <title>Forge</title>

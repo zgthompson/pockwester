@@ -408,12 +408,24 @@ h2
 }
 
 .availability_active:hover, .availability_inactive:hover
-{
+{/*
 	height: 20px;
 	width: 37px;
 	margin-top:18px;
 	margin-bottom:3px;
 	border: 2px solid #FFF;
+
+*/
+}
+.manage_availability
+{
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+
+	/* Rules below not implemented in browsers yet */
+	-o-user-select: none;
+	user-select: none;	
 }
 
 
@@ -452,9 +464,7 @@ h2
 
 	/* Rules below not implemented in browsers yet */
 	-o-user-select: none;
-	user-select: none;	
-
-	
+	user-select: none;		
 }
 
 .availability_title_wrapper:hover .availability_title
@@ -590,6 +600,8 @@ h2
 	
 	.availability_active:hover, .availability_inactive:hover
 	{
+		/*
 		width: 22px;
+		*/
 	}	
 }

@@ -97,13 +97,17 @@ if( count( $newGroupID ) <= 0 )
 $newGroupID = $newGroupID[0];
 
 // Insert the meeting time into the group_availability table for the newly created group
-DB_Query( "INSERT INTO GROUP_AVAILABILITY (GROUP_ID) VALUES ({$newGroupID})" );
+DB_Query( "INSERT INTO GROUP_AVAILABILITY (GROUP_ID,RAW_TIME) VALUES ({$newGroupID},{$meetingTime})" );
 
 // Add each user to the new group
+// Unset the lfg flag for each user added in this manner
 foreach( $groupPeople as $userId )
 {
 	DB_Query( "INSERT INTO USER_GROUP (USER_ID,GROUP_ID,FLAGS) VALUES ({$userId},{$newGroupID},".USER_DEFAULT.")" );
+	$post = array( 'user_id' => $userId, 'group_name' => $group_name, 'bit_flag' => 1, 'remove' => 1);
+	PWTask('set_user_group_flag', $post);
 }
+
 
 return( $newGroupName );
 

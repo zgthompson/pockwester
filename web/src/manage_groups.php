@@ -21,7 +21,10 @@ function CreateGroupBlock( $groupName )
 }
 
 
-$outputHtml = '';
+$studyGroupHtml = '';
+$classHtml = '';
+$searchHtml = '';
+$resultSize = 0;
 
 // Get the groups this user is part of
 $post = array( 'user' => $_SESSION['USER_ID'] );
@@ -31,16 +34,64 @@ if( is_array( $groups ) )
 {
 	foreach( $groups as $group )
 	{
-		$outputHtml .= CreateGroupBlock( $group[0] );
+		if( strpos($group[0], '+' )  !== false )
+		{
+			$studyGroupHtml .= CreateGroupBlock( $group[0] );
+		}
+		else
+		{
+			$classHtml .= CreateGroupBlock( $group[0] );
+		}
 	}
+}
+
+if( isset($_POST['group_search_value']) && $_POST['group_search_value'] != '' )
+{
+	$post = array( 'like' => $_POST['group_search_value'] );
+	
+	$searchGroups = json_decode( PWTask( 'get_groups', $post ) );
+	
+	if( is_array( $searchGroups ) )
+	{
+		
+		foreach( $searchGroups as $group )
+		{
+
+		
+			if( strpos($group[0], '+' )  !== false )
+			{
+
+				$resultSize++; 
+		
+				$searchHtml .= CreateGroupBlock( $group[0] );
+			}
+		}
+	}	
 }
 
 ?>
 
 <div class="window_background center_on_page large_window drop_shadow manage_groups">
-	<h1> <?php echo $_SESSION['USER'] ?>'s Groups </h1>
-		<?php echo $outputHtml; ?>
-	<form method="POST">		
+	<h1> <?php echo $_SESSION['USER'] ?>'s Classes </h1>
+		<?php echo $classHtml; ?>
+	<h1> <?php echo $_SESSION['USER'] ?>'s Study Groups </h1>
+		<?php echo $studyGroupHtml; ?>
+
+	<form method="POST">
+		<h1> Search For Study Groups </h1>
+		<input class="search_classes_input" type="text" name="group_search_value" value="<?php echo $_POST['group_search_value']; ?>" />
+		<button class="search_classes_button" type="submit" name="this" value="search_classes">SEARCH</button>
+	</form>
+		<?php 
+			if( isset($_POST['group_search_value']) && $_POST['group_search_value'] != '' )
+			{
+				echo ($resultSize==0)?"<h2>no groups for <i>'{$_POST['group_search_value']}</i>'":"<h2>{$resultSize} groups for <i>'{$_POST['group_search_value']}'</i></h2>"; 
+			}		
+		?>
+		<?php echo ($searchHtml=='')?'':$searchHtml; ?>
+		<BR/>
+
+	<form method="POST">
 		<button type="submit" name="goto" value="home.php">Back</button>
 	</form>
 </div>

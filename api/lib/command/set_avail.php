@@ -35,6 +35,7 @@ for( $i = 0; $i < $timeStringSize; $i++ )
 		$deleteTime[] = $i;
 	}	
 }
+
 // Run the sql to remove all of the time entries. We do this to prevent
 // running more querys than required
 if( count($deleteTime) > 0 )
@@ -46,12 +47,12 @@ if( count($deleteTime) > 0 )
 		// First insertion
 		if( $orClause == "" )
 		{
-			$orClause .= " ( RAW_TIME = {$i}";
+			$orClause .= " ( RAW_TIME = {$time}";
 			continue;
 		}
 		
 		// Multiple 
-		$orClause .= " OR RAW_TIME = {$i}";
+		$orClause .= " OR RAW_TIME = {$time}";
 		
 	}
 	

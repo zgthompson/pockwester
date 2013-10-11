@@ -147,7 +147,7 @@ if( $updatedClasses ){
 		<?php $i = 1; foreach( $group_names as $groupName ){ echo "<input type=\"hidden\" name=\"group{$i}\" value=\"{$groupName}\">"; $i++; } ?>
 </div>
 		<button type="submit" name="goto" value="search_classes.php">Back</button>
-		<button type="submit" name="this" value="calc_schedule.php">Join Class Groups and Alter Availibility</button>
+	<!--	<button type="submit" name="this" value="calc_schedule.php">Join Class Groups and Alter Availibility</button> -->
 		<button type="submit" name="this" value="calc_schedule.php">Join Class Groups</button>
 	</form>
 </div>
