@@ -204,7 +204,7 @@ label
 	font-size: 20px;
 }
 
-input
+input[type="password"], input[type="textfield"]
 {
 	width:200px;
 	padding: 0px;
@@ -581,6 +581,27 @@ h2
 	border: 2px solid #000;
 	font-size: 18px;
 	margin: auto auto;
+}
+
+.message_table
+{
+	width: 80%;
+	background-color:rgba( 0, 0, 0, 0.2 );
+	border-collapse: collapse;
+	margin: auto auto;
+	text-align:left;
+}
+
+.message_table tr
+{
+	background-color:rgba( 155, 155, 155, 0.4 );
+	border-bottom: 1px solid #494949;
+}
+
+.message_table .first_row
+{
+	background-color:rgba( 155, 155, 155, 0.8 );
+	font-size: 18px;
 }
 
 /* For smaller screens make the pw_bar smaller font */

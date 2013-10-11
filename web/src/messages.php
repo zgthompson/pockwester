@@ -4,9 +4,9 @@
 // Arthur Wuterich
 
 // Builds a message block
-function MessageBlock( $message )
+function MessageBlock( $messageObj )
 {
-	return "<div class=\"message_block\">{$message}</div>";
+	return "<tr><td>{$messageObj->MESSAGE_ID}</td><td class=\"small\"><input type=\"checkbox\" name=\"select[]\" value=\"{$messageObj->MESSAGE_ID}\"/></td><td>{$messageObj->SENDER_NAME}</td><td>{$messageObj->MESSAGE}</td><td>{$messageObj->SENT}</td></tr>";
 }
 
 // Get the messages for the user
@@ -16,15 +16,35 @@ $messageHtml = '';
 
 foreach( $messages as $msg )
 {
-	$messageHtml .= MessageBlock( $msg->MESSAGE );
+	$messageHtml .= MessageBlock( $msg );
 }
 
 ?>
-
+<script>
+$("document").ready( function(){
+	$("#select_all").click( function(){
+	});
+	
+	$("#select_all").mouseup( function(){
+		
+		if( $('#select_all').is(":checked") )
+		{
+			$("input[type='checkbox']").removeAttr('checked');		
+		}
+		else
+		{
+			$("input[type='checkbox']").attr ( "checked" ,"checked" );		
+		}
+	});
+});
+</script>
 <div id="login_window" class="window_background center_on_page large_window drop_shadow no_wrap messages">
 	<form  method="POST">
 		<h2>Messages</h2>
-		<?php echo $messageHtml; ?>
+		<table class="message_table">
+		<tr class="first_row"><td>ID</td><td class="small" ><input type="checkbox" id="select_all" />Flag</td><td>Sender</td><td>Message</td><td>Date</td></tr>
+			<?php echo $messageHtml; ?>
+		</table>
 		<button type="submit" name="goto" value="home.php">Back</button>
 	</form>
 </div>

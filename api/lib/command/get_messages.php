@@ -1,7 +1,7 @@
 <?php
 //	get_messages.php: Will get all of the messages for the user
 //	$user_id: The user_id whoes messages to retrieve
-//	[$flag]: Will only return messages with the provided name
+//	[$flag]: Will only return messages with the provided flag
 //	[$like]: Content will be matched against this
 //	[$sender]: Get messages from provided user_id or user string
 // 10-10-2013
@@ -39,7 +39,7 @@ if( isset($flag) )
 }
 
 // Return all matched messages
-return OutputFormatting( DB_GetArray( DB_Query( "SELECT MESSAGE_ID, MESSAGE, SENDER_NAME, FLAG FROM USER_MESSAGE {$where} ORDER BY MESSAGE_ID DESC" ), true ) );
+return OutputFormatting( DB_GetArray( DB_Query( "SELECT * FROM USER_MESSAGE {$where} ORDER BY MESSAGE_ID DESC" ), true ) );
 
 
 
