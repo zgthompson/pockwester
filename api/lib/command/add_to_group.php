@@ -29,8 +29,12 @@ $group_id = $group_id[0];
 // Add the user to the created group
 DB_Query( "INSERT INTO USER_GROUP (USER_ID, GROUP_ID, FLAGS) VALUES (\"{$user_id}\", \"{$group_id}\", ".USER_DEFAULT.")" );
 
+// Send a message to the user that they have joined the group
+$post = array( 'user_id' => $user_id, 'message' => "You have joined the group {$group_name}");
+PWTask( 'send_message', $post );
+
+
 // Output JSON object
 return( "1" );
-return;
 
 ?>

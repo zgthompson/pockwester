@@ -34,7 +34,7 @@ if( isset( $_POST['this'] ) )
 	switch( $_POST['this'] )
 	{
 		case 'leave_group':
-			$post = array( 'user' => $_SESSION['USER'], 'group_name' => $_POST['group_name'] );
+			$post = array( 'user_id' => $_SESSION['USER_ID'], 'group_name' => $_POST['group_name'] );
 			PWTask( 'remove_from_group', $post );
 		break;
 

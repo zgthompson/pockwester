@@ -4,6 +4,8 @@
 //	$message: The message to send to the user
 //	[$sender]: The user that has sent the message.
 //	[$sender_id]: The id of the sender
+// 10-10-2013
+// Arthur Wuterich
 
 DB_Connect();
 

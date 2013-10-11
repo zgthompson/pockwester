@@ -573,6 +573,16 @@ h2
 	background-color: #FFF;
 }
 
+.message_block
+{
+	width: 50%;
+	height: 25px;
+	background-color:#FFF;
+	border: 2px solid #000;
+	font-size: 18px;
+	margin: auto auto;
+}
+
 /* For smaller screens make the pw_bar smaller font */
 @media screen and (max-width: 970px)
 {

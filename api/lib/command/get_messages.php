@@ -4,6 +4,8 @@
 //	[$flag]: Will only return messages with the provided name
 //	[$like]: Content will be matched against this
 //	[$sender]: Get messages from provided user_id or user string
+// 10-10-2013
+// Arthur Wuterich
 
 DB_Connect();
 
@@ -37,7 +39,7 @@ if( isset($flag) )
 }
 
 // Return all matched messages
-return OutputFormatting( DB_GetArray( DB_Query( "SELECT MESSAGE_ID, MESSAGE, SENDER_NAME, FLAG FROM USER_MESSAGE {$where}" ) ) );
+return OutputFormatting( DB_GetArray( DB_Query( "SELECT MESSAGE_ID, MESSAGE, SENDER_NAME, FLAG FROM USER_MESSAGE {$where} ORDER BY MESSAGE_ID DESC" ), true ) );
 
 
 

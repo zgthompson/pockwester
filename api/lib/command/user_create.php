@@ -38,6 +38,12 @@ $user_id = $user_id[0];
 
 // Insert a row into the user configuration database
 DB_QUERY( "INSERT INTO USER_CONFIG (USER_ID) VALUES ({$user_id})" );
+
+// Send a message to the new user
+// Send a message to the user that they have left the group
+$post = array( 'user_id' => $user_id, 'message' => "Welcome to Pockwester! You should add your classes and start looking for study groups.");
+PWTask( 'send_message', $post );
+
 return( '1' );
 
 ?>

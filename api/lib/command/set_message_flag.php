@@ -4,6 +4,8 @@
 //	[$flag]: The new flag for the message
 //	[$combine]: Will combine the flags
 //	[$remove]: Will remove the flags
+// 10-10-2013
+// Arthur Wuterich
 
 DB_Connect();
 
