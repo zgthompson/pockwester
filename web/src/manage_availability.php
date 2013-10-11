@@ -54,29 +54,6 @@ else
 ?>
 <script type="text/javascript">
 $( document ).ready(function() {
-<<<<<<< HEAD
-
-	$( ".availability_title_wrapper" ).click(function() {
-		time_value = parseInt($(this).attr('time_id'));
-		newChar = '-';
-		
-		obj = $(".availability_inactive[time_id="+time_value+"]");
-		
-		if( obj.size() <= 0 )
-		{
-			obj = $(".availability_active[time_id="+time_value+"]")
-			newChar = '_';
-		}
-		
-		obj.toggleClass( 'availability_inactive').toggleClass( 'availability_active');
-		
-		time_string = $("#timestring").val();
-		time_string = time_string.toString();
-		time_string = time_string.substring(0, time_value) + newChar + time_string.substring(time_value+1);
-		$("#timestring").val( time_string );
-		
-	});
-=======
 	var isDown = false;	
 	$(document).mousedown(function(){
 		isDown = true;
@@ -131,9 +108,6 @@ $( document ).ready(function() {
 		$("#timestring").val( time_string );
 		
 	});
-
-
->>>>>>> 1e98fe279c6e9c722efe8b83c60823580267df19
 });
 </script>
 <div id="login_window" class="window_background center_on_page large_window drop_shadow no_wrap manage_availability">
