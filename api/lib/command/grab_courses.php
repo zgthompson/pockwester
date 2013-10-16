@@ -16,8 +16,8 @@ $like = Get('like', false);
 if ( isset($like) )
 {
     WhereAdd( $where, "title LIKE \"%{$like}%\"" );
-    WhereAdd( $where, "CONCAT(subject, catalog_no) LIKE \"%{$like}\"", "OR");
-    WhereAdd( $where, "CONCAT(subject, ' ', catalog_no) LIKE \"%{$like}\"", "OR");
+    WhereAdd( $where, "CONCAT(subject, catalog_no) LIKE \"%{$like}%\"", "OR");
+    WhereAdd( $where, "CONCAT(subject, ' ', catalog_no) LIKE \"%{$like}%\"", "OR");
 
     $columns = "id, subject, catalog_no, title";
 
