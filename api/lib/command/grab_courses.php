@@ -15,7 +15,21 @@ $like = Get('like', false);
 
 if ( isset($like) )
 {
-    WhereAdd( $where, "(title LIKE \"%{like}%\" OR 
-                        concat(subject, catalog_no) LIKE \"%{like}%\" OR
-                        concat(subject, ' ', catalog_no) LIKE \"%{like}%\")")
+    WhereAdd( $where, "title LIKE \"%{$like}%\"" );
+    WhereAdd( $where, "CONCAT(subject, catalog_no) LIKE \"%{$like}\"", "OR");
+    WhereAdd( $where, "CONCAT(subject, ' ', catalog_no) LIKE \"%{$like}\"", "OR");
+
+    $columns = "id, subject, catalog_no, title";
+
+    $courses = DB_GetArray( DB_Query( "SELECT {$columns} FROM course {$where}" ), true);
+
+    return ( OutputFormatting( array( 'courses' => $courses ) ) );
+}
+
+else {
+    return "like parameter must be set";
+}
+
+
+
 
