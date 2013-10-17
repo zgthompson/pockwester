@@ -9,6 +9,12 @@ function MessageBlock( $messageObj )
 	return "<tr><td>{$messageObj->MESSAGE_ID}</td><td class=\"small\"><input type=\"checkbox\" name=\"select[]\" value=\"{$messageObj->MESSAGE_ID}\"/></td><td>{$messageObj->SENDER_NAME}</td><td>{$messageObj->MESSAGE}</td><td>{$messageObj->SENT}</td></tr>";
 }
 
+// Delete messages if requested
+if( isset($_POST['this']) && $_POST['this'] == 'messages_delete' )
+{
+}
+
+
 // Get the messages for the user
 $post = array( 'user_id' => $_SESSION['USER_ID'] );
 $messages = json_decode( PWTask( 'get_messages', $post ) );
@@ -22,18 +28,23 @@ foreach( $messages as $msg )
 ?>
 <script>
 $("document").ready( function(){
-	$("#select_all").click( function(){
+	$("#select_all").click( function(event){
+		event.preventDefault();
 	});
 	
-	$("#select_all").mouseup( function(){
-		
+	$("#select_all").mousedown( function(event){
+		event.preventDefault();
+	});	
+	
+	$("#select_all").mouseup( function( event ){
+		event.preventDefault();
 		if( $('#select_all').is(":checked") )
 		{
 			$("input[type='checkbox']").removeAttr('checked');		
 		}
 		else
 		{
-			$("input[type='checkbox']").attr ( "checked" ,"checked" );		
+			$("input[type='checkbox']").prop ( "checked" ,"checked" );		
 		}
 	});
 });
@@ -45,6 +56,7 @@ $("document").ready( function(){
 		<tr class="first_row"><td>ID</td><td class="small" ><input type="checkbox" id="select_all" />Flag</td><td>Sender</td><td>Message</td><td>Date</td></tr>
 			<?php echo $messageHtml; ?>
 		</table>
+		<button type="submit" name="this" value="messages_delete">Delete Selected</button>
 		<button type="submit" name="goto" value="home.php">Back</button>
 	</form>
 </div>

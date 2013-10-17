@@ -111,8 +111,8 @@ function PWTask( $apiTask, $post = array() )
 function GetTimeValue( $time, $minutes=false, $offset=0.0 )
 {
 	// Mapping for day to values
-	$DAY_VALUE = array( 'M' => 0,'T' => 1,'W' => 2,'R' => 3,'F' => 4,'S' => 5,'U' => 6);
-	$VALUE_DAY = array( 0 => 'Monday',1 => 'Tuesday',2 => 'Wednesday',3 => 'Thursday',4 => 'Friday',5 => 'Saturday',6 => 'Sunday');
+	$DAY_VALUE = GetDayValueArray();
+	$VALUE_DAY = GetValueDayArray();
 	
 	$result = array();
 		
@@ -194,7 +194,7 @@ function GetTimeValue( $time, $minutes=false, $offset=0.0 )
 //  $day: Include day in string
 function ConvertTimeValue( $timeValue, $day = false )
 {
-	$VALUE_DAY = array( 0 => 'Monday',1 => 'Tuesday',2 => 'Wednesday',3 => 'Thursday',4 => 'Friday',5 => 'Saturday',6 => 'Sunday');
+	$VALUE_DAY = GetValueDayArray();
 	
 	$dayKey = floor(($timeValue%168) / 24.0 );
 	$day = $VALUE_DAY[$dayKey];
