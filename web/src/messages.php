@@ -10,8 +10,17 @@ function MessageBlock( $messageObj )
 }
 
 // Delete messages if requested
-if( isset($_POST['this']) && $_POST['this'] == 'messages_delete' )
+if( isset($_POST['this']) && isset($_POST['select']) && is_array( $_POST['select'] ) && $_POST['this'] == 'messages_delete' )
 {
+	// If the post variable is not an array them force it into an array
+	if( !is_array($_POST['select']) )
+	{
+		$_POST['select'] = array( $_POST['select'] );
+	}
+
+	// Encode all of the delete ids and remove them from the database
+	$post = array( 'user_id' => $_SESSION['USER_ID'], 'message_ids' => json_encode( $_POST['select'] ) );
+	PWTask( 'remove_messages', $post );
 }
 
 
@@ -53,7 +62,7 @@ $("document").ready( function(){
 	<form  method="POST">
 		<h2>Messages</h2>
 		<table class="message_table">
-		<tr class="first_row"><td>ID</td><td class="small" ><input type="checkbox" id="select_all" />Flag</td><td>Sender</td><td>Message</td><td>Date</td></tr>
+		<tr class="first_row"><td>ID</td><td class="small" ><input type="checkbox" id="select_all" /></td><td>Sender</td><td>Message</td><td>Date</td></tr>
 			<?php echo $messageHtml; ?>
 		</table>
 		<button type="submit" name="this" value="messages_delete">Delete Selected</button>

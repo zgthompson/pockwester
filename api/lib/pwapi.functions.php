@@ -196,8 +196,7 @@
 		}	
 	}
 	
-    // Makes a new key based on each element in the make array. This will create the field for 
-    // each key of make taking each found member of the parent array as the data
+	// Makes a new key based on each element in the make array. This will create the field for each key of make taking each found member of the parent array as the data
 	// $make: Is expected to be a assoc array which represents <new_field> => <array,parent,fields,names>
 	// $delimit: What will be placed in between the two elements on concatenation
 	// $recursive: Will run this command on each array element	
@@ -373,7 +372,7 @@
 			$where .= " {$delimit} ";
 		}
 		
-		// If the where clause is empty start the where statement
+		// If ther where clause is empty start the where statement
 		if( strlen( $where ) <= 0 )
 		{
 			$where .= " WHERE";
@@ -382,6 +381,30 @@
 		// Add the new condition
 		$where .= " {$new}";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
 
 	
 ?>
