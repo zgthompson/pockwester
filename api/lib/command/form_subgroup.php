@@ -40,45 +40,101 @@ elseif( $peopleInGroup <= 2 )
 $where = '';
 foreach( $groupPeople as $userId )
 {
-	if( $where != '' )
-	{
-		$where .= ' OR';
-	}
-	
-	$where .= " USER_ID={$userId}";
+	WhereAdd( $where, "USER_ID={$userId}", 'OR' );
 }
 
-// Get all of the availability for all users in the group
-$groupAvailability = DB_GetSingleArray( DB_Query( "SELECT RAW_TIME FROM USER_AVAILABILITY WHERE {$where}" ) );
+// Get all of the availability and user_ids for all users in the group
+$groupAvailability = DB_GetSingleArray( DB_Query( "SELECT RAW_TIME, USER_ID FROM USER_AVAILABILITY {$where}" ) );
 
 // Create a mapping of availability times to frequency
 $availabilityMap = array();
 
-// Take each availability time and count based on the time
-for( $i = 0; $i < count( $groupAvailability ); $i++ )
+// Take each availability time and user to compute a mapping of availability times to user_ids
+for( $i = 0; $i < count( $groupAvailability ); $i+=2 )
 {
-	$availabilityMap[$groupAvailability[$i]]++;
+	// Create the array if not already created
+	if( !is_array($availabilityMap[$groupAvailability[$i]]) )
+	{
+		$availabilityMap[$groupAvailability[$i]] = array();
+	}
+	
+	// Added the user_id to the array at the timeslot
+	$availabilityMap[$groupAvailability[$i]][] = $groupAvailability[$i+1];
 }
 
-// Now all we have to do is find any value in the map that is
-// equal to the amount of users in the group and we have a compatible time
-$meetingTime = '';
-foreach( $availabilityMap as $key => $value )
+// Prune off the groupings that do not meet the minimum number of students
+foreach( $availabilityMap as $time => &$grp )
 {
-	if( $value >= $peopleInGroup )
+	if( count($grp) < MINIMUM_GROUP_SIZE )
 	{
-		// Match!
-		$meetingTime = strval($key);
-		break;
+		unset( $availabilityMap[$time] );
 	}
 }
 
-// If there is a no meeting time then the students availability is too restrictive
-if( $meetingTime == '' )
+// If the availabilityMap is empty there was not 
+// enough overlap between the availability of all of the students
+if( count( $availabilityMap ) <= 0 )
 {
 	return( 'Meeting times are too restrictive to generate a complete group' );
 }
+die();
+// If there is anything in the availabilityMap at this point there will be a group formed
+// Operates on the availabilityMap until all group possibilitys are removed
+while( count( $availabilityMap ) > 0 )
+{
+	// Generate the new group name *** REFACTOR SILLY CODE! ***
+	$newGroupName = '+' . $group_name . (time()%1000);
 
+	// Create the new group
+	DB_Query( "INSERT INTO GROUPS (NAME) VALUES (\"{$newGroupName}\")" );
+
+	// Get the newly generated groups id
+	$newGroupID = DB_GetSingleArray( DB_Query( "SELECT GID FROM GROUPS WHERE NAME=\"{$newGroupName}\" LIMIT 1" ) );
+	$newGroupID = $newGroupID[0];
+	
+	// Get the meeting time. This returns the first key value in the array
+	reset($availabilityMap);
+	$meetingTime = key($array);
+	
+	// Get an array of each student serviced in this iteration, add each one to the new group,
+	// and unset their lfg flag in their old group
+	$servicedUsers = array();
+	foreach( $availabilityMap[$meetingTime] as $user_id )
+	{
+		$servicedUsers[] = $user_id;
+		
+		// Add to new group
+		DB_Query( "INSERT INTO USER_GROUP (USER_ID,GROUP_ID,FLAGS) VALUES ({$user_id},{$newGroupID},".USER_DEFAULT.")" );		
+		
+		// Remove lfg flag from old group
+		$post = array( 'user_id' => $user_id, 'group_name' => $group_name, 'bit_flag' => 1, 'remove' => 1);
+		PWTask('set_user_group_flag', $post);		
+	}
+		
+	// Insert the meeting time into the group_availability table for the newly created group
+	DB_Query( "INSERT INTO GROUP_AVAILABILITY (GROUP_ID,RAW_TIME) VALUES ({$newGroupID},{$meetingTime})" );	
+	
+	// Remove any availabilityTimes that have any of the servicedUsers contained
+	
+	// Prune off the groupings that do not meet the minimum number of students
+	foreach( $availabilityMap as $time => &$grp )
+	{
+		// Check each user serviced
+		foreach( $servicedUsers as $user_id )
+		{
+			// If the availability array contains that user_id then
+			// remove it
+			if( in_array( $user_id, $grp ) )
+			{
+				unset( $availabilityMap[$time] );
+				break;
+			}
+		}
+	}
+}
+
+
+/*
 // Generate the new group name *** REFACTOR SILLY CODE! ***
 $newGroupName = '+' . $group_name . (time()%1000);
 
@@ -107,9 +163,9 @@ foreach( $groupPeople as $userId )
 	$post = array( 'user_id' => $userId, 'group_name' => $group_name, 'bit_flag' => 1, 'remove' => 1);
 	PWTask('set_user_group_flag', $post);
 }
+*/
 
-
-return( $newGroupName );
+return( 1 );
 
 
 
