@@ -1,5 +1,5 @@
 <?php
-// get_courses.php: Pulls the course information from database, formats
+// grab_courses.php: Pulls the course information from database, formats
 //                  into json object, and returns the results
 //      -Returns the courses for provided campus matching $like
 //      -Precondition: Constants in api.cfg.php are defined
@@ -29,7 +29,4 @@ if ( isset($like) )
 else {
     return "like parameter must be set";
 }
-
-
-
 
