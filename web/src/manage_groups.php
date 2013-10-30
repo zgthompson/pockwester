@@ -20,6 +20,21 @@ function CreateGroupBlock( $groupName )
 	return $html;
 }
 
+function CreateClassBlock( $groupName )
+{
+	$html = 
+	"
+	<div class=\"class_block\">
+	<form method=\"POST\">
+		<input type=\"hidden\" name=\"group_name\" value=\"{$groupName}\" />
+		<button name=\"goto\" value=\"group.php\">{$groupName}</button>
+	</form>
+	</div>
+	";	
+	
+	return $html;
+}
+
 
 $studyGroupHtml = '';
 $classHtml = '';
@@ -36,7 +51,7 @@ if( is_array( $groups ) )
 	{
 		if( strpos($group[0], '+' )  !== false )
 		{
-			$studyGroupHtml .= CreateGroupBlock( $group[0] );
+			$studyGroupHtml .= CreateClassBlock( $group[0] );
 		}
 		else
 		{
@@ -72,25 +87,38 @@ if( isset($_POST['group_search_value']) && $_POST['group_search_value'] != '' )
 ?>
 
 <div class="window_background center_on_page large_window drop_shadow manage_groups">
-	<h1> <?php echo $_SESSION['USER'] ?>'s Classes </h1>
-		<?php echo $classHtml; ?>
-	<h1> <?php echo $_SESSION['USER'] ?>'s Study Groups </h1>
-		<?php echo $studyGroupHtml; ?>
-
-	<form method="POST">
-		<h1> Search For Study Groups </h1>
-		<input class="search_classes_input" type="text" name="group_search_value" value="<?php echo $_POST['group_search_value']; ?>" />
-		<button class="search_classes_button" type="submit" name="this" value="search_classes">SEARCH</button>
-	</form>
-		<?php 
-			if( isset($_POST['group_search_value']) && $_POST['group_search_value'] != '' )
-			{
-				echo ($resultSize==0)?"<h2>no groups for <i>'{$_POST['group_search_value']}</i>'":"<h2>{$resultSize} groups for <i>'{$_POST['group_search_value']}'</i></h2>"; 
-			}		
-		?>
-		<?php echo ($searchHtml=='')?'':$searchHtml; ?>
-		<BR/>
-
+	<div class="large_table" >
+		<div class="large_table_row">
+			<div class="large_table_cell">
+				<h1> <?php echo $_SESSION['USER'] ?>'s Classes </h1>
+					<?php echo $classHtml; ?>
+			</div>
+			<div class="large_table_cell">			
+				<h1> <?php echo $_SESSION['USER'] ?>'s Study Groups </h1>
+					<?php echo $studyGroupHtml; ?>
+			</div>
+		</div>
+	</div>
+	
+	<div class="large_table" >
+		<div class="large_table_row">
+			<div class="large_table_cell">
+				<form method="POST">
+					<h1> Search For Study Groups </h1>
+					<input class="search_classes_input" type="text" name="group_search_value" value="<?php echo $_POST['group_search_value']; ?>" />
+					<button class="search_classes_button" type="submit" name="this" value="search_classes">SEARCH</button>
+				</form>					
+				<?php 
+					if( isset($_POST['group_search_value']) && $_POST['group_search_value'] != '' )
+					{
+						echo ($resultSize==0)?"<h2>no groups for <i>'{$_POST['group_search_value']}</i>'":"<h2>{$resultSize} groups for <i>'{$_POST['group_search_value']}'</i></h2>"; 
+					}		
+				?>
+				<?php echo ($searchHtml=='')?'':$searchHtml; ?>
+			</div>
+		</div>
+	</div>
+	
 	<form method="POST">
 		<button type="submit" name="goto" value="home.php">Back</button>
 	</form>

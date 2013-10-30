@@ -38,6 +38,10 @@ if( isset($flag) )
 	WhereAdd( $where, "FLAG&{$flag}={$flag}" );
 }
 
+// Update the flag for any messages to show that they have been read
+DB_Query( "UPDATE USER_MESSAGE SET FLAG=FLAG|1 WHERE FLAG=0" );
+
+
 // Return all matched messages
 return OutputFormatting( DB_GetArray( DB_Query( "SELECT * FROM USER_MESSAGE {$where} ORDER BY MESSAGE_ID DESC" ), true ) );
 

@@ -49,7 +49,7 @@ if( $combine != '' )
 elseif( $remove != '' )
 {
 	// And the flipped provided field with the current flag
-	$bit_flag = (~$bit_flag)&intval($userAvalDetails[0]['FLAGS']);
+	$bit_flag = (~intval($bit_flag))&intval($userAvalDetails[0]['FLAGS']);
 }
 
 // Set the flags

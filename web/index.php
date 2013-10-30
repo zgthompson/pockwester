@@ -38,7 +38,6 @@ if( !isset($_SESSION['USER']) )
 <?php GetPage( HEADER_FILE ); ?>
 </head>
 <body>
-<?php GetPage( PW_BAR_FILE ); ?>
 <div id="page">
 	<div id="main_content">
 		<?php
@@ -51,5 +50,9 @@ if( !isset($_SESSION['USER']) )
 		?>
 	</div>
 </div>
+<?php 
+	// Load the PW bar to allow source files that changed information to be visible immediatly
+	GetPage( PW_BAR_FILE );
+?>
 </body>
 </html>

@@ -21,6 +21,9 @@ define( 'ERROR_VARIABLE_NOT_FOUND', 'A required variable was not found in the co
 // Returns an array of the commands available in the LIB_PATH/CMD_PATH/ directory
 $API_COMMANDS = GetCommandArray( scandir( LIB_PATH . CMD_PATH ) );
 
+// Group forming constants
+define( 'MINIMUM_GROUP_SIZE', 3 );
+
 // Length of availability strings
 define( 'AVAL_LENGTH', 168 );
 

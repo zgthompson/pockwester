@@ -108,6 +108,8 @@ $( document ).ready(function() {
 		$("#timestring").val( time_string );
 		
 	});
+
+
 });
 </script>
 <div id="login_window" class="window_background center_on_page large_window drop_shadow no_wrap manage_availability">
