@@ -28,6 +28,7 @@ define( 'NOW', time() );
 
 // Template variables
 define( 'DEFAULT_CONTENT', 'home.php'	);
+define( 'INFO_CONTENT'	 , 'setup_user.php' );
 define( 'LOGIN_PAGE'     , 'login.php'	);
 define( 'LOGOUT_PAGE'	 , 'logout.php'	);
 define( 'HEADER_FILE'	 , 'head.php' 	);

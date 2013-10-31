@@ -118,6 +118,6 @@ $( document ).ready(function() {
 	<form  method="POST">
 		<input type="hidden" id="timestring" name="timestring" value="<?php echo$availString; ?>" >
 		<button type="submit" name="this" value="manage_availability_alter">Alter</button>
-		<button type="submit" name="goto" value="home.php">Back</button>
+		<button type="submit" name="goto" value="back">Back</button>
 	</form>
 </div>

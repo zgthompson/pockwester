@@ -134,7 +134,6 @@ else
 
 <div class="window_background center_on_page large_window drop_shadow group">
 	<h1> <?php echo $group ?> Details </h1>
-	<h2> <?php if( isset($newGroup)){echo $newGroup;}  ?> </h2>	
 	<div class="large_table">
 		<div class="large_table_row">
 			<div class="large_table_cell">
@@ -161,6 +160,6 @@ else
 		</div>
 	</div>
 	<form method="POST">
-		<button type="submit" name="goto" value="manage_groups.php">Back</button>
+		<button type="submit" name="goto" value="back">Back</button>
 	</form>
 </div>

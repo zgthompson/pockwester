@@ -85,7 +85,7 @@ foreach( $_POST['class'] as $course )
 			<?php echo $sectionHtml; ?>
 </div>			
 			<BR />
-			<button type="submit" name="goto" value="search_classes.php">Back</button>
+			<button type="submit" name="goto" value="back">Back</button>
 			<button type="submit" name="goto" value="add_courses.php">Add Courses</button>
 		</form>
 </div>

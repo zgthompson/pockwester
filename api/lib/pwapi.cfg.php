@@ -10,6 +10,9 @@ require_once 'pwapi.functions.php';
 // the most current command
 define( 'LEGACY', true );
 
+// Logging commands and runtimes
+define( 'LOGGING', true );
+
 // System Constants
 // Messages
 define( 'ERROR_INVALID_POST', 'Post array or elements are impropertly formed' );

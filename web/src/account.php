@@ -54,6 +54,6 @@ if( $save_settings ){
 		<button type="submit" name="goto" value="manage_availability.php">Manage Availability</button><BR/>
 		
 		<button type="submit" name="this" value="account_save_settings">Save Settings</button>
-		<button type="submit" name="goto" value="home.php">Back</button>
+		<button type="submit" name="goto" value="back">Back</button>
 	</form>
 </div>

@@ -21,14 +21,27 @@
 				$post = array( 'user_id' => $response );
 				$config = json_decode( PWTask( 'get_user_config', $post ) );
 				$config = $config[0];
-								
+				
+				// Page history tracking								
+				$_SESSION['PAGE_HISTROY'] = array();
 				$_SESSION['USER'] = ucwords(strtolower($_POST['login_username']));
 				$_SESSION['USER_ID'] = intval($response);
 				
 				// Set the beta user ID for the new database ***REMOVE***
 				$_SESSION['USER_ID_BETA'] = intval($response_beta);
 				
-				$_SESSION['CURRENT_PAGE'] = DEFAULT_CONTENT;
+				// Check to see if the user has setup the required information to user the site
+				$post = array( 'user_id' => "{$_SESSION['USER_ID']},{$_SESSION['USER_ID_BETA']}");
+				if( PWTask( 'user_is_setup', $post ) == '0' )
+				{
+					$_SESSION['CURRENT_PAGE'] = INFO_CONTENT;
+				}
+				else
+				// Else goto the default home page
+				{
+					$_SESSION['CURRENT_PAGE'] = DEFAULT_CONTENT;
+				}
+				$_SESSION['PAGE_HISTROY'][] = $_SESSION['CURRENT_PAGE'];
 				$_SESSION['THEME'] = $config->THEME;
 				
 			}

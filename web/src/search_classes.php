@@ -44,7 +44,7 @@ function AddField()
 			<button type="button" name="add" id="add" class="add" onclick="AddField();">+</button>
 </div>			
 			<BR />
-			<button type="submit" name="goto" value="home.php">Back</button>
+			<button type="submit" name="goto" value="back">Back</button>
 			<button type="submit" name="goto" value="sections.php">Continue</button>
 		</form>
 </div>

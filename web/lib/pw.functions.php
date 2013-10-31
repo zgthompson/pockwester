@@ -81,6 +81,7 @@ function PWTask( $apiTask, $post = array() )
 	// Add the apiTask to the post array as well as the apikey
 	$post['apitask'] = $apiTask;
 	$post['apikey'] = $_SERVER['API_APIKEY'];
+	$post['ip'] = $_SERVER['REMOTE_ADDR'];
 	
 	// Open url link
 	$link = curl_init();

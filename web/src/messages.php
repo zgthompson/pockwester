@@ -66,6 +66,6 @@ $("document").ready( function(){
 			<?php echo $messageHtml; ?>
 		</table>
 		<button type="submit" name="this" value="messages_delete">Delete Selected</button>
-		<button type="submit" name="goto" value="home.php">Back</button>
+		<button type="submit" name="goto" value="back">Back</button>
 	</form>
 </div>

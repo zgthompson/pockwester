@@ -70,6 +70,6 @@ foreach( $classes->instances as $class )
 	<?php echo $classHtml; ?>
 	<form  method="POST">
 		<button type="submit" name="goto" value="search_classes.php">Add Classes</button>
-		<button type="submit" name="goto" value="home.php">Back</button>
+		<button type="submit" name="goto" value="back">Back</button>
 	</form>
 </div>

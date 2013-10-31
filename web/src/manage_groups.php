@@ -116,6 +116,6 @@ if( isset($_POST['group_search_value']) && $_POST['group_search_value'] != '' )
 	</div>
 	
 	<form method="POST">
-		<button type="submit" name="goto" value="home.php">Back</button>
+		<button type="submit" name="goto" value="back">Back</button>
 	</form>
 </div>

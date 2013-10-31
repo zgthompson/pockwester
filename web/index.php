@@ -20,7 +20,32 @@ if( isset($_SESSION['THEME']) && !is_readable( THM_PATH . $_SESSION['THEME'] ) )
 // If the post variable 'goto' is set then try to route to that page
 if( isset( $_POST['goto'] ) )
 {
-	$_SESSION['CURRENT_PAGE'] = $_POST['goto'];
+
+	// Go back a page in history
+	if( $_POST['goto'] == 'back' )
+	{
+		// Remove the last element because this is the old current page
+		array_pop( $_SESSION['PAGE_HISTROY'] );
+		$_SESSION['CURRENT_PAGE'] = end( $_SESSION['PAGE_HISTROY'] );
+	}
+	else
+	// Goto page directly and save history
+	{
+		$_SESSION['CURRENT_PAGE'] = $_POST['goto'];
+		
+		// Only add a history element if it is unique
+		if( count($_SESSION['PAGE_HISTROY']) <= 0 || end( $_SESSION['PAGE_HISTROY'] ) != $_POST['goto'] )
+		{
+			$_SESSION['PAGE_HISTROY'][] = $_POST['goto'];
+		}
+		
+		// Maintain length of history to less than 5
+		while( count( $_SESSION['PAGE_HISTROY'] ) > 5 )
+		{
+			array_shift( $_SESSION['PAGE_HISTROY'] );
+		}
+	}
+	
 }
 
 // If the user is not set then only allow access to public pages
