@@ -51,6 +51,8 @@ if( $save_settings ){
 			<?php foreach( $themes as $theme ){ if($_SESSION['THEME'] === $theme){continue;}echo GetOption( $theme, GetThemeName( $theme ) );} ?>
 		</select>
 		<BR/>
+		<button type="submit" name="goto" value="manage_availability.php">Manage Availability</button><BR/>
+		
 		<button type="submit" name="this" value="account_save_settings">Save Settings</button>
 		<button type="submit" name="goto" value="home.php">Back</button>
 	</form>

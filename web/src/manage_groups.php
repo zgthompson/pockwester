@@ -89,10 +89,6 @@ if( isset($_POST['group_search_value']) && $_POST['group_search_value'] != '' )
 <div class="window_background center_on_page large_window drop_shadow manage_groups">
 	<div class="large_table" >
 		<div class="large_table_row">
-			<div class="large_table_cell">
-				<h1> <?php echo $_SESSION['USER'] ?>'s Classes </h1>
-					<?php echo $classHtml; ?>
-			</div>
 			<div class="large_table_cell">			
 				<h1> <?php echo $_SESSION['USER'] ?>'s Study Groups </h1>
 					<?php echo $studyGroupHtml; ?>

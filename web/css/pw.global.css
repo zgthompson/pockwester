@@ -327,7 +327,10 @@ h2
 	margin: 0px auto 0px auto;
 	text-align: left;
 }
-
+.search_classes_left_align select
+{
+	margin-left:100px;
+}
 .calc_schedule_left_align
 {
 	width: 900px;
@@ -503,6 +506,7 @@ h2
 
 .large_table_cell
 {
+	padding: 10px;
 	border: 3px solid rgba( 0, 0, 0, .25 );
 	display:table-cell;
 }
@@ -581,6 +585,13 @@ h2
 	width: 6em;
 	padding: 10px 0px 10px 0px;
 	background-color: #FFF;
+}
+
+.course_row
+{
+	background-color: rgba(0,0,0,.1);
+	padding:10px 0px 10px 0px;
+	border-bottom:1px solid rgba(0,0,0,.5)
 }
 
 .message_block

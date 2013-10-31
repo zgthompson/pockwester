@@ -7,9 +7,7 @@
 <div id="login_window" class="window_background center_on_page small_window drop_shadow home">
 	<h1> Home </h1>
 	<form  method="POST">
-		<button type="submit" name="goto" value="manage_groups.php">View Classes and Study Groups</button>
-		<button type="submit" name="goto" value="search_classes.php">Add Classes</button>
-		<button type="submit" name="goto" value="manage_availability.php">Manage Availability</button>
-		<button type="submit" name="goto" value="logout.php">Logoff <?php echo $_SESSION['USER']; ?></button>
+		<button type="submit" name="goto" value="manage_groups.php">Study Groups</button>
+		<button type="submit" name="goto" value="classes.php">Classes</button>
 	</form>
 </div>

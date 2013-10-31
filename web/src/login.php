@@ -11,6 +11,7 @@
 		{
 			$post = array( 'username' => $_POST['login_username'], 'password' => $_POST['login_password'] );
 			$response = PWTask( 'login_user', $post );
+			$response_beta = PWTask( 'login', $post );
 			
 			// If the response is >=1 then this is the users userid
 			if( intval($response) >= 1 )
@@ -23,8 +24,13 @@
 								
 				$_SESSION['USER'] = ucwords(strtolower($_POST['login_username']));
 				$_SESSION['USER_ID'] = intval($response);
+				
+				// Set the beta user ID for the new database ***REMOVE***
+				$_SESSION['USER_ID_BETA'] = intval($response_beta);
+				
 				$_SESSION['CURRENT_PAGE'] = DEFAULT_CONTENT;
 				$_SESSION['THEME'] = $config->THEME;
+				
 			}
 			else
 			{

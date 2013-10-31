@@ -4,16 +4,18 @@
 // Arthur Wuterich
 
 // Get class data from PWApi
-$classes = PWTask( 'get_classes' );
+$classes = PWTask( 'grab_courses' );
 
 $classes = json_decode( $classes, true );
+$classes = $classes['courses'];
 
-$classes_dropdown = '<select name="class1" id="select_copy">';
+$classes_dropdown = '<select name="class[]" id="select_copy">';
 
 // Build the class select object
 foreach( $classes as $class )
 {
-	$classes_dropdown .= "<option value=\"{$class[1]} {$class[2]}({$class[0]}), {$class[7]} {$class[8]}\">{$class[1]} {$class[2]}({$class[0]}), {$class[7]} {$class[8]}</option>";
+	/* $classes_dropdown .= "<option value=\"{$class['id']} {$class[2]}({$class[0]}), {$class[7]} {$class[8]}\">{$class[1]} {$class[2]}({$class[0]}), {$class[7]} {$class[8]}</option>"; */
+	$classes_dropdown .= "<option value=\"{$class['id']},{$class['subject']},{$class['catalog_no']}\">{$class['subject']} {$class['catalog_no']}</option>";
 }
 
 $classes_dropdown .= '</select>';
@@ -23,13 +25,12 @@ $classes_dropdown .= '</select>';
 <script type="text/javascript">
 
 // Copies the classes drop down menu and adds to document
-var nextField = 2;
 function AddField()
 {
 	// Copy the classes dropdown menu with options
 	var options = $("#select_copy > option").clone();
 	$('#select_copy').clone().attr({
-		name: 'class'+(nextField++),
+		name: 'class[]',
 		id: ''
 	}).append(options).fadeIn(500).insertBefore('#add').before("<BR/>");
 }
@@ -43,7 +44,7 @@ function AddField()
 			<button type="button" name="add" id="add" class="add" onclick="AddField();">+</button>
 </div>			
 			<BR />
-			<button type="submit" name="goto" value="home.php">Back Home</button>
-			<button type="submit" name="goto" value="calc_schedule.php">Calculate Schedule</button>
+			<button type="submit" name="goto" value="home.php">Back</button>
+			<button type="submit" name="goto" value="sections.php">Continue</button>
 		</form>
 </div>

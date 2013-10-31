@@ -16,6 +16,9 @@
 							'email' => $_POST['new_email'] 		 );
 			if( intval( $error = PWTask( 'user_create', $post ) ) == 1 )
 			{	
+				// Create the user in the new database ***REMOVE***
+				PWTask( 'create_student', $post );
+				
 				$_SESSION['CURRENT_PAGE'] = LOGIN_PAGE;
 				$create = true;
 			}
