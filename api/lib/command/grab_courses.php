@@ -4,7 +4,7 @@
 //      -Returns the courses for provided campus matching $like
 //      -Precondition: Constants in api.cfg.php are defined
 //      -$like: Will only return courses that have a name that is similar to $like
-// Zachary Thompson
+// Zachary Thompson, Arthur Wuterich
 // 10-11-13
 
 DB_Connect();

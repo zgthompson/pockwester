@@ -65,7 +65,8 @@ CREATE TABLE student (
     id                  integer         NOT NULL PRIMARY KEY AUTO_INCREMENT,
     username            varchar(20)     NOT NULL UNIQUE,
     password            varchar(32)     NOT NULL,
-    email               varchar(100)    NOT NULL UNIQUE
+    email               varchar(100)    NOT NULL UNIQUE,
+    availability        varchar(168)    NOT NULL DEFAULT "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
 );
 
 CREATE TABLE student_course_instance (
