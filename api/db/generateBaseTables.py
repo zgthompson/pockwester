@@ -21,6 +21,7 @@ def main():
     printer.write("professor", parser.professors())
     printer.write("section_professor", parser.section_professors())
     printer.write("section_time", parser.section_times())
+    printer.write("section_time_code", parser.section_time_codes())
 
 
 def strip_whitespace(row):
@@ -70,6 +71,9 @@ class ScheduleParser:
     def section_times(self):
         return self.section_parser.section_times
 
+    def section_time_codes(self):
+        return self.section_parser.section_time_codes
+
 
 class InstanceChecker:
 
@@ -115,6 +119,7 @@ class SectionParser:
         self.sections = list()
         self.section_professors = list()
         self.section_times = list()
+        self.section_time_codes = list()
 
         #Helper classes
         self.id_holder = id_holder
@@ -156,7 +161,6 @@ class SectionParser:
         if pattern != "ARR":
             if pattern == "FIVE":
                 pattern = "MTWHF"
-            num = 0
             for c in pattern:
                 if c == 'H':
                     if day_list[-1] == 'T':
@@ -169,10 +173,13 @@ class SectionParser:
             day_list.append("ARR")
 
         for day in day_list:
-            next_entry = self.row['Cls#'] + day + self.row['START TIME'] + self.row['Facil ID']
+            next_entry = self.row['Cls#'] + day + self.row['START TIME']
             if next_entry not in self.parsed_times:
                 self.parsed_times.add(next_entry)
                 self.section_times.append(self.sql_section_time_output(day))
+                if day != "ARR" and self.has_time():
+                    for code in self.code_range(day):
+                        self.section_time_codes.append(self.sql_section_time_codes_output(code))
 
         # only add professor if they haven't been added for the current section
         prof_section = self.row['ID'] + self.row['Cls#']
@@ -180,6 +187,9 @@ class SectionParser:
             self.parsed_prof_sections.add(prof_section)
             self.section_professors.append(self.sql_section_professor_output())
 
+
+    def has_time(self):
+        return self.row['START TIME'] and self.row['END TIME']
 
     # Input: "10:00 AM", Output: "1000"
     def parse_time(self, time):
@@ -202,6 +212,17 @@ class SectionParser:
         else:
             return ""
 
+    def day_to_int(self, day):
+        return { 'M' : 0, 'T' : 1, 'W' : 2, 'TH' : 3, 'F' : 4, 'S' : 5 }[day]
+
+    def parse_code(self, day, time):
+        return self.day_to_int(day) * 24 + ((int(self.parse_time(time)[:2]) + 16) % 24)
+
+    def code_range(self, day):
+        start_code = self.parse_code(day, self.row['START TIME'])
+        end_code = self.parse_code(day, self.row['END TIME'])
+        return range(start_code, end_code + 1)
+
 
     def sql_section_output(self):
         return [self.row['Cls#'], self.instance_id, 
@@ -212,6 +233,9 @@ class SectionParser:
         start_time = self.parse_time(self.row['START TIME'])
         end_time = self.parse_time(self.row['END TIME'])
         return [self.row['Cls#'], day, start_time, end_time, self.row['Facil ID']]
+
+    def sql_section_time_codes_output(self, code):
+        return [self.row['Cls#'], code]
 
     def sql_section_professor_output(self):
         return [self.row['Cls#'], self.row['ID']]

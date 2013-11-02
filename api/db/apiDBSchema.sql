@@ -2,6 +2,7 @@ use $PW_NAME;
 BEGIN;
 set @@foreign_key_checks = 0;
 
+DROP TABLE IF EXISTS section_time_code;
 DROP TABLE IF EXISTS student_course_instance;
 DROP TABLE IF EXISTS student;
 DROP TABLE IF EXISTS section_professor;
@@ -75,6 +76,13 @@ CREATE TABLE student_course_instance (
     PRIMARY KEY (student_id, course_instance_id),
     FOREIGN KEY (student_id) REFERENCES student (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (course_instance_id) REFERENCES course_instance (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE section_time_code (
+    section_id          char(4)         NOT NULL,
+    time_code           integer         NOT NULL,
+    PRIMARY KEY (section_id, time_code),
+    FOREIGN KEY (section_id) REFERENCES section (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 set @@foreign_key_checks = 1;
