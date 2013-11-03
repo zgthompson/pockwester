@@ -382,29 +382,20 @@
 		$where .= " {$new}";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
+    // Updates the availability string given the time codes to change and the add or remove action
+	function UpdateAvailString ( &$avail_string, $codes, $action )
+    {
+        foreach ($codes as $time_code) {
+            $i = intval($time_code);
+            if ($action == 'add') {
+                $char = $avail_string[$i];
+                $avail_string[$i] = ++$char;
+            }
+            else if ($action == 'remove') {
+                $char = $avail_string[$i];
+                $avail_string[$i] = --$char;
+            }
+        }
+    }
 	
 ?>
