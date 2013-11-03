@@ -42,6 +42,18 @@ else if ($action == 'remove') {
 
     if ($rows > 0) {
         DB_Query ( "DELETE FROM student_course_instance ${where}" );
+        $old_time_codes = DB_GetSingleArray( 
+            DB_Query("
+            SELECT DISTINCT time_code 
+            FROM section_time_code 
+            WHERE section_id IN (
+                SELECT section.id 
+                FROM course_instance, section 
+                WHERE course_instance.id = course_instance_id 
+                AND course_instance.id = {$instance_id})" 
+        )
+    );
+
     }
     else {
         return ('This course is already removed');
@@ -51,15 +63,16 @@ else if ($action == 'remove') {
 // successful add or remove
 
 // grab time codes for course instance
-$time_codes = DB_GetSingleArray( 
+$cur_time_codes = DB_GetSingleArray( 
         DB_Query("
         SELECT DISTINCT time_code 
         FROM section_time_code 
         WHERE section_id IN (
-            SELECT section.id 
-            FROM course_instance, section 
-            WHERE course_instance.id = course_instance_id 
-            AND course_instance.id = {$instance_id})" 
+            SELECT s.id 
+            FROM course_instance AS ci, section AS s, student_course_instance AS sci
+            WHERE ci.id = s.course_instance_id 
+            AND ci.id = sci.course_instance_id
+            AND sci.student_id = {$student_id})" 
         )
     );
 
@@ -71,7 +84,7 @@ $avail = DB_GetSingleArray(
 $avail_string = $avail[0];
 
 // update availability string
-UpdateAvailString( $avail_string, $time_codes, $action );
+UpdateAvailString( $avail_string, $cur_time_codes, $old_time_codes);
 DB_Query( "UPDATE student SET availability=\"{$avail_string}\" WHERE id={$student_id}" );
 
 return ('1');

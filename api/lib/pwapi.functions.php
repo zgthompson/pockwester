@@ -382,18 +382,24 @@
 		$where .= " {$new}";
 	}
 	
-    // Updates the availability string given the time codes to change and the add or remove action
-	function UpdateAvailString ( &$avail_string, $codes, $action )
+    // Updates the availability string to unset any $old_codes and set all the $cur_codes
+	function UpdateAvailString ( &$avail_string, $cur_codes, $old_codes )
     {
-        foreach ($codes as $time_code) {
-            $i = intval($time_code);
-            if ($action == 'add') {
-                $char = $avail_string[$i];
-                $avail_string[$i] = ++$char;
+        if ( isset($old_codes) ) {
+            foreach ($old_codes as $time_code) {
+                $i = intval($time_code);
+                // if you were unavailable, now you are unset
+                if ($avail_string[$i] == '0') {
+                    $avail_string[$i] = '1';
+                }
             }
-            else if ($action == 'remove') {
-                $char = $avail_string[$i];
-                $avail_string[$i] = --$char;
+        }
+
+        foreach ($cur_codes as $time_code) {
+            $i = intval($time_code);
+            // if you were unset now you are unvailable
+            if ($avail_string[$i] == '1') {
+                $avail_string[$i] = '0';
             }
         }
     }
