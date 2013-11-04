@@ -25,5 +25,20 @@ if ( empty($avail) )
 
 DB_Query( "UPDATE student SET availability=\"{$avail_string}\" WHERE id={$student_id}" );
 
+// remove the students old availability time codes
+DB_Query( "DELETE FROM student_time_code WHERE student_id={$student_id}" );
+
+$time_codes = GetTimeCodes( $avail_string );
+$sql = array();
+
+foreach ($time_codes as $time_code) {
+    $sql[] = "({$student_id}, {$time_code})";
+}
+
+// add updated time codes
+if (count($sql) > 0) {
+    DB_Query( 'INSERT INTO student_time_code (student_id, time_code) VALUES '.implode(',', $sql) );
+}
+
 return ('1');
 ?>

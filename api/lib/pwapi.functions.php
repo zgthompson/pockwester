@@ -397,11 +397,23 @@
 
         foreach ($cur_codes as $time_code) {
             $i = intval($time_code);
-            // if you were unset now you are unvailable
-            if ($avail_string[$i] == '1') {
-                $avail_string[$i] = '0';
+            // all these are class times, so you are unavailable
+            $avail_string[$i] = '0';
+        }
+    }
+
+    // returns an array of time codes where student is available
+    function GetTimeCodes( $avail_string )
+    {
+        $time_codes = array();
+
+        for ($i = 0; $i < 168; $i++) {
+            if ($avail_string[$i] == 2) {
+                $time_codes[] = $i;
             }
         }
+
+        return $time_codes;
     }
 	
 ?>
