@@ -1,83 +1,94 @@
 <?php
-// Landing page for the pockwester project web interface
-// 9-17-13
-// Arthur Wuterich
+//	Main content wrapper
+//	10/25/2013
+//	Arthur Wuterich
 
-// Library include
-require_once( 'lib/pw.cfg.php' );
-require_once( 'lib/pw.functions.php' );
+// Library Includes
+include 'lib/pw.cfg.php';
+include 'lib/pw.functions.php';
+
+// Functions
 
 // Landing page code
 session_start();
 
-// Theme code
-if( isset($_SESSION['THEME']) && !is_readable( THM_PATH . $_SESSION['THEME'] ) )
+// Title of webpage
+$title = 'Test Site';
+
+// Rel path to content folder
+$CONTENT_PATH = '/home/content/14/11456014/html/pockwester/web/content';
+define( 'CONTENT_PATH', $CONTENT_PATH );
+
+// Break apart the URI
+//echo $_SERVER['REQUEST_URI'];
+$requestUrl = explode('/', $_SERVER['REQUEST_URI'] );
+$page = '';
+
+// Process the URI request
+while( count( $requestUrl ) > 0 )
 {
-	unset($_SESSION['THEME']);
-}
-
-
-// If the post variable 'goto' is set then try to route to that page
-if( isset( $_POST['goto'] ) )
-{
-
-	// Go back a page in history
-	if( $_POST['goto'] == 'back' )
+	// If any element is empty skip processing
+	if( strlen( end($requestUrl)) <= 0 )
 	{
-		// Remove the last element because this is the old current page
-		array_pop( $_SESSION['PAGE_HISTROY'] );
-		$_SESSION['CURRENT_PAGE'] = end( $_SESSION['PAGE_HISTROY'] );
+		array_pop($requestUrl);
+		continue;
 	}
 	else
-	// Goto page directly and save history
 	{
-		$_SESSION['CURRENT_PAGE'] = $_POST['goto'];
-		
-		// Only add a history element if it is unique
-		if( count($_SESSION['PAGE_HISTROY']) <= 0 || end( $_SESSION['PAGE_HISTROY'] ) != $_POST['goto'] )
-		{
-			$_SESSION['PAGE_HISTROY'][] = $_POST['goto'];
-		}
-		
-		// Maintain length of history to less than 5
-		while( count( $_SESSION['PAGE_HISTROY'] ) > 5 )
-		{
-			array_shift( $_SESSION['PAGE_HISTROY'] );
-		}
+		$page = array_pop( $requestUrl );
+		break;
 	}
-	
 }
 
 // If the user is not set then only allow access to public pages
 if( !isset($_SESSION['USER']) )
 {
-	if( !IsPagePublic( $_SESSION['CURRENT_PAGE'] ) )
+	if( !IsPagePublic( $page ) )
 	{
-		$_SESSION['CURRENT_PAGE'] = LOGIN_PAGE;	
+		$page = LOGIN_PAGE;	
 	}
 }
+
+// If the page is not readable then redirect
+if( strlen( $page ) <= 0 || !is_readable( "{$CONTENT_PATH}/{$page}.php" ) )
+{
+	if( isset($_SESSION['USER']) )
+	{
+		$page = DEFAULT_CONTENT;
+	}
+	else
+	{
+		$page = LOGIN_PAGE;
+	}
+}
+else
+{
+	// Process the last root node's name as the title
+	$pageLevels = explode( '.', $page );
+	$titlePage = ucwords( str_replace( array('-','_'), ' ', end( $pageLevels ) ) );
+	$title .= " {$titlePage}";
+}
+
+$_SESSION['CURRENT_PAGE'] = $page;
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-<?php GetPage( HEADER_FILE ); ?>
+<?php 
+	define( 'TITLE', $title );
+	include "{$CONTENT_PATH}/head.php"; 
+?>
 </head>
 <body>
 <div id="page">
 	<div id="main_content">
-		<?php
-		// If the current page cannot be retrived then return the default content page
-		if( !GetPage( $_SESSION['CURRENT_PAGE'] ) )
-		{
-			GetPage( DEFAULT_CONTENT );
-			$_SESSION['CURRENT_PAGE'] = DEFAULT_CONTENT;
-		}
-		?>
+		<?php include "{$CONTENT_PATH}/{$page}.php"; ?>
 	</div>
 </div>
 <?php 
 	// Load the PW bar to allow source files that changed information to be visible immediatly
-	GetPage( PW_BAR_FILE );
+	include "{$CONTENT_PATH}/" . PW_BAR_FILE;
 ?>
 </body>
 </html>

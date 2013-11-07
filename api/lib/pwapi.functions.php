@@ -382,29 +382,38 @@
 		$where .= " {$new}";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    // Updates the availability string to unset any $old_codes and set all the $cur_codes
+	function UpdateAvailString ( &$avail_string, $cur_codes, $old_codes )
+    {
+        if ( isset($old_codes) ) {
+            foreach ($old_codes as $time_code) {
+                $i = intval($time_code);
+                // if you were unavailable, now you are unset
+                if ($avail_string[$i] == '0') {
+                    $avail_string[$i] = '1';
+                }
+            }
+        }
 
+        foreach ($cur_codes as $time_code) {
+            $i = intval($time_code);
+            // all these are class times, so you are unavailable
+            $avail_string[$i] = '0';
+        }
+    }
 
+    // returns an array of time codes where student is available
+    function GetTimeCodes( $avail_string )
+    {
+        $time_codes = array();
 
+        for ($i = 0; $i < 168; $i++) {
+            if ($avail_string[$i] == 2) {
+                $time_codes[] = $i;
+            }
+        }
+
+        return $time_codes;
+    }
 	
 ?>

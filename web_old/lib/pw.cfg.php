@@ -12,12 +12,12 @@ define( 'FLAG_NONE', 0 );
 define( 'FLAG_LFG', 1 );
 
 // Path constants
-define( 'LIB_PATH', '/pockwester/web/lib/' );
-define( 'IMG_PATH', '/pockwester/web/image/' );
-define( 'SRC_PATH', '/pockwester/web/src/' );
-define( 'CSS_PATH', '/pockwester/web/style/' );
-define( 'JAV_PATH', '/pockwester/web/js/'  );
-define( 'THM_PATH', '/pockwester/web/theme/'  );
+define( 'LIB_PATH', 'lib/' );
+define( 'IMG_PATH', 'img/' );
+define( 'SRC_PATH', 'src/' );
+define( 'CSS_PATH', 'css/' );
+define( 'JAV_PATH', 'js/'  );
+define( 'THM_PATH', 'theme/'  );
 
 // API http location
 define( 'PWAPI_URL', 'http://arthurwut.com/pockwester/api/' );
@@ -27,10 +27,10 @@ define( 'PWAPI_TIMEOUT', 5 );
 define( 'NOW', time() );
 
 // Template variables
-define( 'DEFAULT_CONTENT', 'home'	);
-define( 'INFO_CONTENT'	 , 'setup_user' );
-define( 'LOGIN_PAGE'     , 'login'	);
-define( 'LOGOUT_PAGE'	 , 'logout'	);
+define( 'DEFAULT_CONTENT', 'home.php'	);
+define( 'INFO_CONTENT'	 , 'setup_user.php' );
+define( 'LOGIN_PAGE'     , 'login.php'	);
+define( 'LOGOUT_PAGE'	 , 'logout.php'	);
 define( 'HEADER_FILE'	 , 'head.php' 	);
 define( 'PW_BAR_FILE'	 , 'pw_bar.php' );
 define( 'BOUNCE_QUICK'	 , .5 			);
@@ -40,6 +40,6 @@ define( 'BOUNCE_NORMAL'	 , 2 			);
 define( 'DEFAULT_THEME', 'pw.global.css' );
 
 // Source files that are considered public and do not need a login to access
-$PUBLIC_SOURCE_FILES = array ( 'new_user', 'logout', LOGIN_PAGE, LOGOUT_PAGE, 'help_user' );
+$PUBLIC_SOURCE_FILES = array ( 'new_user.php', 'logout.php', LOGIN_PAGE, LOGOUT_PAGE, 'help_user.php' );
 
 ?>
