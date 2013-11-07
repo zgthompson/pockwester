@@ -4,7 +4,7 @@
 //      -Returns the course instances for provided campus matching $course_id
 //      -Precondition: Constants in api.cfg.php are defined
 //      -$course_id: Will only return course instances that have a course id matching $course_id
-// Zachary Thompson
+// Zachary Thompson, Arthur Wuterich
 // 10-15-13
 
 DB_Connect();

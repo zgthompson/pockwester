@@ -2,6 +2,8 @@ use $PW_NAME;
 BEGIN;
 set @@foreign_key_checks = 0;
 
+DROP TABLE IF EXISTS student_time_code;
+DROP TABLE IF EXISTS section_time_code;
 DROP TABLE IF EXISTS student_course_instance;
 DROP TABLE IF EXISTS student;
 DROP TABLE IF EXISTS section_professor;
@@ -65,7 +67,8 @@ CREATE TABLE student (
     id                  integer         NOT NULL PRIMARY KEY AUTO_INCREMENT,
     username            varchar(20)     NOT NULL UNIQUE,
     password            varchar(32)     NOT NULL,
-    email               varchar(100)    NOT NULL UNIQUE
+    email               varchar(100)    NOT NULL UNIQUE,
+    availability        varchar(168)    NOT NULL DEFAULT "111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
 );
 
 CREATE TABLE student_course_instance (
@@ -74,6 +77,20 @@ CREATE TABLE student_course_instance (
     PRIMARY KEY (student_id, course_instance_id),
     FOREIGN KEY (student_id) REFERENCES student (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (course_instance_id) REFERENCES course_instance (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE section_time_code (
+    section_id          char(4)         NOT NULL,
+    time_code           integer         NOT NULL,
+    PRIMARY KEY (section_id, time_code),
+    FOREIGN KEY (section_id) REFERENCES section (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE student_time_code (
+    student_id          integer         NOT NULL,
+    time_code           integer         NOT NULL,
+    PRIMARY KEY (student_id, time_code),
+    FOREIGN KEY (student_id) REFERENCES student (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 set @@foreign_key_checks = 1;

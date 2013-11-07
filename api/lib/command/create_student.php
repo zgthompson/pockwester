@@ -9,15 +9,9 @@
 
 DB_Connect();
 
-$username = strtolower( Get( 'username' ) );
-$password = md5( Get( 'password' ) );
-$email = 	Get( 'email' );
-
-// If any of the fields are empty then EndCommand
-if( strlen($username)<=0 || strlen($password)<=0 || strlen($email)<=0 )
-{
-	return( 'Must include username, password and email' );
-}
+$username = strtolower( Get( 'username', true ) );
+$password = md5( Get( 'password', true ) );
+$email = 	Get( 'email', true );
 
 // Find if user is in the database already
 $users = DB_GetArray( 
