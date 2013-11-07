@@ -5,8 +5,81 @@
 $post = array( 'user_id' => "{$_SESSION['USER_ID']},{$_SESSION['USER_ID_BETA']}");
 $user_info = json_decode( PWTask( 'get_user_overview', $post ) );
 
-// print_r( $user_info );
+// Get info to display
+$groups = json_decode( $user_info->groups );
+$classes = json_decode( $user_info->classes );
+$classes = $classes->instances;
+$time_string = $user_info->time_string;
 
+// Process the information
+$groupsHtml = '';
+$groupLimit = 5; // Limit the number of displayed groups
+
+$classesHtml = '';
+$classLimit = 5;
+
+$timestringHtml = '';
+
+// Groups
+$addedGroups = 0;
+foreach( $groups as $group )
+{
+	$groupsHtml .= "<div class=\"home_group_block\">{$group[0]}</div>";
+	
+	$addedGroups++;
+	if( $addedGroups >= $groupLimit )
+	{
+		break;
+	}
+}
+
+if( $groupsHtml == '' )
+{
+	$groupsHtml = "You have no study groups";
+}
+
+
+// Classes
+$addedClasses = 0;
+foreach( $classes as $class )
+{
+	$classesHtml .= "<div class=\"home_class_block\">{$class->title}</div>";
+	
+	$addedClasses++;
+	if( $addedClasses >= $classLimit )
+	{
+		break;
+	}	
+	
+}
+
+if( $classesHtml == '' )
+{
+	$classesHtml = "You have no classes";
+}
+
+// Time String
+for( $i = 0; $i < strlen( $time_string ); $i++ )
+{
+	// Set css classes based on the availability
+	$class = '';
+	if( $time_string[$i] == '-' )
+	{
+		$class .= 'home_time_available';
+	}
+	else
+	{
+		$class .= 'home_time_unavailable';
+	}
+	
+	// Give the current hour another css class to signify
+	if( intval( date('G') == $i ) )
+	{
+		$class .= ' home_time_current';
+	}
+	
+	$timestringHtml .= "<div class=\"{$class}\">{$i}</div>";	
+}
 
 ?>
 <div id="login_window" class="window_background center_on_page small_window drop_shadow home">
@@ -15,16 +88,28 @@ $user_info = json_decode( PWTask( 'get_user_overview', $post ) );
 		<div class="large_table">
 			<div class="large_table_row">
 				<div class="large_table_cell">
+					<div class="home_group_wrapper">
+						<?php echo $groupsHtml; ?>
+					</div>
 					<button class="home_manage_button" type="submit" onclick="GotoPage( this, '/manage_groups/' );">Manage Study Groups</button>
 				</div>
 			</div>
 			<div class="large_table_row">
 				<div class="large_table_cell">
+					<div class="home_class_wrapper">
+						<?php echo $classesHtml; ?>	
+					</div>
 					<button class="home_manage_button" type="submit" onclick="GotoPage( this, '/classes/' );">Manage Classes</button>
 				</div>
 			</div>
 			<div class="large_table_row">
 				<div class="large_table_cell">
+					<div class="home_time_title">
+						<?php echo date('l'); ?>
+					</div>
+					<div class="home_time_wrapper">				
+						<?php echo $timestringHtml; ?>
+					</div>
 					<button class="home_manage_button" type="submit" onclick="GotoPage( this, '/manage_availability/' );">Manage Availability</button>
 				</div>
 			</div>

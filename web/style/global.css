@@ -260,7 +260,55 @@ h2
 {
 	float:right;
 }
-
+.home_group_block, .home_class_block
+{
+	float:left;
+	width: 18%;
+	height: 100px;
+	margin: 3px;
+	border-radius: 2px;
+	border: 1px solid #AAA;
+}
+.home_group_block
+{
+	background-color: #FFF;
+}
+.home_class_block
+{
+	background-color: #FFF;
+}
+.home_time_available, .home_time_unavailable
+{
+	width: 3.9%;
+	height: 4em;
+	display: inline-block;
+	border-right: 1px solid rgba( 0, 0, 0, .2);
+}
+.home_time_available
+{
+	background-color: #0F0;
+}
+.home_time_unavailable
+{
+	background-color: #F00;
+}
+.home_time_current
+{
+	border-top: 8px solid #FF0;
+}
+.home_group_wrapper, .home_class_wrapper, .home_time_wrapper
+{
+	width: 100%;
+	height: 100px;
+}
+.home_time_title
+{
+	font-size:30px;
+	font-weight:bold;
+	width: 100%;
+	text-align:left;
+	margin-bottom: 10px;
+}
 #course_form
 {
 }

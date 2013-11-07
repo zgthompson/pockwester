@@ -40,7 +40,7 @@ if( $save_settings ){
 	<?php echo Message( 'Saving Settings...' ); ?>
 </div>
 
-<?php exit(); } ?>
+<?php return; } ?>
 <div id="login_window" class="window_background center_on_page small_window drop_shadow">
 	<h1> Account </h1>
 	<form method="POST">

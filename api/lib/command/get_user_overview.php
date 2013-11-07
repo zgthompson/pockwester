@@ -25,8 +25,9 @@ $user_data['classes'] = PWTask( 'grab_instances', $post );
 $post = array( 'user' => $user_id[0] );
 $user_data['time_string'] = PWTask( 'get_avail', $post );
 
+// Limit the timestring to only today
+$user_data['time_string'] = substr( $user_data['time_string'], 24*(intval( date('N'))-1), 24 );
 
 return( OutputFormatting( $user_data ) );
-	
-	
+
 ?>
