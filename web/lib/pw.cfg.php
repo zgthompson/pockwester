@@ -5,7 +5,7 @@
 
 // System Variables
 define( 'AVAL_LENGTH', 168 );
-define( 'PW_VERSION', 'V0.3.0' );
+define( 'PW_VERSION', 'V0.4.0' );
 
 // Flags
 define( 'FLAG_NONE', 0 );

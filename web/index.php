@@ -13,11 +13,12 @@ include 'lib/pw.functions.php';
 session_start();
 
 // Title of webpage
-$title = 'Test Site';
+$title = 'Forge';
 
 // Rel path to content folder
 $CONTENT_PATH = '/home/content/14/11456014/html/pockwester/web/content';
 define( 'CONTENT_PATH', $CONTENT_PATH );
+define( 'REL_CONTENT_PATH', '/pockwester/web' );
 
 // Break apart the URI
 //echo $_SERVER['REQUEST_URI'];
@@ -67,6 +68,16 @@ else
 	$pageLevels = explode( '.', $page );
 	$titlePage = ucwords( str_replace( array('-','_'), ' ', end( $pageLevels ) ) );
 	$title .= " {$titlePage}";
+}
+
+if( isset($_POST['bypass_needs']) )
+{
+	unset( $_SESSION['NEEDS'] );
+}
+
+if( $page == 'home' && isset( $_SESSION['USER']) && isset($_SESSION['NEEDS']) )
+{
+	$page = INFO_CONTENT;
 }
 
 $_SESSION['CURRENT_PAGE'] = $page;

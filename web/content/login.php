@@ -10,8 +10,7 @@
 		if( isset( $_POST['login_username'] ) && isset( $_POST['login_password'] ) )
 		{
 			$post = array( 'username' => $_POST['login_username'], 'password' => $_POST['login_password'] );
-			$response = PWTask( 'login_user', $post );
-			$response_beta = PWTask( 'login', $post );
+			$response = PWTask( 'login', $post );
 			
 			// If the response is >=1 then this is the users userid
 			if( intval($response) >= 1 )
@@ -23,16 +22,11 @@
 				$config = json_decode( PWTask( 'get_user_config', $post ) );
 				$config = $config[0];
 				
-				// Page history tracking								
-				$_SESSION['PAGE_HISTROY'] = array();
 				$_SESSION['USER'] = ucwords(strtolower($_POST['login_username']));
 				$_SESSION['USER_ID'] = intval($response);
 				
-				// Set the beta user ID for the new database ***REMOVE***
-				$_SESSION['USER_ID_BETA'] = intval($response_beta);
-				
 				// Check to see if the user has setup the required information to user the site
-				$post = array( 'user_id' => "{$_SESSION['USER_ID']},{$_SESSION['USER_ID_BETA']}");
+				$post = array( 'user_id' => $_SESSION['USER_ID'] );
 				$result = json_decode( PWTask( 'user_is_setup', $post ) );
 				if( $result[0] <= 0 || $result[1] <= 0 )
 				{
@@ -67,7 +61,7 @@
 	BouncePage( <?php echo BOUNCE_QUICK; ?>, '/home/' );
 </script>
 <div id="login_window" class="window_background center_on_page small_window drop_shadow">
-	<h1> Pockwester Scheduling Application </h1>
+	<h1> Forge </h1>
 	<h2> Logged in! </h2>
 	<form  method="POST">
 		<button type="submit" onclick="GotoPage( this, '/home/' );">Continue</button>
@@ -76,11 +70,11 @@
 <?php return; } ?>
 
 <div id="login_window" class="window_background center_on_page small_window drop_shadow login">
-	<h1> Pockwester Scheduling Application </h1>
+	<h1> Forge </h1>
 	<form  method="POST" id="login_form">
 		<?php echo Message( $error, 'error_box' ); ?>
 		<label for="login_username">Username</label>
-		<input type="textfield" name="login_username" value="<?php echo $_POST['login_username'];?>"><BR/>
+		<input type="textfield" name="login_username" value="<?php echo $_POST['login_username']; ?>"><BR/>
 		<label for="login_password">Password</label>
 		<input type="password" name="login_password"><BR/>
 		<button type="submit" name="this" value="login.php">Login</button>

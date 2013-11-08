@@ -2,7 +2,7 @@
 // home.php: Landing page for entering the pw web client
 // 9-17-13
 // Arthur Wuterich
-$post = array( 'user_id' => "{$_SESSION['USER_ID']},{$_SESSION['USER_ID_BETA']}");
+$post = array( 'user_id' => $_SESSION['USER_ID'] );
 $user_info = json_decode( PWTask( 'get_user_overview', $post ) );
 
 // Get info to display
@@ -21,10 +21,17 @@ $classLimit = 5;
 $timestringHtml = '';
 
 // Groups
+/*
 $addedGroups = 0;
 foreach( $groups as $group )
 {
-	$groupsHtml .= "<div class=\"home_group_block\">{$group[0]}</div>";
+	$groupsHtml .= 
+	"
+		<div class=\"home_group_block\">
+			{$group[0]}
+		</div>
+		
+	";
 	
 	$addedGroups++;
 	if( $addedGroups >= $groupLimit )
@@ -32,7 +39,7 @@ foreach( $groups as $group )
 		break;
 	}
 }
-
+*/
 if( $groupsHtml == '' )
 {
 	$groupsHtml = "You have no study groups";
@@ -40,9 +47,18 @@ if( $groupsHtml == '' )
 
 
 // Classes
+// Don't duplicate class names
+$servicedClasses = array();
 $addedClasses = 0;
 foreach( $classes as $class )
 {
+	if( in_array( $class->title, $servicedClasses ) )
+	{
+		continue;
+	}
+	
+	$servicedClasses[] = $class->title;
+
 	$classesHtml .= "<div class=\"home_class_block\">{$class->title}</div>";
 	
 	$addedClasses++;
@@ -63,17 +79,24 @@ for( $i = 0; $i < strlen( $time_string ); $i++ )
 {
 	// Set css classes based on the availability
 	$class = '';
-	if( $time_string[$i] == '-' )
+	
+	switch( $time_string[$i] )
 	{
-		$class .= 'home_time_available';
-	}
-	else
-	{
-		$class .= 'home_time_unavailable';
+		case '0':
+			$class .= 'home_time_unavailable';
+		break;
+		
+		case '1':
+			$class .= 'home_time_empty';
+		break;
+		
+		case '2':
+			$class .= 'home_time_available';
+		break;		
 	}
 	
 	// Give the current hour another css class to signify
-	if( intval( date('G') == $i ) )
+	if( intval( date('G')-1 == $i ) )
 	{
 		$class .= ' home_time_current';
 	}
@@ -85,9 +108,12 @@ for( $i = 0; $i < strlen( $time_string ); $i++ )
 <div id="login_window" class="window_background center_on_page small_window drop_shadow home">
 	<h1> Home </h1>
 	<form method="POST">
-		<div class="large_table">
+		<div id="home_info_table" class="large_table">
 			<div class="large_table_row">
 				<div class="large_table_cell">
+					<div class="home_group_title">
+						Upcoming Groups
+					</div>
 					<div class="home_group_wrapper">
 						<?php echo $groupsHtml; ?>
 					</div>
@@ -96,6 +122,9 @@ for( $i = 0; $i < strlen( $time_string ); $i++ )
 			</div>
 			<div class="large_table_row">
 				<div class="large_table_cell">
+					<div class="home_class_title">
+						Upcoming Classes
+					</div>
 					<div class="home_class_wrapper">
 						<?php echo $classesHtml; ?>	
 					</div>

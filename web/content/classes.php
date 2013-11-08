@@ -37,14 +37,14 @@ function CreateClassBlock( $class, $classes )
 // Leave classes if requested
 if( isset( $_POST['classes_remove'] ) && is_numeric( $_POST['classes_remove'] ) )
 {
-	$post = array(	'student_id'	=>	$_SESSION['USER_ID_BETA'],
+	$post = array(	'student_id'	=>	$_SESSION['USER_ID'],
 					'instance_id'	=>	$_POST['classes_remove'],
 					'action'		=>	'remove'					  );
 	echo PWTask( 'update_student_courses', $post );
 }
 
 // Get the student's classes
-$post = array( 'student_id' => $_SESSION['USER_ID_BETA'] );
+$post = array( 'student_id' => $_SESSION['USER_ID'] );
 $classes = json_decode( PWTask( 'grab_instances', $post ) );
 
 $servicedInstances = array();

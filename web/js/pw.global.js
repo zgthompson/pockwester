@@ -1,8 +1,14 @@
-PAGE_ROOT = "/pockwester/web";
+// Will assume that PAGE_ROOT is defined before using any of these function
 
 // Will bounce the current page after time secondsOB
 function BouncePage( time, page )
 {
+
+	if( page == undefined )
+	{
+		page = '/';
+	}
+
 	setTimeout( "location.href = '"+ PAGE_ROOT + page + "'", time*1000);
 }
 

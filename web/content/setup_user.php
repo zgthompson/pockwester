@@ -5,8 +5,8 @@
 
 $saHtml = '';
 $scHtml = '';
-
-$post = array( 'user_id' => "{$_SESSION['USER_ID']},{$_SESSION['USER_ID_BETA']}");
+$buttonText = 'Skip';
+$post = array( 'user_id' => $_SESSION['USER_ID'] );
 $needs = json_decode( PWTask( 'user_is_setup', $post ) );
 
 // Availability
@@ -28,6 +28,12 @@ else
 {
 	$scHtml = "<span class=\"setup_complete\"></span>";
 }
+
+// Change the button text if everything is setup
+if( $needs[0] > 0 && $needs[1] > 0 )
+{
+	$buttonText = 'Continue';
+}
 ?>
 <div id="login_window" class="window_background center_on_page small_window drop_shadow new_user">
 	<h1> New User Setup </h1>
@@ -39,6 +45,9 @@ else
 		<?php echo $scHtml; ?><BR/>
 		<BR/>
 		<BR/>
-		<button type="submit" onclick="GotoPage( this, '/home/' );">Skip</button>
+	</form>
+	<form method="POST">
+		<input type="hidden" name="bypass_needs" value="1" />
+		<button type="submit" onclick="GotoPage( this, '/home/' );"><?php echo $buttonText; ?></button>
 	</form>
 </div>

@@ -14,6 +14,7 @@
 <?php } ?>
 
 <!-- JAVA -->
+<script type="text/javascript"> PAGE_ROOT = "<?php echo REL_CONTENT_PATH; ?>"; </script>
 <script src="<?php echo JAV_PATH ?>jquery-1.10.2.js"></script>
 <script src="<?php echo JAV_PATH ?>pw.global.js"></script>
 <script src="<?php echo JAV_PATH ?>jquery-ui-1.10.3.custom.min.js"></script>

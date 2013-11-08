@@ -6,7 +6,7 @@
 // Add each instance_id to the user
 foreach( $_POST['section_instance'] as $instance_id )
 {
-	$post = array(	'student_id'	=>	$_SESSION['USER_ID_BETA'],
+	$post = array(	'student_id'	=>	$_SESSION['USER_ID'],
 					'instance_id'	=>	$instance_id,
 					'action'		=>	'add'					  );
 	PWTask( 'update_student_courses', $post );

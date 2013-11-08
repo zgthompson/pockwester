@@ -10,20 +10,17 @@ $user_id = Get( 'user_id' );
 
 $user_data = array();
 
-// Composite user_key *** REMOVE ***
-$user_id = explode( ',', $user_id );
-
 // Get study group info
-$post = array( 'user' => $user_id[0] );
+$post = array( 'user' => $user_id );
 $user_data['groups'] = PWTask( 'get_groups', $post );
 
 // Get class info
-$post = array( 'student_id' => $user_id[1] );
+$post = array( 'student_id' => $user_id );
 $user_data['classes'] = PWTask( 'grab_instances', $post );
 
 // Get availability info
-$post = array( 'user' => $user_id[0] );
-$user_data['time_string'] = PWTask( 'get_avail', $post );
+$post = array( 'student_id' => $user_id );
+$user_data['time_string'] = PWTask( 'grab_availability', $post );
 
 // Limit the timestring to only today
 $user_data['time_string'] = substr( $user_data['time_string'], 24*(intval( date('N'))-1), 24 );

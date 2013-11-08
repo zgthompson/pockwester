@@ -10,16 +10,14 @@
 		// Check the user submitted parameters meet the standards for the database 
 		if( ( $error = MeetsUserStandard( $_POST['new_username'], $_POST['new_email'], $_POST['new_password'] )) == '1' )
 		{
-			// Sends user_create command to the PWApi, if the return is 1 then the user was created suscessfully
+			// Sends user_create command to the PWApi, if the return is numeric then that is the users USER_ID and the user was created suscessfully
 			$post = array( 	'username' => $_POST['new_username'],
 							'password' => $_POST['new_password'],
 							'email' => $_POST['new_email'] 		 );
-			if( intval( $error = PWTask( 'user_create', $post ) ) == 1 )
+			if( is_numeric( $error = PWTask( 'create_student', $post ) ) )
 			{	
-				// Create the user in the new database ***REMOVE***
-				echo PWTask( 'create_student', $post );
-				
-				$_SESSION['CURRENT_PAGE'] = LOGIN_PAGE;
+				$_SESSION['USER'] = $_POST['new_username'];			
+				$_SESSION['USER_ID'] = $error;
 				$create = true;
 			}
 		}
@@ -29,7 +27,7 @@
 if( $create ){
 ?>
 <script type="text/javascript">
-	BouncePage( <?php echo BOUNCE_QUICK; ?> );
+	BouncePage( <?php echo BOUNCE_QUICK; ?>, '/home/' );
 </script>
 <div id="login_window" class="window_background center_on_page small_window drop_shadow">
 	<h1> New User </h1>
