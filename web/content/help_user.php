@@ -51,7 +51,7 @@ if( $sent_mail ) {
 	<form  method="POST">
 	</form>
 </div>
-<?php exit(); } ?>
+<?php return; } ?>
 <div id="login_window" class="window_background center_on_page small_window drop_shadow help_user">
 	<h1> Pockwester Scheduling Application </h1>
 	<h2> Whats the email for the account? </h2>

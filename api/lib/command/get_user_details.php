@@ -38,7 +38,7 @@ if( $user_name )
 	$where .= " NAME = \"{$user_name}\"";
 }
 
-$user_data = DB_GetSingleArray( DB_Query( "SELECT NAME, EMAIL FROM USER WHERE {$where}" ) );
+$user_data = DB_GetSingleArray( DB_Query( "SELECT username, email FROM student WHERE {$where}" ) );
 
 if( count( $user_data ) <= 0 )
 {
