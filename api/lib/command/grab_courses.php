@@ -11,28 +11,13 @@ DB_Connect();
 
 // Get like
 $like = Get('like', false, '');
+WhereAdd( $where, "title LIKE \"%{$like}%\"" );
+WhereAdd( $where, "CONCAT(subject, catalog_no) LIKE \"%{$like}%\"", "OR");
+WhereAdd( $where, "CONCAT(subject, ' ', catalog_no) LIKE \"%{$like}%\"", "OR");
 
-/*
-if ( isset($like) )
-{
-*/
-    WhereAdd( $where, "title LIKE \"%{$like}%\"" );
-    WhereAdd( $where, "CONCAT(subject, catalog_no) LIKE \"%{$like}%\"", "OR");
-    WhereAdd( $where, "CONCAT(subject, ' ', catalog_no) LIKE \"%{$like}%\"", "OR");
+$columns = "id, subject, catalog_no, title";
 
-    $columns = "id, subject, catalog_no, title";
+$courses = DB_GetArray( DB_Query( "SELECT {$columns} FROM course {$where}" ), true);
 
-    $courses = DB_GetArray( DB_Query( "SELECT {$columns} FROM course {$where}" ), true);
-
-    return ( OutputFormatting( array( 'courses' => $courses ) ) );
-/*
-}
-
-else {
-    return "like parameter must be set";
-}
-*/
-
-
-
+return ( OutputFormatting( array( 'courses' => $courses ) ) );
 

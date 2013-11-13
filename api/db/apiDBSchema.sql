@@ -2,6 +2,8 @@ use $PW_NAME;
 BEGIN;
 set @@foreign_key_checks = 0;
 
+DROP TABLE IF EXISTS student_study_group;
+DROP TABLE IF EXISTS study_group;
 DROP TABLE IF EXISTS student_time_code;
 DROP TABLE IF EXISTS section_time_code;
 DROP TABLE IF EXISTS student_course_instance;
@@ -74,6 +76,7 @@ CREATE TABLE student (
 CREATE TABLE student_course_instance (
     student_id          integer         NOT NULL,
     course_instance_id  integer         NOT NULL,
+    looking_for_group   char(1)         NOT NULL DEFAULT "n",
     PRIMARY KEY (student_id, course_instance_id),
     FOREIGN KEY (student_id) REFERENCES student (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (course_instance_id) REFERENCES course_instance (id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -91,6 +94,23 @@ CREATE TABLE student_time_code (
     time_code           integer         NOT NULL,
     PRIMARY KEY (student_id, time_code),
     FOREIGN KEY (student_id) REFERENCES student (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+CREATE TABLE study_group (
+    id                  integer         NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    time_code           integer         NOT NULL,
+    course_instance_id  integer         NOT NULL,
+    FOREIGN KEY (course_instance_id)
+        REFERENCES course_instance (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE student_study_group (
+    student_id          integer         NOT NULL,
+    study_group_id      integer         NOT NULL,
+    PRIMARY KEY (student_id, study_group_id),
+    FOREIGN KEY (student_id) REFERENCES student (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (study_group_id) REFERENCES study_group (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 set @@foreign_key_checks = 1;
