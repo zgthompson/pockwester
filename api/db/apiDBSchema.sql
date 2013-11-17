@@ -101,6 +101,8 @@ CREATE TABLE study_group (
     id                  integer         NOT NULL PRIMARY KEY AUTO_INCREMENT,
     time_code           integer         NOT NULL,
     course_instance_id  integer         NOT NULL,
+    created_at          integer         NOT NULL,
+    meeting_time        integer         NOT NULL,
     FOREIGN KEY (course_instance_id)
         REFERENCES course_instance (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
