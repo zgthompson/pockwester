@@ -11,7 +11,7 @@ DB_Connect();
 $user_id = Get( 'user_id' );
 
 // Get the data
-$config = DB_GetArray( DB_Query( "SELECT * FROM USER_CONFIG WHERE USER_ID={$user_id}" ), true );
+$config = DB_GetArray( DB_Query( "SELECT theme FROM student WHERE id={$user_id}" ), true );
 
 return OutputFormatting( $config );
 

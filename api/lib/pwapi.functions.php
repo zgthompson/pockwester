@@ -415,5 +415,21 @@
 
         return $time_codes;
     }
+
+
+// Converts military time into standard time and returns a string representing the time
+function ConvertMilitary( $time )
+{
+	if( $time >= 12.0 )
+	{
+		if($time >= 13.0 )
+		{
+			$time-=12.0;
+		}
+		
+		return "{$time}PM";
+	}
 	
+	return "{$time}AM";
+}
 ?>

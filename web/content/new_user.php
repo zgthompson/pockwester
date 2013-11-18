@@ -16,8 +16,6 @@
 							'email' => $_POST['new_email'] 		 );
 			if( is_numeric( $error = PWTask( 'create_student', $post ) ) )
 			{	
-				$_SESSION['USER'] = $_POST['new_username'];			
-				$_SESSION['USER_ID'] = $error;
 				$create = true;
 			}
 		}
@@ -27,7 +25,7 @@
 if( $create ){
 ?>
 <script type="text/javascript">
-	BouncePage( <?php echo BOUNCE_QUICK; ?>, '/home/' );
+	BouncePage( <?php echo BOUNCE_QUICK; ?>, '/login/' );
 </script>
 <div id="login_window" class="window_background center_on_page small_window drop_shadow">
 	<h1> New User </h1>

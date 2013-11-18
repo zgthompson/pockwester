@@ -11,8 +11,8 @@ $user_id = Get( 'user_id' );
 $user_data = array();
 
 // Get study group info
-$post = array( 'user' => $user_id );
-$user_data['groups'] = PWTask( 'get_groups', $post );
+$post = array( 'student_id' => $user_id );
+$user_data['groups'] = PWTask( 'grab_study_groups', $post );
 
 // Get class info
 $post = array( 'student_id' => $user_id );

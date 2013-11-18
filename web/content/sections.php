@@ -16,29 +16,15 @@ function BuildCourseRow( $course )
 	$instanceHtml = '<select class="section_instance_dropdown" name="section_instance[]">';
 	$post = array( 'course_id' => $course[0] );
 	$instances = json_decode( PWTask( 'grab_instances', $post ) );
-	$last_instance_id = -1;
 	
 	// Add all of the instances to the selection list
 	foreach( $instances->instances as $instance )
 	{
-		// Only close off options when the section_instance_id is different
-		if( $last_instance_id != $instance->course_instance_id )
-		{
-			if( $last_instance_id != -1 )
-			{
-				$instanceHtml .= '</option>';
-			}
-			
-			$instanceHtml .= "<option value={$instance->course_instance_id}>{$instance->section_id}: ";
-			$last_instance_id = $instance->course_instance_id;
-		}
-		
-		// Add day and time to select option
-		$instanceHtml .= "{$instance->day} {$instance->start_time}-{$instance->end_time} ";
+		$instanceHtml .= "<option value=\"{$instance->course_instance_id}\">{$instance->section_id}: {$instance->time}</option>";
 	}
 	
-	// Close off the last option and the last select	
-	$instanceHtml .= '</option></select>';
+	// Close off the select
+	$instanceHtml .= '</select>';
 	
 	// Return the course row
 	return

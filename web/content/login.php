@@ -39,7 +39,7 @@
 					$_SESSION['CURRENT_PAGE'] = DEFAULT_CONTENT;
 				}
 				$_SESSION['PAGE_HISTROY'][] = $_SESSION['CURRENT_PAGE'];
-				$_SESSION['THEME'] = $config->THEME;
+				$_SESSION['THEME'] = $config->theme;
 				
 			}
 			else

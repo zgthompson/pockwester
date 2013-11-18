@@ -273,7 +273,7 @@ h2
 {
 	float:left;
 	width: 18%;
-	height: 100px;
+	height: 140px;
 	margin: 3px;
 	border-radius: 2px;
 	border: 1px solid #AAA;
@@ -723,6 +723,11 @@ h2
 .setup_incomplete
 {
 	background-color: #F00;
+}
+
+#main_content button.start_lfg_button
+{
+	font-size: 10px;
 }
 
 /* For smaller screens make the pw_bar smaller font */

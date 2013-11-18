@@ -15,7 +15,7 @@ $sender_id = Get( 'sender_id', false, 0 );
 $message = htmlspecialchars( Get( 'message' ) );
 
 // Make sure the user exists to send the message
-$user = DB_GetSingleArray( DB_Query( "SELECT * FROM USER WHERE UID={$user_id}" ) );
+$user = DB_GetSingleArray( DB_Query( "SELECT * FROM student WHERE id={$user_id}" ) );
 
 // If the user was not found then exit
 if( count( $user ) <= 0 )
@@ -30,7 +30,7 @@ if( count( $user ) <= 0 )
 // If the sender id is present then try to get the name of the user
 if( $sender_id != 0 )
 {
-	$sender_result = DB_GetSingleArray( DB_Query( "SELECT NAME FROM USER WHERE UID={$sender_id} LIMIT 1" ) );
+	$sender_result = DB_GetSingleArray( DB_Query( "SELECT username FROM student WHERE id={$sender_id} LIMIT 1" ) );
 		
 	// There is a user with the uid = $sender, set to the name of the user
 	if( count( $sender_result ) >= 0 )

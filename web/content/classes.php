@@ -6,16 +6,6 @@
 // Builds a class block
 function CreateClassBlock( $class, $classes )
 {
-	// Create the time html
-	$timeHtml = '';
-	foreach( $classes as $class_time )
-	{
-		// We only care about sections with the matching ID
-		if( $class->section_id == $class_time->section_id )
-		{
-			$timeHtml .= "{$class_time->day} {$class_time->start_time} - {$class_time->end_time}<BR/>";
-		}
-	}
 	
 	// Generate the class block
 	return "
@@ -24,7 +14,7 @@ function CreateClassBlock( $class, $classes )
 		{$class->subject} {$class->catalog_no}: {$class->title}
 		</div>
 		<div class=\"times\">
-			{$timeHtml}
+			{$class->time}
 		</div>
 		{$class->location}
 		<form method=\"POST\">
@@ -40,7 +30,7 @@ if( isset( $_POST['classes_remove'] ) && is_numeric( $_POST['classes_remove'] ) 
 	$post = array(	'student_id'	=>	$_SESSION['USER_ID'],
 					'instance_id'	=>	$_POST['classes_remove'],
 					'action'		=>	'remove'					  );
-	echo PWTask( 'update_student_courses', $post );
+	PWTask( 'update_student_courses', $post );
 }
 
 // Get the student's classes

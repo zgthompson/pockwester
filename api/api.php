@@ -7,6 +7,13 @@
 define( 'LIB_PATH', 'lib/' );
 define( 'CMD_PATH', 'command/' );
 
+// Logging
+if( LOGGING )
+{
+	$start = microtime( true );
+}
+
+
 // Load api libraries
 require_once LIB_PATH . 'database/database.functions.php';
 require_once LIB_PATH . 'pwapi.functions.php';
@@ -47,7 +54,19 @@ if( !LEGACY && isset( $LEGACY_COMMANDS[APITASK] ) && in_array( $LEGACY_COMMANDS[
 }
 
 // Execute command
-exit( include( LIB_PATH . CMD_PATH . $Apitask . '.php' ) );
+$result = include( LIB_PATH . CMD_PATH . $Apitask . '.php' );
+
+// Logging
+if( LOGGING )
+{
+	DB_Connect();
+	$end = microtime( true );
+	$seconds = $end - $start;
+	$ip = isset($_POST['ip'])?$_POST['ip']:$_SERVER['REMOTE_ADDR'];
+	DB_Query( "INSERT INTO API_LOG(COMMAND,IP,SECONDS,START,END)VALUES(\"{$Apitask}\",\"{$ip}\",\"{$seconds}\",\"{$start}\",\"{$end}\")");
+}
+
+exit( $result );
 
 ?>
 

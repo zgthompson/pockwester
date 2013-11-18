@@ -9,36 +9,37 @@ function FormatTimeString( $timeString )
 	$timeStringLength = strlen( $timeString );
 	$value_day = GetValueDayArray();
 	
-	$html = "<h3>{$value_day[0]}</h3>";
-	// Iterate over the entire string
-	for( $i = 0; $i < $timeStringLength; $i++ )
+	$html = "";
+	
+	for( $day = 0; $day < 7; $day++ )
 	{
-	
-		$dayhour = GetDayHourString( $i );
-		$block = "<span class=\"availability_title_wrapper\" time_id=\"{$i}\"><span class=\"availability_title\">{$dayhour}</span></span>";
-		
-		if( ($i)%24 == 0 && $i != 0 )
+		$html .= "<h3>{$value_day[$day]}</h3>";
+
+		for( $hour = 0; $hour < 16; $hour++ )
 		{
-			$pos = floor(($i+ 1)/24);
-			$html .= "<h3>{$value_day[$pos]}</h3>";
-		}			
-		
-		// Depending on what each char is add a different piece of HTML
-		switch( $timeString[$i] )
-		{		
-			case '0':
-				$html .= "<span class=\"availability_inactive timeblock\">{$block}</span>";
-			break;
-			case '1':
-				$html .= "<span class=\"availability_empty timeblock\">{$block}</span>";
-			break;			
-			case '2':
-				$html .= "<span class=\"availability_active timeblock\">{$block}</span>";
-			break;				
+			$timeValue = ($day*24)+$hour;
+			$dayHour = GetDayHourString( ( $timeValue + 8 ) % 168 );
+			$block = "<span class=\"availability_title_wrapper\" time_id=\"{$timeValue}\"><span class=\"availability_title\">{$dayHour}</span></span>";
+
+			// Depending on what each char is add a different piece of HTML
+			switch( $timeString[$timeValue] )
+			{		
+				case '0':
+					$html .= "<span class=\"availability_inactive timeblock\">{$block}</span>";
+				break;
+				case '1':
+					$html .= "<span class=\"availability_empty timeblock\">{$block}</span>";
+				break;			
+				case '2':
+					$html .= "<span class=\"availability_active timeblock\">{$block}</span>";
+				break;				
+			}
+
+
+
 		}
-		
 	}
-	
+
 	return $html;
 }
 

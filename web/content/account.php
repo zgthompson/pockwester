@@ -20,7 +20,7 @@ if( $_POST['this'] === 'account_save_settings' )
 		
 		// Save the theme information in the database
 		$post = array( 	'user_id' 	=> $_SESSION['USER_ID'],
-						'field'		=> 'THEME',
+						'field'		=> 'theme',
 						'value'		=> $_SESSION['THEME'] );
 		PWTask( 'set_user_config', $post );
 	}

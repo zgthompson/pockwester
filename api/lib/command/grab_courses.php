@@ -11,13 +11,22 @@ DB_Connect();
 
 // Get like
 $like = Get('like', false, '');
-WhereAdd( $where, "title LIKE \"%{$like}%\"" );
-WhereAdd( $where, "CONCAT(subject, catalog_no) LIKE \"%{$like}%\"", "OR");
-WhereAdd( $where, "CONCAT(subject, ' ', catalog_no) LIKE \"%{$like}%\"", "OR");
 
-$columns = "id, subject, catalog_no, title";
+    WhereAdd( $where, "title LIKE \"%{$like}%\"" );
+    WhereAdd( $where, "CONCAT(subject, catalog_no) LIKE \"%{$like}%\"", "OR");
+    WhereAdd( $where, "CONCAT(subject, ' ', catalog_no) LIKE \"%{$like}%\"", "OR");
 
-$courses = DB_GetArray( DB_Query( "SELECT {$columns} FROM course {$where}" ), true);
+    $columns = "id, subject, catalog_no, title";
 
-return ( OutputFormatting( array( 'courses' => $courses ) ) );
+    $courses = DB_GetArray( DB_Query( "SELECT {$columns} FROM course {$where}" ), true);
+
+    foreach( $courses as &$course )
+    {
+        $course['subject_no'] = "{$course['subject']} {$course['catalog_no']}";
+    }
+
+    return ( OutputFormatting( array( 'courses' => $courses ) ) );
+
+
+
 

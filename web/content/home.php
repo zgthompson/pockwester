@@ -2,6 +2,14 @@
 // home.php: Landing page for entering the pw web client
 // 9-17-13
 // Arthur Wuterich
+
+if( isset($_POST['lfg'] ) )
+{
+	$post = array( 'student_id' => $_SESSION['USER_ID'], 'instance_id' => $_POST['course_instance_id'], 'flag' => 'y' );
+	echo PWTask( 'set_lfg_flag', $post );
+}
+
+
 $post = array( 'user_id' => $_SESSION['USER_ID'] );
 $user_info = json_decode( PWTask( 'get_user_overview', $post ) );
 
@@ -48,18 +56,17 @@ if( $groupsHtml == '' )
 
 // Classes
 // Don't duplicate class names
-$servicedClasses = array();
 $addedClasses = 0;
 foreach( $classes as $class )
 {
-	if( in_array( $class->title, $servicedClasses ) )
-	{
-		continue;
-	}
-	
-	$servicedClasses[] = $class->title;
-
-	$classesHtml .= "<div class=\"home_class_block\">{$class->title}</div>";
+	$classesHtml .= "<div class=\"home_class_block\">{$class->title}<BR/>{$class->time}
+						<div class=\"lfg_button\">
+							<form method=\"post\" style=\"background-color:transparent;\">
+								<input type=\"hidden\" name=\"course_instance_id\" value=\"{$class->course_instance_id}\" >
+								<button class=\"start_lfg_button\" name=\"lfg\" value=\"true\">Start Looking For Group</button>
+							</form>
+						</div>
+					</div>";
 	
 	$addedClasses++;
 	if( $addedClasses >= $classLimit )
@@ -75,7 +82,7 @@ if( $classesHtml == '' )
 }
 
 // Time String
-for( $i = 0; $i < strlen( $time_string ); $i++ )
+for( $i = 0; $i < 16 ; $i++ )
 {
 	// Set css classes based on the availability
 	$class = '';
@@ -95,13 +102,8 @@ for( $i = 0; $i < strlen( $time_string ); $i++ )
 		break;		
 	}
 	
-	// Give the current hour another css class to signify
-	if( intval( date('G')-1 == $i ) )
-	{
-		$class .= ' home_time_current';
-	}
-	
-	$timestringHtml .= "<div class=\"{$class}\">{$i}</div>";	
+	$time = $i + 8;
+	$timestringHtml .= "<div class=\"{$class}\">{$time}</div>";	
 }
 
 ?>

@@ -9,9 +9,9 @@
 
 DB_Connect();
 
-$username = strtolower( Get( 'username', true ) );
-$password = md5( Get( 'password', true ) );
-$email = 	Get( 'email', true );
+$username = strtolower( Get( 'username' ) );
+$password = md5( Get( 'password' ) );
+$email = 	Get( 'email' );
 
 // Find if user is in the database already
 $users = DB_GetArray( 
@@ -30,6 +30,10 @@ DB_Query( "INSERT INTO student (username, password, email) VALUES ('{$username}'
 // Get the number of the newly created user
 $user_id = DB_GetSingleArray( DB_Query( "SELECT id FROM student WHERE username='{$username}' LIMIT 1" ) );
 $user_id = $user_id[0];
+
+// Send a message to the new user that they have created their account and need to setup their availability and classes
+$post = array( 'user_id' => $user_id, 'message' => "Welcome to Pockwester! You should add your classes and start looking for study groups.");
+PWTask( 'send_message', $post );
 
 return( $user_id );
 

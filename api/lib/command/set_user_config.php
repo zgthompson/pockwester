@@ -4,7 +4,6 @@
 //	 $user_id: The user_id to be updated
 //	 $field: The cfg field to be updated
 //	 $value: The value to become assumed
-//	 Precondition: The user has been created with a cfg file already
 //	9/27/13
 // Arthur Wuterich
 
@@ -20,7 +19,7 @@ $user_id = mysql_real_escape_string( $user_id );
 $field = strtoupper( $field );
 
 // Update the row
-DB_Query( "UPDATE USER_CONFIG SET {$field}=\"{$value}\" WHERE USER_ID={$user_id}" );
+DB_Query( "UPDATE student SET {$field}=\"{$value}\" WHERE id={$user_id}" );
 
 return( '1' );
 

@@ -1,6 +1,3 @@
 [submodule "android"]
 	path = android
 	url = https://github.com/zgthompson/forge-android.git
-[submodule "forge-android"]
-	path = forge-android
-	url = git://github.com/zgthompson/forge-android
