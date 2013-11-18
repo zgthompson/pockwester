@@ -149,7 +149,7 @@ $( document ).ready(function() {
 	<?php echo FormatTimeString( $availString ) ?>
 	<form  method="POST">
 		<input type="hidden" id="timestring" name="timestring" value="<?php echo$availString; ?>" >
-		<button type="submit" name="this" value="manage_availability_alter">Alter</button>
+		<button type="submit" name="this" value="manage_availability_alter">Done</button>
 		<button type="submit" onclick="Back( this );">Back</button>
 	</form>
 </div>

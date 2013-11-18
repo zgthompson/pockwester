@@ -48,7 +48,8 @@ if( count( $student_ids ) <= 0 )
 
 $now = time();
 
-// This will calculate the next meeting time epoc. 60^2*24*4 is an offset for unix epoc starting on a thursday
+// This will calculate the next meeting time epoc. 60^2*24*4 is an offset for unix epoc because it started on a thursday
+// when our time system starts on Monday 8am
 $meeting_time = ( ( floor ( $now / 604800 ) ) * 604800 ) + ( 60 * 60 * 24 * 4 ) + ( ( ( $time + 8 ) % 168 ) * 60 * 60 );
 
 // Create the study group
@@ -75,11 +76,13 @@ foreach( $student_ids as $student_id )
 			" );
 			
 	// Unset LFG Flag
-	$post = array( 'instance_id' => $instance_id, 'student_id' => $student_id, 'flag' => 0 );
-	print_r( $post );
-	PWTask( 'set_lfg_flag', $post);
+	$test = array( 'instance_id' => $instance_id, 'student_id' => $student_id, 'flag' => 'n' );
+	PWTask( 'set_lfg_flag', $test );
 	
-	// Update availability 			
+	// Update availability 	
+	// Send message	
+	$post = array( 'user_id' => $student_id, 'message' => "A study group has been dynamically formed and your in!");
+	PWTask( 'send_message', $post );	
 }
 
 return '1';

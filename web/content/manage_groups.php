@@ -5,28 +5,34 @@
 
 // Takes a groupname and returns a group block
 // Precondition: valid group name string
-function CreateGroupBlock( $groupName )
+function CreateGroupBlock( $group )
 {
 	$html = 
 	"
 	<div class=\"group_block\">
 	<form method=\"POST\">
-		<input type=\"hidden\" name=\"group_name\" value=\"{$groupName}\" />
-		<button onclick=\"GotoPage( this, 'group/' );\">{$groupName}</button>
+		<input type=\"hidden\" name=\"group_id\" value=\"{$group->id}\" />
+		<button onclick=\"GotoPage( this, 'group/' );\">{$group->title}, {$group->time}</button>
 	</form>
 	</div>
 	";	
 	
 	return $html;
 }
-
+// Set LFG flag
+if( isset( $_POST['set_lfg'] ) )
+{
+	$post = array( 'student_id' => $_SESSION['USER_ID'], 'instance_id' => $_POST['set_lfg'], 'flag' => 'y' );
+	PWTask( 'set_lfg_flag', $post );
+}
+/*
 function CreateClassBlock( $groupName )
 {
 	$html = 
 	"
 	<div class=\"class_block\">
 	<form method=\"POST\">
-		<input type=\"hidden\" name=\"group_name\" value=\"{$groupName}\" />
+		<input type=\"hidden\" name=\"group_id\" value=\"{$groupName}\" />
 		<button onclick=\"GotoPage( this, 'group/' );\">{$groupName}</button>
 	</form>
 	</div>
@@ -34,6 +40,7 @@ function CreateClassBlock( $groupName )
 	
 	return $html;
 }
+*/
 
 
 $studyGroupHtml = '';
@@ -42,46 +49,51 @@ $searchHtml = '';
 $resultSize = 0;
 
 // Get the groups this user is part of
-$post = array( 'user' => $_SESSION['USER_ID'] );
-$groups = json_decode( PWTask( 'get_groups', $post ) );
-
-if( is_array( $groups ) )
+$post = array( 'student_id' => $_SESSION['USER_ID'] );
+$groups = json_decode( PWTask( 'grab_study_groups', $post ) );
+if( is_array( $groups->study_groups ) )
 {
-	foreach( $groups as $group )
+	foreach( $groups->study_groups as $group )
 	{
-		if( strpos($group[0], '+' )  !== false )
-		{
-			$studyGroupHtml .= CreateClassBlock( $group[0] );
-		}
-		else
-		{
-			$classHtml .= CreateGroupBlock( $group[0] );
-		}
+		$studyGroupHtml .= CreateGroupBlock( $group );
 	}
+}
+else if( is_object( $groups->study_groups ) )
+{
+	$studyGroupHtml .= CreateGroupBlock( $groups->study_groups );
 }
 
 if( isset($_POST['group_search_value']) && $_POST['group_search_value'] != '' )
 {
+	/*
 	$post = array( 'like' => $_POST['group_search_value'] );
+	$searchGroups = json_decode( PWTask( 'grab_study_groups', $post ) );
 	
-	$searchGroups = json_decode( PWTask( 'get_groups', $post ) );
-	
-	if( is_array( $searchGroups ) )
+	if( is_array( $searchGroups->studygroups ) )
 	{
-		
 		foreach( $searchGroups as $group )
 		{
-
-		
-			if( strpos($group[0], '+' )  !== false )
-			{
-
-				$resultSize++; 
-		
-				$searchHtml .= CreateGroupBlock( $group[0] );
-			}
+			$resultSize++; 
+			$searchHtml .= CreateGroupBlock( $group );
 		}
-	}	
+	}
+	*/	
+}
+else
+if( isset($_POST['course_instance_id']) && $_POST['course_instance_id'] != '' )
+{
+	
+	$post = array( 'instance_id' => $_POST['course_instance_id'] );
+	$searchGroups = json_decode( PWTask( 'grab_study_groups', $post ) );
+	
+	if( is_array( $searchGroups->studygroups ) )
+	{
+		foreach( $searchGroups->studygroups as $group )
+		{
+			$resultSize++; 
+			$searchHtml .= CreateGroupBlock( $group );	
+		}
+	}
 }
 
 ?>
@@ -105,10 +117,17 @@ if( isset($_POST['group_search_value']) && $_POST['group_search_value'] != '' )
 					<button class="search_classes_button" type="submit" name="this" value="search_classes">SEARCH</button>
 				</form>					
 				<?php 
-					if( isset($_POST['group_search_value']) && $_POST['group_search_value'] != '' )
+					echo ($resultSize==0)?"<h2>no study groups found":"<h2>found {$resultSize} group(s)</h2>";
+					
+					if( isset( $_POST['course_instance_id'] ) )
 					{
-						echo ($resultSize==0)?"<h2>no groups for <i>'{$_POST['group_search_value']}</i>'":"<h2>{$resultSize} groups for <i>'{$_POST['group_search_value']}'</i></h2>"; 
-					}		
+						echo "
+						<form method=\"post\">
+							<button name=\"set_lfg\" value=\"{$_POST['course_instance_id']}\">Start Looking For Group</button>
+						</form>";
+					}
+						
+	
 				?>
 				<?php echo ($searchHtml=='')?'':$searchHtml; ?>
 			</div>

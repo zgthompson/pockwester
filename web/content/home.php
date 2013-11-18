@@ -3,13 +3,6 @@
 // 9-17-13
 // Arthur Wuterich
 
-if( isset($_POST['lfg'] ) )
-{
-	$post = array( 'student_id' => $_SESSION['USER_ID'], 'instance_id' => $_POST['course_instance_id'], 'flag' => 'y' );
-	echo PWTask( 'set_lfg_flag', $post );
-}
-
-
 $post = array( 'user_id' => $_SESSION['USER_ID'] );
 $user_info = json_decode( PWTask( 'get_user_overview', $post ) );
 
@@ -29,14 +22,15 @@ $classLimit = 5;
 $timestringHtml = '';
 
 // Groups
-/*
 $addedGroups = 0;
-foreach( $groups as $group )
+foreach( $groups->study_groups as $group )
 {
 	$groupsHtml .= 
 	"
 		<div class=\"home_group_block\">
-			{$group[0]}
+			{$group->subject_no}<BR/>
+			{$group->title}<BR/>
+			{$group->time}
 		</div>
 		
 	";
@@ -47,7 +41,7 @@ foreach( $groups as $group )
 		break;
 	}
 }
-*/
+
 if( $groupsHtml == '' )
 {
 	$groupsHtml = "You have no study groups";
@@ -63,7 +57,7 @@ foreach( $classes as $class )
 						<div class=\"lfg_button\">
 							<form method=\"post\" style=\"background-color:transparent;\">
 								<input type=\"hidden\" name=\"course_instance_id\" value=\"{$class->course_instance_id}\" >
-								<button class=\"start_lfg_button\" name=\"lfg\" value=\"true\">Start Looking For Group</button>
+								<button class=\"start_lfg_button\" name=\"course_instance_id\" value=\"{$class->course_instance_id}\" onclick=\"GotoPage( this, '/manage_groups/' );\">Find a Study Group</button>
 							</form>
 						</div>
 					</div>";

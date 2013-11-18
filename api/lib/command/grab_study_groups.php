@@ -35,33 +35,26 @@ if( count($groups[0]) <= 0 )
 	return OutputFormatting( array( 'study_groups' => $groups ) );
 }
 
-// Get the name of the study group
-$courseData = DB_GetArray( DB_Query( "SELECT title, subject, catalog_no from course as a, course_instance as b where a.id = b.course_id and b.id = {$groups[0][2]}" ));
+$result_array = array();
 
-$modifiedMeetingTime = ConvertMilitary( ( $groups[0][1] + 8 ) % 24 ) ;
-$modifiedMeetingEpoc = $groups[0][4]+25200;
-$resultArray = array(
-	'id' => $groups[0][0],
-	'title' => $courseData[0][0],
-	'subject_no' => "{$courseData[0][1]} {$courseData[0][2]}",
-	'time' => $modifiedMeetingTime, 
-	'date' => date( "n-d gA", $modifiedMeetingEpoc )
-);
+foreach( $groups as $group )
+{
+	// Get the name of the study group
+	$courseData = DB_GetArray( DB_Query( "SELECT title, subject, catalog_no from course as a, course_instance as b where a.id = b.course_id and b.id = {$group[2]}" ));
 
+	// Modified because of small offset(timezone?)
+	$modifiedMeetingEpoc = $group[4]+25200;
+	$modifiedMeetingTime = date( "D hA", $modifiedMeetingEpoc );
+	$result_array[] = array(
+		'id' => $group[0],
+		'title' => $courseData[0][0],
+		'subject_no' => "{$courseData[0][1]} {$courseData[0][2]}",
+		'time' => $modifiedMeetingTime, 
+		'date' => date( "n-d gA", $modifiedMeetingEpoc )
+	);
+}
 
-return OutputFormatting( array( 'study_groups' => $resultArray ));
-
-
-
-
-
-
-
-
-
-
-
-
+return OutputFormatting( array( 'study_groups' => $result_array ));
 
 
 

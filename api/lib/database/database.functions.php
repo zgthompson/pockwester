@@ -116,7 +116,7 @@ function DB_GetSingleArray( &$result, $assoc = false )
 //	[$default]: The default value if no value found
 function Get( $postVariable, $required = true, $default = null )
 {
-	if( !isset($_POST[$postVariable]) || $_POST[$postVariable] == '' )
+	if( ( !isset( $_POST[$postVariable] ) || $_POST[$postVariable] == '' ) )
 	{
 		if( $required )
 		{

@@ -33,7 +33,7 @@ if ( isset($course_id) || isset($instance_ids) || isset($student_id) )
     $columns = "title, subject, catalog_no, course_instance_id, section_id, day, start_time, end_time, location, component";
     $tables = "course, course_instance, section, section_time";
 
-    $instances = DB_GetArray( DB_Query( "SELECT {$columns} FROM {$tables} {$where} ORDER BY course_instance_id" ), true);
+    $instances = DB_GetArray( DB_Query( "SELECT {$columns} FROM {$tables} {$where} ORDER BY course_instance_id, day" ), true);
 
     $instanceTimes = array();
 
