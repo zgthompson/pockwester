@@ -12,11 +12,11 @@ $classes = $classes['courses'];
 $classes_dropdown = '<select name="class[]" id="select_copy">';
 
 $autoCompleteTags = array();
+
 // Build the class select object
 foreach( $classes as $class )
 {
-	$autoCompleteTags[] = array( "{$class['subject']} {$class['catalog_no']}", $class['id'] );
-	$classes_dropdown .= "<option value=\"{$class['id']},{$class['subject']},{$class['catalog_no']}\">{$class['subject']} {$class['catalog_no']}</option>";
+	$autoCompleteTags[] = array( $class['subject'], $class['catalog_no'], $class['id'], $class['title'] );
 }
 
 $classes_dropdown .= '</select>';
@@ -24,36 +24,38 @@ $classes_dropdown .= '</select>';
 ?>
 
 <script type="text/javascript">
+
 function UpdateCourseIds()
 {
+
 	var courseTags = '';
-	$(".classes").each(function(){
-		courseTags += $(this).val() + ":" + courseValuesTags[$(this).val()] + ",";
+	$("*[course-data]").each(function(){
+		courseTags += $(this).attr('course-data')+",";
 	});
 	
 	$("#select_sections_ids").val( courseTags );
+
 }
 
 function BindAutoComplete()
 {
-	$( ".classes" ).autocomplete({
-		source: function(request, response) {
-			var results = $.ui.autocomplete.filter(courseTags, request.term);
-			response(results.slice(0, 10));
-		},
-		messages:{
-			noResults: '',
-			results: function() {}
-		},
+	
+    $(".classes").autocomplete({
+        source: courseObjects,
 		change: function(event,ui){
-			if( courseTags.indexOf($(this).val()) == -1 )
+			if( ui.item == null )
 			{
 				$(this).val( "" );
+				$(this).attr( 'course-data', "" );
+				return;
 			}
+			
+			$(this).attr( 'course-data', ui.item.subject + " " + ui.item.cat + ":" + ui.item.id );
 			UpdateCourseIds();
-		}			
-	});	
+		},		
+    });
 }
+
 
 // Copies the classes drop down menu and adds to document
 function AddField()
@@ -61,30 +63,26 @@ function AddField()
 	// Copy the classes dropdown menu with options
 	var lastOptions = $(".classes_input").last();
 	var options = $(".classes_input").last().clone();
-	$(options).val("").fadeIn(500).insertAfter(lastOptions);
+	$(options).children("input").val("");
+	$(options).fadeIn(500).insertAfter(lastOptions);
 	BindAutoComplete();
 }
-
-	courseTags = [
+	courseObjects = [
+	
 	<?php
 	// Pass the tags to the JS autocomplete function
 	foreach( $autoCompleteTags as $tag )
 	{
-		echo "\"{$tag[0]}\",";
+		echo "
+		{
+			subject:\"{$tag[0]}\",
+			cat:\"{$tag[1]}\",
+			id:\"{$tag[2]}\",
+			label:\"{$tag[0]} {$tag[1]}: {$tag[3]}\",
+		},";
 	}
 	?>
 	];
-	
-	courseValuesTags = {
-	<?php
-	// Pass the tags to the JS autocomplete function
-	foreach( $autoCompleteTags as $tag )
-	{
-		echo "\"{$tag[0]}\":\"{$tag[1]}\",";
-	}
-	?>
-	};	
-	
 	
 	$( document ).ready(function() {
 		BindAutoComplete();
@@ -97,7 +95,7 @@ function AddField()
 		<form  method="POST" >
 			<div class="classes_input">
 				<label>Course:</label>
-				<input class="classes" name="class[]" />
+				<input class="classes" />
 			</div>
 			<button type="button" name="add" id="add" class="add" onclick="AddField();">+</button>
 </div>			

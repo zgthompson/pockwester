@@ -460,7 +460,7 @@ h2
 {
 	border: 1px solid #000;
 	margin: 2px auto 2px auto;
-	background: #606c88; /* Old browsers */
+	background-color:#EEE;
 }
 
 .group_block button, .member_block button, .class_block button
