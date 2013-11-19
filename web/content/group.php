@@ -7,12 +7,8 @@
 
 // Retuns a member name in a member block
 // Precondition: Valid string name
-function GroupMemberBlock( $name, $lfg = false )
+function GroupMemberBlock( $name )
 {
-	if( $lfg )
-	{
-		return "<div class=\"member_block group_lfg\">{$name}</div>";
-	}
 	return "<div class=\"member_block\">{$name}</div>";
 }
 
@@ -34,35 +30,42 @@ if( isset( $_POST['this'] ) )
 	switch( $_POST['this'] )
 	{
 		case 'leave_group':
-			$post = array( 'user_id' => $_SESSION['USER_ID'], 'group_name' => $_POST['group_name'] );
-			//PWTask( 'remove_from_group', $post );
-			echo 'left group';
+			$post = array( 	'student_id' 	=> $_SESSION['USER_ID'], 
+							'group_id' 		=> $_POST['group_id'],
+							'action'		=> 'leave' );
+			PWTask( 'group_action', $post );
 		break;
 
 		case 'join_group':
-			$post = array( 'user' => $_SESSION['USER_ID'], 'group_name' => $_POST['group_name'] );
-			//PWTask( 'add_to_group', $post );
-			echo 'joined group';			
+			$post = array( 	'student_id' 	=> $_SESSION['USER_ID'], 
+							'group_id' 		=> $_POST['group_id'],
+							'action'		=> 'join' );
+			PWTask( 'group_action', $post );
 		break;
 		
 	}
 }
 
-$userHtml = '';
-
 $group_id = $_POST['group_id'];
 $post = array( 'group_id' => $group_id );
 $group = json_decode( PWTask( 'grab_study_groups', $post ) );
-$group = $group->study_groups;
+$group = $group->study_groups[0];
 
 
 // Details
 $detailsHtml = '';
 $actionsHtml = '';
+$userHtml = '';
 
 // Leave group button
 $actionsHtml .= '<button name="this" value="leave_group" >Leave Group</button>';
 $actionsHtml .= '<button name="this" value="join_group" >Join Group</button>';
+
+// User html
+foreach( $group->students as $student )
+{
+	$userHtml .= GroupMemberBlock( $student );
+}
 
 ?>
 
@@ -75,24 +78,18 @@ $actionsHtml .= '<button name="this" value="join_group" >Join Group</button>';
 				<?php echo $userHtml; ?>	
 			</div>
 			<div class="large_table_cell">
-				<h2> More Details </h2>
-				<?php echo $detailsHtml; ?>
+				<h2> Meeting Time </h2>
+				<?php echo DetailsBlock( $group->time ); ?>
 			</div>			
 		</div>
-		<div class="large_table_row">
-			<div class="large_table_cell">
-				<h2> Actions </h2>
-				<form method="POST">
-					<?php echo $actionsHtml; ?>
-					<input type="hidden" name="group_id" value="<?php echo $_POST['group_id']; ?>" >
-				</form>
-			</div>
-			<div class="large_table_cell">
-				<h2> Meeting Time </h2>
-				<?php echo $group->time; ?>
-			</div>					
-		</div>
 	</div>
+	<HR/>
+	<h2> Actions </h2>
+	<form method="POST">
+		<?php echo $actionsHtml; ?>
+		<input type="hidden" name="group_id" value="<?php echo $_POST['group_id']; ?>" >
+	</form>
+	<HR/>
 	<form method="POST">
 		<button type="submit" onclick="Back( this );">Back</button>
 	</form>

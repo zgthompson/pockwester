@@ -4,6 +4,7 @@
 // Arthur Wuterich
 ?>
 <!-- CSS -->
+<link rel="stylesheet" type="text/css" href="/pockwester/web/style/jquery-ui-1.10.3.custom.min.css">
 <link rel="stylesheet" type="text/css" href="/pockwester/web/style/global.css">
 <link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH; ?>pw.global.css">
 <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="style/lt.ie8.global.css"><![endif]-->

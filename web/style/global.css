@@ -288,7 +288,7 @@ h2
 }
 .home_time_available, .home_time_unavailable, .home_time_empty
 {
-	width: 3.9%;
+	width: 5.0%;
 	height: 4em;
 	display: inline-block;
 	border-right: 1px solid rgba( 0, 0, 0, .2);
@@ -403,6 +403,10 @@ h2
 	margin: 0px auto 0px auto;
 	text-align: left;
 }
+#main_content .add
+{
+	width: 100%;
+}
 .search_classes_left_align select
 {
 	margin-left:100px;
@@ -473,7 +477,7 @@ h2
 .availability_active, .availability_inactive, .availability_empty
 {
 	height: 20px;
-	width: 40px;
+	width: 60px;
 	margin-top: 20px;
 	margin-bottom:5px;
 	display: inline-block;
@@ -569,7 +573,7 @@ h2
 	display:table;
 	border-collapse:collapse;
 	border: 6px groove rgba( 0, 0, 0, .25 );
-	margin: 0px auto 0px auto;
+	margin: 10px auto 10px auto;
 	background-color: rgba( 0, 0, 0, .25 );
 }
 .large_table_row
@@ -727,7 +731,7 @@ h2
 
 #main_content button.start_lfg_button
 {
-	font-size: 10px;
+/*	font-size: 10px; */
 }
 
 /* For smaller screens make the pw_bar smaller font */

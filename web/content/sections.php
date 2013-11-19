@@ -5,16 +5,10 @@
 
 // Will generate a row for course section selection
 function BuildCourseRow( $course )
-{
-	// Exit conditions
-	if( !is_array( $course ) )
-	{
-		return '';
-	}
-	
+{	
 	// Generate the instance drop downs
 	$instanceHtml = '<select class="section_instance_dropdown" name="section_instance[]">';
-	$post = array( 'course_id' => $course[0] );
+	$post = array( 'course_id' => $course[1] );
 	$instances = json_decode( PWTask( 'grab_instances', $post ) );
 	
 	// Add all of the instances to the selection list
@@ -31,7 +25,7 @@ function BuildCourseRow( $course )
 	"
 	<div class=\"course_row\">
 		<div class=\"row_header\">
-		{$course[1]} {$course[2]}
+		{$course[0]}
 		</div>
 		{$instanceHtml}
 	</div>
@@ -40,24 +34,16 @@ function BuildCourseRow( $course )
 
 $sectionHtml = '';
 $servicedCourses = array();
+$courses = explode( ',', $_POST['select_sections_ids'] );
 
 // For each course passed to this file generate a list of sections to select from
-foreach( $_POST['class'] as $course )
+foreach( $courses as $course )
 {
-	// Break data from csv
-	$courseData = explode( ',', $course );
-	
-	// Only display a courses once
-	if( !in_array( $courseData[0], $servicedCourses ) )
+	$course = explode( ':', $course );
+	if( count( $course ) == 2 )
 	{
-		$servicedCourses[] = $courseData[0];
+		$sectionHtml .= BuildCourseRow( $course );
 	}
-	else
-	{
-		continue;
-	}
-
-	$sectionHtml .= BuildCourseRow( $courseData );
 }
 ?>
 
