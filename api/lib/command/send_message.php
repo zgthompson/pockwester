@@ -1,6 +1,7 @@
 <?php
-//	send_message.php: Will send a message to a user
+//	send_message.php: Will send a message to a user or group. Either $user_id or $group_id needs to be set
 //	$user_id: The id of the user.
+//	$group_id: The id of the group.
 //	$message: The message to send to the user
 //	[$sender]: The user that has sent the message.
 //	[$sender_id]: The id of the sender
@@ -9,10 +10,44 @@
 
 DB_Connect();
 
-$user_id = Get( 'user_id' );
+$message = htmlspecialchars( Get( 'message' ) );
+
+$group_id = Get( 'group_id', false );
+$user_id = Get( 'user_id', false );
+
+if( !isset($group_id) && !isset($user_id) )
+{
+	return 'Either group_id or user_id needs to be set';
+}
+
 $sender = Get( 'sender', false, '' );
 $sender_id = Get( 'sender_id', false, 0 );
-$message = htmlspecialchars( Get( 'message' ) );
+
+// If the sender id is present then try to get the name of the user
+if( $sender_id != 0 )
+{
+	$sender_result = DB_GetSingleArray( DB_Query( "SELECT username FROM student WHERE id={$sender_id} LIMIT 1" ) );
+		
+	// There is a user with the uid = $sender, set to the name of the user
+	if( count( $sender_result ) >= 0 )
+	{
+		$sender	= $sender_result[0];
+	}
+}
+
+// Send the message to the group
+if( isset( $group_id ) )
+{
+	DB_Query( "
+			INSERT INTO 
+				study_group_message
+			(group_id, sender, message)
+			VALUES
+			({$group_id}, \"{$sender}\", \"{$message}\")
+			");
+			
+	return '1';
+}
 
 // Make sure the user exists to send the message
 $user = DB_GetSingleArray( DB_Query( "SELECT * FROM student WHERE id={$user_id}" ) );

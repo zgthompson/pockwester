@@ -733,6 +733,67 @@ h2
 {
 /*	font-size: 10px; */
 }
+#chat
+{
+	width: 600px;
+	margin: 0px auto 0px auto;
+}
+#chat_window
+{
+	margin: 0px auto 0px auto;
+	width: 100%;
+	height: 200px;
+	background-color: #EEE;
+	text-align: left;
+	overflow-y: scroll;
+	padding: 2px;
+	border-radius: 2px;
+	border: 1px solid #CCC;
+}
+
+#chat_window_send
+{
+}
+#chat_window_message
+{
+	width: 200px;
+	text-align: left;
+}
+#chat_input
+{
+	float: right;
+}
+
+.chat_line
+{
+	border-bottom: 1px solid #999;
+}
+
+.chat_line_message
+{
+	display: inline-block;
+	padding-left:30px;
+}
+
+.chat_line_sender
+{
+	display: inline-block;
+	font-weight: bold;
+}
+.chat_line_date
+{
+	font-style:italic;
+	font-size: 90%;
+	width:100%;
+	text-align:right;
+	background-color: #E7E7E7;
+}
+
+.clear
+{
+	width: 100%;
+	clear: both;
+}
 
 /* For smaller screens make the pw_bar smaller font */
 @media screen and (max-width: 970px)
@@ -764,5 +825,10 @@ h2
 		/*
 		width: 22px;
 		*/
+	}	
+	
+	#chat
+	{
+		width: 300px;
 	}	
 }
